@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://stahe.github.io/jpa-juin-2007/sitemap.xml
