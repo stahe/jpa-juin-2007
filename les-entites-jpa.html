@@ -2024,18 +2024,22 @@
 <p>La couche [dao] de l&#x27;application cliente peut gérer elle-même la version de la classe [Personne]. A chaque fois qu&#x27;il y aura une modification d&#x27;un objet P, la version de cet objet sera incrémentée de 1 dans la table. L&#x27;annotation <strong>@Version</strong> permet de transférer cette gestion à la couche JPA. Le champ concerné n&#x27;a nul besoin de s&#x27;appeler <em>version</em> comme dans l&#x27;exemple. Il peut porter un nom quelconque.</p>
 <p>Les champs correspondant aux annotations <strong>@Id</strong> et <strong>@Version</strong> sont des champs présents à cause de la persistance. On n&#x27;en aurait pas besoin si la classe [Personne] n&#x27;avait pas besoin d&#x27;être persistée. On voit donc qu&#x27;un objet n&#x27;a pas la même représentation selon qu&#x27;il a besoin ou non d&#x27;être persisté.</p>
 <ul>
-<li>ligne 17 : de nouveau l&#x27;annotation <strong>@Column</strong> pour donner des informations sur la colonne de la table [personne] associée au champ <em>nom</em> de la classe <em>Personne</em>.  On trouve ici deux nouveaux arguments :</li>
+<li>ligne 17 : de nouveau l&#x27;annotation <strong>@Column</strong> pour donner des informations sur la colonne de la table [personne] associée au champ <em>nom</em> de la classe <em>Personne</em>.  On trouve ici deux nouveaux arguments :<ul>
 <li><strong>unique=true</strong> indique que le nom d&#x27;une personne doit être unique. Cela va se traduire dans la base de données par l&#x27;ajout d&#x27;une contrainte d&#x27;unicité sur la colonne NOM de la table [personne].</li>
 <li><strong>length=30</strong> fixe à 30 le nombre de caractères de la colonne NOM. Cela signifie que le type de cette colonne sera VARCHAR(30).</li>
+</ul>
+</li>
 <li>ligne 24 : l&#x27;annotation <strong>@Temporal</strong> sert à indiquer quel type SQL donner à une colonne / champ de type date / heure. Le type  <em>TemporalType.DATE</em> désigne une date seule sans heure associée. Les autres types possibles sont <em>TemporalType.TIME</em> pour coder une heure et <em>TemporalType.TIMESTAMP</em> pour coder une date avec heure.</li>
 </ul>
 <p>Commentons maintenant le reste du code de la classe [Personne] :</p>
 <ul>
 <li>ligne 6 : la classe implémente l&#x27;interface <em>Serializable</em>. La <em>sérialisation</em> d&#x27;un objet consiste à le transformer en une suite de bits. La <em>désérialisation</em> est l&#x27;opération inverse. La sérialisation / désérialisation est notamment utilisée dans les applications client / serveur où des objets sont échangés via le réseau. Les applications clientes ou serveur sont ignorantes de cette opération qui est faite de façon transparente par les JVM. Pour qu&#x27;elle soit possible, il faut cependant que les classes des objets échangés soit &quot; taguées &quot; avec le mot clé <em>Serializable</em>.</li>
 <li>ligne 37 : un constructeur de la classe. On notera que les champs <strong>id</strong> et <strong>version</strong> ne font pas partie des paramètres. En effet, ces deux champs sont gérés par la couche JPA et non par l&#x27;application.</li>
-<li>lignes 51 et au-delà : les méthodes <strong>get</strong> et <strong>set</strong> de chacun des champs de la classe. Il est à noter que les annotations JPA peuvent être placées sur les méthodes <strong>get</strong> des champs au lieu d&#x27;être placées sur les champs eux-mêmes. La place des annotations indique le mode que doit utiliser JPA pour accéder aux champs :</li>
+<li>lignes 51 et au-delà : les méthodes <strong>get</strong> et <strong>set</strong> de chacun des champs de la classe. Il est à noter que les annotations JPA peuvent être placées sur les méthodes <strong>get</strong> des champs au lieu d&#x27;être placées sur les champs eux-mêmes. La place des annotations indique le mode que doit utiliser JPA pour accéder aux champs :<ul>
 <li>si les annotations sont mises au niveau champ, JPA accèdera directement aux champs pour les lire ou les écrire</li>
 <li>si les annotations sont mises au niveau <strong>get</strong>, JPA accèdera aux champs via les méthodes get / set pour les lire ou les écrire</li>
+</ul>
+</li>
 </ul>
 <p>C&#x27;est la position de l&#x27;annotation <strong>@Id</strong> qui fixe la position des annotations JPA d&#x27;une classe. Placée au niveau champ, elle indique un accès direct aux champs et placée au niveau <em>get</em>, un accès aux champs via les <em>get</em> et <em>set</em>. Les autres annotations doivent alors être placées de la même façon que l&#x27;annotation @<strong>Id</strong>.</p>
 <h3 id="213-le-projet-eclipse-des-tests">2.1.3. Le projet Eclipse des tests</h3>
