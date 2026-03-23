@@ -1225,26 +1225,34 @@
 </code></pre></div>
 <p>On arrive au même résultat que celui obtenu avec le fichier .ini, en créant un raccourci qui lancerait Eclipse avec ces mêmes arguments. Explicitons ceux-ci :</p>
 <ol>
-<li>-<strong>vmargs</strong> : indique que les arguments qui suivent sont destinés à la machine virtuelle Java qui va exécuter Eclipse. Eclipse est une application Java.</li>
-<li>-<strong>Xms40m</strong> : ?</li>
-<li>-<strong>Xmx256m</strong> : fixe la taille mémoire en Mo allouée à la machine virtuelle Java (JVM) qui exécute Eclipse. Par défaut, cette taille est de 256 Mo comme montré ici. Si la machine le permet, 512 Mo est préférable.</li>
+  <li>-<b>vmargs</b> : indique que les arguments qui suivent sont destinés à la machine virtuelle Java qui va exécuter Eclipse. Eclipse est une application Java.
+  </li>
+  <li>-<b>Xms40m</b> : ?
+  </li>
+  <li>-<b>Xmx256m</b> : fixe la taille mémoire en Mo allouée à la machine virtuelle Java (JVM) qui exécute Eclipse. Par défaut, cette taille est de 256 Mo comme montré ici. Si la machine le permet, 512 Mo est préférable.
+  </li>
 </ol>
+
 <p>Ces arguments sont passés à la JVM qui va exécuter Eclipse. La JVM est représentée par un fichier [java.exe] ou [javaw.exe]. Comment celui-ci est-il trouvé ? En fait, il est cherché de différentes façons :</p>
 <ul>
-<li>dans le PATH de l&#x27;OS</li>
-<li>dans le dossier &lt;JAVA_HOME&gt;/jre/bin où JAVA_HOME est une variable système définissant le dossier racine d&#x27;un JDK.</li>
-<li>à un emplacement passé en argument à Eclipse sous la forme -vm &lt;chemin&gt;\javaw.exe</li>
+  <li>dans le PATH de l&#x27;OS
+  </li>
+  <li>dans le dossier &lt;JAVA_HOME&gt;/jre/bin où JAVA_HOME est une variable système définissant le dossier racine d&#x27;un JDK.
+  </li>
+  <li>à un emplacement passé en argument à Eclipse sous la forme -vm &lt;chemin&gt;\javaw.exe
+  </li>
 </ul>
+
 <p>Cette dernière solution est préférable car les deux autres sont sujettes aux aléas d&#x27;installations ultérieures d&#x27;applications qui peuvent soit changer le PATH de l&#x27;OS, soit changer la variable JAVA_HOME.</p>
 <p>Nous créons donc le raccourci suivant :</p>
 <p><img src="images/1000000000000160000000F20E32078C.png" style="width:6.518cm;height:4.498cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/1000000000000160000000F20E32078C.png" /></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cible
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">&lt;eclipse&gt;\eclipse.exe&quot; -vm &quot;C:\Program Files\Java\jre1.6.0_01\bin\javaw.exe&quot; -vmargs -Xms40m -Xmx512m</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">&lt;eclipse&gt;\eclipse.exe&quot; -vm &quot;C:\Program Files\Java\jre1.6.0_01\bin\javaw.exe&quot; -vmargs -Xms40m -Xmx512m</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Démarrer dans
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">dossier &lt;eclipse&gt; d&#x27;installation d&#x27;Eclipse</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">dossier &lt;eclipse&gt; d&#x27;installation d&#x27;Eclipse</div></td></tr></table>
 
 <p>Ceci fait, lançons Eclipse via ce raccourci. On obtient une première boîte de dialogue :</p>
 <p><img src="images/10000000000001B5000000F486A33340.png" style="width:8.087cm;height:4.519cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000001B5000000F486A33340.png" /></p>
@@ -1270,9 +1278,12 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000047F000001003B715E22.png" style="display:inline-block; margin:4px;width:15.228cm;height:3.387cm;" class="odt-zoomable" data-zoom-src="images/100000000000047F000001003B715E22.png" /></td></tr></table>
 
 <ul>
-<li>en [1], nous voyons le dossier [src] dans lequel seront rangés les sources .java</li>
-<li>en [2], nous voyons le dossier [bin] dans lequel seront rangés les fichiers compilés .class</li>
+  <li>en [1], nous voyons le dossier [src] dans lequel seront rangés les sources .java
+  </li>
+  <li>en [2], nous voyons le dossier [bin] dans lequel seront rangés les fichiers compilés .class
+  </li>
 </ul>
+
 <p>Nous terminons l&#x27;assistant avec [Finish]. Nous avons alors un squelette de projet Java :</p>
 <p><img src="images/10000000000000E700000069F8E7C371.png" style="width:4.279cm;height:1.94cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000000E700000069F8E7C371.png" /></p>
 <p>Cliquons droit sur le projet [test1] pour créer une classe Java :</p>
@@ -1280,11 +1291,16 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000028C00000219788BC0F9.png" style="display:inline-block; margin:4px;width:8.625cm;height:7.105cm;" class="odt-zoomable" data-zoom-src="images/100000000000028C00000219788BC0F9.png" /></td></tr></table>
 
 <ol>
-<li>dans [1], le dossier où sera créée la classe. Eclipse propose par défaut le dossier du projet courant.</li>
-<li>dans [2], le paquetage dans lequel sera placée la classe</li>
-<li>dans [3], le nom de la classe</li>
-<li>dans [4], nous demandons à ce que la méthode statique [main] soit générée</li>
+  <li>dans [1], le dossier où sera créée la classe. Eclipse propose par défaut le dossier du projet courant.
+  </li>
+  <li>dans [2], le paquetage dans lequel sera placée la classe
+  </li>
+  <li>dans [3], le nom de la classe
+  </li>
+  <li>dans [4], nous demandons à ce que la méthode statique [main] soit générée
+  </li>
 </ol>
+
 <p>Nous validons l&#x27;assistant par [Finish]. Le projet est alors enrichi d&#x27;une classe :</p>
 <p><img src="images/10000000000000E10000008B39151C2D.png" style="width:4.17cm;height:2.57cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000000E10000008B39151C2D.png" /></p>
 <p>Eclipse a généré le squelette de la classe. Celui-ci est obtenu en double-cliquant sur [Test1.java] ci-dessus :</p>
@@ -1302,9 +1318,12 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000003040000015FC0C97989.png" style="display:inline-block; margin:4px;width:10.213cm;height:4.644cm;" class="odt-zoomable" data-zoom-src="images/10000000000003040000015FC0C97989.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : choix de l&#x27;option [Java / Compiler]</li>
-<li>en [2] : choix de la compatibilité Java 5.0</li>
+  <li>en [1] : choix de l&#x27;option [Java / Compiler]
+  </li>
+  <li>en [2] : choix de la compatibilité Java 5.0
+  </li>
 </ul>
+
 <p><a id="eclipse-callisto"></a></p>
 <h3 id="523-installation-des-plugins-callisto">5.2.3. Installation des plugins Callisto</h3>
 <p>La version de base installée ci-dessus permet de construire des application Java console mais pas des applications Java de type web ou Swing, ou alors il faut tout faire soi-même. Nous allons installer divers plugins :</p>
@@ -1312,60 +1331,87 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004C50000016A375293E9.png" style="display:inline-block; margin:4px;width:16.154cm;height:4.789cm;" class="odt-zoomable" data-zoom-src="images/10000000000004C50000016A375293E9.png" /></td></tr></table>
 
 <ul>
-<li>en [2], on indique qu&#x27;on veut installer de nouveaux plugins</li>
+  <li>en [2], on indique qu&#x27;on veut installer de nouveaux plugins
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000502000001497BCA41E0.png" style="display:inline-block; margin:4px;width:16.96cm;height:4.353cm;" class="odt-zoomable" data-zoom-src="images/1000000000000502000001497BCA41E0.png" /></td></tr></table>
 
 <ul>
-<li>en [3], on indique les sites à explorer pour trouver les plugins</li>
-<li>en [4], on coche les plugins désirés</li>
+  <li>en [3], on indique les sites à explorer pour trouver les plugins
+  </li>
+  <li>en [4], on coche les plugins désirés
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004E000000132AED5B82A.png" style="display:inline-block; margin:4px;width:16.51cm;height:4.048cm;" class="odt-zoomable" data-zoom-src="images/10000000000004E000000132AED5B82A.png" /></td></tr></table>
 
 <ul>
-<li>en [5], Eclipse signale qu&#x27;on a choisi un plugin qui dépend d&#x27;autres plugins qui n&#x27;ont pas été sélectionnés</li>
-<li>en [6], on utilise le bouton [Select Required] pour sélectionner automatiquement les plugins manquants</li>
-<li>en [7], on accepte les conditions des licences de ces divers plugins</li>
+  <li>en [5], Eclipse signale qu&#x27;on a choisi un plugin qui dépend d&#x27;autres plugins qui n&#x27;ont pas été sélectionnés
+  </li>
+  <li>en [6], on utilise le bouton [Select Required] pour sélectionner automatiquement les plugins manquants
+  </li>
+  <li>en [7], on accepte les conditions des licences de ces divers plugins
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000504000001DFCC321271.png" style="display:inline-block; margin:4px;width:16.986cm;height:6.338cm;" class="odt-zoomable" data-zoom-src="images/1000000000000504000001DFCC321271.png" /></td></tr></table>
 
 <ul>
-<li>en [8], on a la liste de tous les plugins qui vont être installés</li>
-<li>en [9], on lance le téléchargement de ces plugins</li>
-<li>en [10], une fois ceux-ci téléchargés, on les installe tous sans vérifier leur signature</li>
+  <li>en [8], on a la liste de tous les plugins qui vont être installés
+  </li>
+  <li>en [9], on lance le téléchargement de ces plugins
+  </li>
+  <li>en [10], une fois ceux-ci téléchargés, on les installe tous sans vérifier leur signature
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D800000256110E5671.png" style="display:inline-block; margin:4px;width:16.404cm;height:7.911cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D800000256110E5671.png" /></td></tr></table>
 
 <ul>
-<li>en [11], à la fin de l&#x27;installation des plugins, on laisse Eclipse se relancer</li>
-<li>en [12], si on fait [File/New/Project], on découvre qu&#x27;on peut maintenant créer des applications web, ce qui n&#x27;était pas possible initialement.</li>
+  <li>en [11], à la fin de l&#x27;installation des plugins, on laisse Eclipse se relancer
+  </li>
+  <li>en [12], si on fait [File/New/Project], on découvre qu&#x27;on peut maintenant créer des applications web, ce qui n&#x27;était pas possible initialement.
+  </li>
 </ul>
+
 <p><a id="testng"></a></p>
 <h3 id="524-installation-du-plugin-testng">5.2.4. Installation du plugin [TestNG]</h3>
 <p>TestNG (Test Next Generation) est un outil de tests unitaires semblable dans son esprit à JUnit. Il apporte cependant des améliorations qui nous le font préférer ici à JUnit. Nous procédons comme précédemment : [Help/Software Udates/Find and Install] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004F80000016034BCE440.png" style="display:inline-block; margin:4px;width:16.828cm;height:4.657cm;" class="odt-zoomable" data-zoom-src="images/10000000000004F80000016034BCE440.png" /></td></tr></table>
 
 <ul>
-<li>en [2], on indique qu&#x27;on veut installer de nouveaux plugins</li>
+  <li>en [2], on indique qu&#x27;on veut installer de nouveaux plugins
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004AD0000010ACAB7A064.png" style="display:inline-block; margin:4px;width:15.836cm;height:3.519cm;" class="odt-zoomable" data-zoom-src="images/10000000000004AD0000010ACAB7A064.png" /></td></tr></table>
 
 <ul>
-<li>en [3a], le site de téléchargment de [TestNG] n&#x27;est pas présent. Nous l&#x27;ajoutons avec [3b]</li>
-<li>en [4b] : le site du plugin est [http://beust.com/eclipse]. En [4a], on met ce qu&#x27;on veut.</li>
+  <li>en [3a], le site de téléchargment de [TestNG] n&#x27;est pas présent. Nous l&#x27;ajoutons avec [3b]
+  </li>
+  <li>en [4b] : le site du plugin est [http://beust.com/eclipse]. En [4a], on met ce qu&#x27;on veut.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004B3000001B4DD531E25.png" style="display:inline-block; margin:4px;width:15.916cm;height:5.768cm;" class="odt-zoomable" data-zoom-src="images/10000000000004B3000001B4DD531E25.png" /></td></tr></table>
 
 <ul>
-<li>en [5a], le plugin [TestNG] est sélectionné pour la mise à jour. En [5b], on lance celle-ci.</li>
-<li>en [6], la connexion avec le site du plugin a été faite. Nous sont présentés tous les plugis disponibles sur le site. Un seul, ici, que nous sélectionnons avant de passer à l&#x27;étape suivante.</li>
+  <li>en [5a], le plugin [TestNG] est sélectionné pour la mise à jour. En [5b], on lance celle-ci.
+  </li>
+  <li>en [6], la connexion avec le site du plugin a été faite. Nous sont présentés tous les plugis disponibles sur le site. Un seul, ici, que nous sélectionnons avant de passer à l&#x27;étape suivante.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004ED0000019941FA0848.png" style="display:inline-block; margin:4px;width:16.683cm;height:5.412cm;" class="odt-zoomable" data-zoom-src="images/10000000000004ED0000019941FA0848.png" /></td></tr></table>
 
 <ul>
-<li>en [7], on accepte les conditions des licences du plugin</li>
-<li>en [8], on a la liste de tous les plugins qui vont être installés, un ici. On lance le téléchargement. Ensuite tout se déroule comme décrit ci-dessus, pour les plugins Callisto.</li>
+  <li>en [7], on accepte les conditions des licences du plugin
+  </li>
+  <li>en [8], on a la liste de tous les plugins qui vont être installés, un ici. On lance le téléchargement. Ensuite tout se déroule comme décrit ci-dessus, pour les plugins Callisto.
+  </li>
 </ul>
+
 <p>Une fois Eclipse relancé, on peut constater la présence du nouveau plugin en demandant, par exemple, à voir les vues disponibles [Window / show View / Other]  :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000010E000000D3975DCEBB.png" style="display:inline-block; margin:4px;width:5.001cm;height:3.911cm;" class="odt-zoomable" data-zoom-src="images/100000000000010E000000D3975DCEBB.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">&nbsp;</td></tr></table>
 
@@ -1377,22 +1423,31 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000548000001F73C7A2EE1.png" style="display:inline-block; margin:4px;width:17.886cm;height:6.655cm;" class="odt-zoomable" data-zoom-src="images/1000000000000548000001F73C7A2EE1.png" /></td></tr></table>
 
 <ul>
-<li>en [1], on sélectionne la dernière version d&#x27;Hibernate Tools</li>
-<li>en [2], on la télécharge</li>
+  <li>en [1], on sélectionne la dernière version d&#x27;Hibernate Tools
+  </li>
+  <li>en [2], on la télécharge
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000542000001ADEDC05987.png" style="display:inline-block; margin:4px;width:17.806cm;height:5.676cm;" class="odt-zoomable" data-zoom-src="images/1000000000000542000001ADEDC05987.png" /></td></tr></table>
 
 <ul>
-<li>en [3], avec un dézippeur, on décompresse dans le dossier &lt;eclipse&gt; le fichier zip téléchargé (il est préférable qu&#x27;Eclipse ne soit pas actif)</li>
-<li>en [4], on accepte que certains fichiers soient écrasés dans l&#x27;opération</li>
+  <li>en [3], avec un dézippeur, on décompresse dans le dossier &lt;eclipse&gt; le fichier zip téléchargé (il est préférable qu&#x27;Eclipse ne soit pas actif)
+  </li>
+  <li>en [4], on accepte que certains fichiers soient écrasés dans l&#x27;opération
+  </li>
 </ul>
+
 <p>On relance Eclipse :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000049500000170C4E9AA7F.png" style="display:inline-block; margin:4px;width:15.519cm;height:4.868cm;" class="odt-zoomable" data-zoom-src="images/100000000000049500000170C4E9AA7F.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on ouvre une perspective</li>
-<li>en [2] : il existe maintenant une perspective [Hibernate Console]</li>
+  <li>en [1] : on ouvre une perspective
+  </li>
+  <li>en [2] : il existe maintenant une perspective [Hibernate Console]
+  </li>
 </ul>
+
 <p>Nous n&#x27;irons pas plus loin avec le plugin [Hibernate Tools] (Cancel en [2]). Son mode d&#x27;utilisation est expliqué dans les exemples du tutoriel.</p>
 <p>Parfois Eclipse ne détecte pas la présence de nouveaux plugins. On peut le forcer à rescanner tous ses plugins avec l&#x27;option -<strong>clean</strong>. Ainsi l&#x27;exécutable du raccourci d&#x27;Eclipse serait modifié de la façon suivante : </p>
 <div class="odt-code-rich" data-linenums="false" style="counter-reset: odtline 0;"><pre><code class="language-text">
@@ -1406,29 +1461,42 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004B000000248F9E50B9E.png" style="display:inline-block; margin:4px;width:15.875cm;height:7.726cm;" class="odt-zoomable" data-zoom-src="images/10000000000004B000000248F9E50B9E.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le site des plugins Eclipse</li>
-<li>en [2] : choisir la catégorie [Database]</li>
-<li>en [3] : dans la catégorie [Database], choisir un affichage par classement (peu fiable vu le faible nombre de gens qui votent)</li>
-<li>en [4] : QuantumDB arrive en 1ère position</li>
-<li>en [5] : nous choisissons SQLExplorer, plus ancien, moins bien côté (3ième) mais très bien quand même. Nous allons sur le site du plugin [plugin-homepage]</li>
+  <li>en [1] : le site des plugins Eclipse
+  </li>
+  <li>en [2] : choisir la catégorie [Database]
+  </li>
+  <li>en [3] : dans la catégorie [Database], choisir un affichage par classement (peu fiable vu le faible nombre de gens qui votent)
+  </li>
+  <li>en [4] : QuantumDB arrive en 1ère position
+  </li>
+  <li>en [5] : nous choisissons SQLExplorer, plus ancien, moins bien côté (3ième) mais très bien quand même. Nous allons sur le site du plugin [plugin-homepage]
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004A3000000E4BC55759C.png" style="display:inline-block; margin:4px;width:15.704cm;height:3.016cm;" class="odt-zoomable" data-zoom-src="images/10000000000004A3000000E4BC55759C.png" /></td></tr></table>
 
 <ul>
-<li>en [6] et [7] : on procède au téléchargement du plugin.</li>
+  <li>en [6] et [7] : on procède au téléchargement du plugin.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000001CD000001E9EC8DBBE7.png" style="display:inline-block; margin:4px;width:6.1cm;height:6.47cm;" class="odt-zoomable" data-zoom-src="images/10000000000001CD000001E9EC8DBBE7.png" /></td></tr></table>
 
 <ul>
-<li>en [8] : décompresser le fichier zip du plugin dans le dossier d&#x27;Eclipse.</li>
+  <li>en [8] : décompresser le fichier zip du plugin dans le dossier d&#x27;Eclipse.
+  </li>
 </ul>
+
 <p>Pour vérifier, relancer Eclipse avec éventuellement l&#x27;option -clean :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000040C000001A28F32BE4F.png" style="display:inline-block; margin:4px;width:13.705cm;height:5.53cm;" class="odt-zoomable" data-zoom-src="images/100000000000040C000001A28F32BE4F.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : ouvrir une nouvelle perspective</li>
-<li>en [2] : on voit qu&#x27;une perspective [SQL Explorer] est disponible. Nous y reviendrons ultérieurement.</li>
+  <li>en [1] : ouvrir une nouvelle perspective
+  </li>
+  <li>en [2] : on voit qu&#x27;une perspective [SQL Explorer] est disponible. Nous y reviendrons ultérieurement.
+  </li>
 </ul>
+
 <p><a id="tomcat55"></a></p>
 <h2 id="53-le-conteneur-de-servlets-tomcat-55">5.3. Le conteneur de servlets Tomcat 5.5</h2>
 <h3 id="531-installation">5.3.1. Installation</h3>
@@ -1477,13 +1545,13 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>classes
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">dans le dossier &lt;webapp&gt;\WEB-INF\classes</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">dans le dossier &lt;webapp&gt;\WEB-INF\classes</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>archives java
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">dans le dossier &lt;webapp&gt;\WEB-INF\lib</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">dans le dossier &lt;webapp&gt;\WEB-INF\lib</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vues, ressources (.jsp, .html, ...)
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">dans le dossier &lt;webapp&gt; ou des sous-dossiers</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">dans le dossier &lt;webapp&gt; ou des sous-dossiers</div></td></tr></table>
 
 <p>L&#x27;application web est configurée par un fichier XML : <strong>&lt;webapp&gt;\WEB-INF\web.xml</strong>. Ce fichier n&#x27;est pas nécessaire dans les cas simples, notamment le cas où l&#x27;application web ne contient que des fichiers statiques. Construisons le fichier HTML suivant :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
@@ -1529,14 +1597,22 @@
 <p><img src="images/10000000000000FC0000016F9FD0D308.png" style="width:4.669cm;height:6.798cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000000FC0000016F9FD0D308.png" /></p>
 <p>Cette page permet à l&#x27;administrateur de Tomcat de définir</p>
 <ul>
-<li>des sources de données (Data Sources),</li>
-<li>les informations nécessaires à l&#x27;envoi de courrier (Mail Sessions),</li>
-<li>des données d&#x27;environnement accessibles à toutes les applications (Environment Entries),</li>
-<li>de gérer les utilisateurs/administrateurs de Tomcat (Users),</li>
-<li>de gérer des groupes d&#x27;utilisateurs (Groups),</li>
-<li>de définir des rôles (= ce que peut faire ou non un utilisateur),</li>
-<li>de définir les caractéristiques des applications web déployées par le serveur (Service Catalina)</li>
+  <li>des sources de données (Data Sources),
+  </li>
+  <li>les informations nécessaires à l&#x27;envoi de courrier (Mail Sessions),
+  </li>
+  <li>des données d&#x27;environnement accessibles à toutes les applications (Environment Entries),
+  </li>
+  <li>de gérer les utilisateurs/administrateurs de Tomcat (Users),
+  </li>
+  <li>de gérer des groupes d&#x27;utilisateurs (Groups),
+  </li>
+  <li>de définir des rôles (= ce que peut faire ou non un utilisateur),
+  </li>
+  <li>de définir les caractéristiques des applications web déployées par le serveur (Service Catalina)
+  </li>
 </ul>
+
 <p>Suivons le lien [Roles] ci-dessus :</p>
 <p><img src="images/10000000000002A5000000F068F62971.png" style="width:12.538cm;height:4.438cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002A5000000F068F62971.png" /></p>
 <p>Un rôle permet de définir ce que peut faire ou ne pas faire un utilisateur ou un groupe d&#x27;utilisateurs. On associe à un rôle certains droits. Chaque utilisateur est associé à un ou plusieurs rôles et dispose des droits de ceux-ci. Le rôle [manager] ci-dessous donne le droit de gérer les applications web déployées dans Tomcat (déploiement, démarrage, arrêt, déchargement). Nous allons créer un utilisateur [manager] qu&#x27;on associera au rôle [manager] afin de lui permettre de gérer les applications de Tomcat. Pour cela, nous suivons le lien [Users] de la page d&#x27;administration :</p>
@@ -1562,8 +1638,10 @@
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="nt">&lt;/tomcat-users&gt;</span>
 </code></pre></div>
 <ul>
-<li>ligne 10 : l&#x27;utilisateur [manager] qui a été créé</li>
+  <li>ligne 10 : l&#x27;utilisateur [manager] qui a été créé
+  </li>
 </ul>
+
 <p>Une autre façon d&#x27;ajouter des utilisateurs est de modifier directement ce fichier. C&#x27;est notamment ainsi qu&#x27;il faut procéder si, d&#x27;aventure, on a oublié le mot de passe de l&#x27;administrateur <strong>admin</strong> ou de <strong>manager</strong>.</p>
 <h3 id="535-gestion-des-applications-web-deployees">5.3.5. Gestion des applications web déployées</h3>
 <p>Revenons maintenant à la page d&#x27;entrée [http://localhost:8080] et suivons le lien [Tomcat Manager] :</p>
@@ -1579,10 +1657,10 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Context Path
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">/exemple</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">le nom utilisé pour désigner l&#x27;application web</p><p style="margin:0;">à déployer</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">/exemple</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">le nom utilisé pour désigner l&#x27;application web</div><div style="margin:0 0 0.5em 0">à déployer</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Directory URL
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">C:\data\travail\2006-2007\eclipse\dvp-jpa\annexes\tomcat\exemple</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">le dossier de l&#x27;application web</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">C:\data\travail\2006-2007\eclipse\dvp-jpa\annexes\tomcat\exemple</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">le dossier de l&#x27;application web</div></td></tr></table>
 
 <p>Pour obtenir le fichier [C:\data\travail\2006-2007\eclipse\dvp-jpa\annexes\tomcat\exemple\exemple.html], nous demanderons à Tomcat l&#x27;URL [http://localhost:8080<strong>/exemple</strong>/exemple.html]. Le <strong>contexte</strong> sert à donner un nom à la racine de l&#x27;arborescence de l&#x27;application web déployée. Nous utilisons le bouton [Deploy] pour effectuer le déploiement de l&#x27;application. Si tout se passe bien, nous obtenons la page réponse suivante :</p>
 <p><img src="images/10000000000002D500000062596537D1.png" style="width:13.418cm;height:1.808cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002D500000062596537D1.png" /></p>
@@ -1593,19 +1671,19 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>/exemple
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">lien sur http://localhost:8080/exemple</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">lien sur http://localhost:8080/exemple</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Démarrer
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">permet de démarrer l&#x27;application</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">permet de démarrer l&#x27;application</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Arrêter
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">permet d&#x27;arrêter l&#x27;application</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">permet d&#x27;arrêter l&#x27;application</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Recharger
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">permet de recharger l&#x27;application. C&#x27;est nécessaire par exemple lorsqu&#x27;on a ajouté,</p><p style="margin:0;">modifié ou supprimé certaines classes de l&#x27;application.</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">permet de recharger l&#x27;application. C&#x27;est nécessaire par exemple lorsqu&#x27;on a ajouté,</div><div style="margin:0 0 0.5em 0">modifié ou supprimé certaines classes de l&#x27;application.</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Undeploy
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">suppression du contexte [/exemple]. L&#x27;application disparaît de la liste</p><p style="margin:0;">des applications disponibles.</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">suppression du contexte [/exemple]. L&#x27;application disparaît de la liste</div><div style="margin:0 0 0.5em 0">des applications disponibles.</div></td></tr></table>
 
 <p>Maintenant que notre application <strong>/exemple</strong> est déployée, nous pouvons faire quelques tests. Nous demandons la page [exemple.html] via l&#x27;url [http://localhost:8080/exemple/vues/exemple.html] :</p>
 <p><img src="images/10000000000001BE000000651E5E3BB2.png" style="width:8.28cm;height:1.87cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000001BE000000651E5E3BB2.png" /></p>
@@ -1660,14 +1738,20 @@
 <a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="nt">&lt;/web-app&gt;</span>
 </code></pre></div></td></tr></table></div>
 <ul>
-<li>lignes 2-5 : la balise racine &lt;web-app&gt; avec des attributs obtenus par copier / coller du fichier [web.xml] de l&#x27;application [/admin] de Tomcat (&lt;tomcat&gt;/server/webapps/admin/WEB-INF/web.xml).</li>
-<li>ligne 7 : le nom d&#x27;affichage de l&#x27;application web. C&#x27;est un nom libre qui a moins de contraintes que le nom de contexte de l&#x27;application. On peut y mettre des espaces par exemple, ce qui n&#x27;est pas possible avec le nom de contexte. Ce nom est affiché par exemple par l&#x27;administrateur Tomcat :</li>
+  <li>lignes 2-5 : la balise racine &lt;web-app&gt; avec des attributs obtenus par copier / coller du fichier [web.xml] de l&#x27;application [/admin] de Tomcat (&lt;tomcat&gt;/server/webapps/admin/WEB-INF/web.xml).
+  </li>
+  <li>ligne 7 : le nom d&#x27;affichage de l&#x27;application web. C&#x27;est un nom libre qui a moins de contraintes que le nom de contexte de l&#x27;application. On peut y mettre des espaces par exemple, ce qui n&#x27;est pas possible avec le nom de contexte. Ce nom est affiché par exemple par l&#x27;administrateur Tomcat :
+  </li>
 </ul>
+
 <p><img src="images/1000000000000193000000A44C3183C5.png" style="width:8.53cm;height:3.471cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/1000000000000193000000A44C3183C5.png" /></p>
 <ol>
-<li>ligne 8 : description de l&#x27;application web. Ce texte peut ensuite être obtenu par programmation.</li>
-<li>lignes 9-11 : la liste des fichiers d&#x27;accueil. La balise &lt;welcome-file-list&gt; sert à définir la liste des vues à présenter lorsqu&#x27;un client demande le contexte de l&#x27;application. Il peut y avoir plusieurs vues. La première trouvée est présentée au client. Ici nous n&#x27;en avons qu&#x27;une : [/exemple.html]. Ainsi, lorsqu&#x27;un client demandera l&#x27;url [/exemple], ce sera en fait l&#x27;url [/exemple/exemple.html] qui lui sera délivrée.</li>
+  <li>ligne 8 : description de l&#x27;application web. Ce texte peut ensuite être obtenu par programmation.
+  </li>
+  <li>lignes 9-11 : la liste des fichiers d&#x27;accueil. La balise &lt;welcome-file-list&gt; sert à définir la liste des vues à présenter lorsqu&#x27;un client demande le contexte de l&#x27;application. Il peut y avoir plusieurs vues. La première trouvée est présentée au client. Ici nous n&#x27;en avons qu&#x27;une : [/exemple.html]. Ainsi, lorsqu&#x27;un client demandera l&#x27;url [/exemple], ce sera en fait l&#x27;url [/exemple/exemple.html] qui lui sera délivrée.
+  </li>
 </ol>
+
 <p>Sauvegardons ce fichier [web.xml] dans &lt;exemple&gt;\WEB-INF :</p>
 <p><img src="images/1000000000000098000000503220D7CB.png" style="width:2.82cm;height:1.48cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/1000000000000098000000503220D7CB.png" /></p>
 <p>Si Tomcat est toujours actif, il est possible de le forcer à recharger l&#x27;application web [/exemple] avec le lien [Recharger] :</p>
@@ -1679,29 +1763,42 @@
 <h3 id="537-integration-de-tomcat-dans-eclipse">5.3.7. Intégration de Tomcat dans Eclipse</h3>
 <p>Nous allons maintenant intégrer Tomcat dans Eclipse. Cette intégration permet de :</p>
 <ul>
-<li>lancer / arrêter Tomcat à partir d&#x27;Eclipse</li>
-<li>développer des applications web Java et les exécuter sur Tomcat. L&#x27;intégration Eclipse / Tomcat permet de tracer (déboguer) l&#x27;exécution de l&#x27;application, y compris l&#x27;exécution des classes Java (servlets) exécutées par Tomcat.</li>
+  <li>lancer / arrêter Tomcat à partir d&#x27;Eclipse
+  </li>
+  <li>développer des applications web Java et les exécuter sur Tomcat. L&#x27;intégration Eclipse / Tomcat permet de tracer (déboguer) l&#x27;exécution de l&#x27;application, y compris l&#x27;exécution des classes Java (servlets) exécutées par Tomcat.
+  </li>
 </ul>
+
 <p>Lançons Eclipse, puis demandons à voir la vue [Servers] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000049B0000024442E742C2.png" style="display:inline-block; margin:4px;width:15.598cm;height:7.673cm;" class="odt-zoomable" data-zoom-src="images/100000000000049B0000024442E742C2.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : Window/Show View/Other</li>
-<li>en [2] : sélectionner la vue [Servers] et faire [OK]</li>
+  <li>en [1] : Window/Show View/Other
+  </li>
+  <li>en [2] : sélectionner la vue [Servers] et faire [OK]
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000048E000001B3B3DECD3F.png" style="display:inline-block; margin:4px;width:15.425cm;height:5.756cm;" class="odt-zoomable" data-zoom-src="images/100000000000048E000001B3B3DECD3F.png" /></td></tr></table>
 
 <ul>
-<li>en [1], on a une nouvelle vue [Servers]</li>
-<li>en [2], on clique droit sur la vue et on demande à créer un nouveau serveur [New/Server]</li>
-<li>en [3], on choisit le serveur [Tomcat 5.5] puis on fait [Next]</li>
+  <li>en [1], on a une nouvelle vue [Servers]
+  </li>
+  <li>en [2], on clique droit sur la vue et on demande à créer un nouveau serveur [New/Server]
+  </li>
+  <li>en [3], on choisit le serveur [Tomcat 5.5] puis on fait [Next]
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000547000001D8377C4AA6.png" style="display:inline-block; margin:4px;width:17.873cm;height:6.244cm;" class="odt-zoomable" data-zoom-src="images/1000000000000547000001D8377C4AA6.png" /></td></tr></table>
 
 <ul>
-<li>en [4], on désigne le dossier d&#x27;installation de Tomcat 5.5</li>
-<li>en [5], on indique qu&#x27;il n&#x27;y a pas de projets Eclipse/Tomcat pour le moment. on fait [Finish]</li>
+  <li>en [4], on désigne le dossier d&#x27;installation de Tomcat 5.5
+  </li>
+  <li>en [5], on indique qu&#x27;il n&#x27;y a pas de projets Eclipse/Tomcat pour le moment. on fait [Finish]
+  </li>
 </ul>
+
 <p>L&#x27;ajout du serveur se concrétise par celui d&#x27;un dossier dans l&#x27;explorateur de projets d&#x27;Eclipse [6] et l&#x27;apparition d&#x27;un serveur dans la vue [servers] [7] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000045500000104F0BD53CD.png" style="display:inline-block; margin:4px;width:14.672cm;height:3.44cm;" class="odt-zoomable" data-zoom-src="images/100000000000045500000104F0BD53CD.png" /></td></tr></table>
 
@@ -1726,9 +1823,12 @@
 </code></pre></div></td></tr></table></div>
 <p>La compréhension de ces logs demande une certaine habitude. Nous ne nous apesantirons pas dessus pour le moment. Il est cependant important de vérifier qu&#x27;ils ne signalent pas d&#x27;erreurs de chargement de contextes. En effet, lorsqu&#x27;il est lancé, le serveur Tomcat / Eclipse va chercher à charger le contexte des applications qu&#x27;il gère. Charger le contexte d&#x27;une application implique d&#x27;exploiter son fichier [web.xml] et de charger une ou plusieurs classes l&#x27;initialisant. Plusieurs types d&#x27;erreurs peuvent alors se produire :</p>
 <ul>
-<li>le fichier [web.xml] est syntaxiquement incorrect. C&#x27;est l&#x27;erreur la plus fréquente. Il est conseillé d&#x27;utiliser un outil capable de vérifier la validité d&#x27;un document XML lors de sa construction.</li>
-<li>certaines classes à charger n&#x27;ont pas été trouvées. Elles sont cherchées dans [WEB-INF/classes] et [WEB-INF/lib]. Il faut en général vérifier la présence des classes nécessaires et l&#x27;orthographe de celles déclarées dans le fichier [web.xml].</li>
+  <li>le fichier [web.xml] est syntaxiquement incorrect. C&#x27;est l&#x27;erreur la plus fréquente. Il est conseillé d&#x27;utiliser un outil capable de vérifier la validité d&#x27;un document XML lors de sa construction.
+  </li>
+  <li>certaines classes à charger n&#x27;ont pas été trouvées. Elles sont cherchées dans [WEB-INF/classes] et [WEB-INF/lib]. Il faut en général vérifier la présence des classes nécessaires et l&#x27;orthographe de celles déclarées dans le fichier [web.xml].
+  </li>
 </ul>
+
 <p>Le serveur lancé à partir d&#x27;Eclipse n&#x27;a pas la même configuration que celui installé au paragraphe <a href="#tomcat55">5.3</a>. Pour nous en assurer, demandons l&#x27;url [http://localhost:8080] avec un navigateur :</p>
 <p><img src="images/1000000000000149000001004C29433E.png" style="width:6.091cm;height:4.74cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/1000000000000149000001004C29433E.png" /></p>
 <p>Cette réponse n&#x27;indique pas que le serveur ne fonctionne pas mais que la ressource / qui lui est demandée n&#x27;est pas disponible. Avec le serveur Tomcat intégré à Eclipse, ces ressources vont être des projets web. Nous le verrons ultérieurement. Pour le moment, arrêtons Tomcat :</p>
@@ -1761,10 +1861,14 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000048E000001825F96B29B.png" style="display:inline-block; margin:4px;width:15.425cm;height:5.106cm;" class="odt-zoomable" data-zoom-src="images/100000000000048E000001825F96B29B.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on utilise l&#x27;option [Download.Firebird Relational Database]</li>
-<li>en [2] : on désigne la version de Firebird désirée</li>
-<li>en [3] : on télécharge le binaire de l&#x27;installation</li>
+  <li>en [1] : on utilise l&#x27;option [Download.Firebird Relational Database]
+  </li>
+  <li>en [2] : on désigne la version de Firebird désirée
+  </li>
+  <li>en [3] : on télécharge le binaire de l&#x27;installation
+  </li>
 </ul>
+
 <p>Une fois le fichier [3] téléchargé, on double-clique dessus pour installer le SGBD Firebird. Le SGBD est installé dans un dossier dont le contenu est analogue au suivant :</p>
 <p><img src="images/10000000000000D60000011DEC852F46.png" style="width:3.96cm;height:5.267cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000000D60000011DEC852F46.png" /></p>
 <p>Les binaires sont dans le dossier [bin] :</p>
@@ -1772,10 +1876,10 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>fbguard.exe
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">permet de lancer/arrêter le SGBD</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">permet de lancer/arrêter le SGBD</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>isql.exe
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">client ligne permettant de gérer des bases de données</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">client ligne permettant de gérer des bases de données</div></td></tr></table>
 
 <p>On notera que par défaut, l&#x27;administrateur du SGBD s&#x27;appelle [SYSDBA] et son mot de passe est [masterkey]. Des menus ont été installés dans [Démarrer] :</p>
 <p><img src="images/1000000000000207000000AB2A62248A.png" style="width:9.61cm;height:3.17cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/1000000000000207000000AB2A62248A.png" /></p>
@@ -1792,11 +1896,16 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000048300000197CAD33958.png" style="display:inline-block; margin:4px;width:15.281cm;height:5.385cm;" class="odt-zoomable" data-zoom-src="images/100000000000048300000197CAD33958.png" /></td></tr></table>
 
 <ul>
-<li>en [1], on sélectionne IBExpert</li>
-<li>en [2], on sélectionne le téléchargement après avoir éventuellement choisi la langue de son choix</li>
-<li>en [3], on sélectionne la version dite &quot;personnelle&quot; car elle est gratuite. Il faut néanmoins s&#x27;inscrire auprès du site.</li>
-<li>en [4], on télécharge IBExpert</li>
+  <li>en [1], on sélectionne IBExpert
+  </li>
+  <li>en [2], on sélectionne le téléchargement après avoir éventuellement choisi la langue de son choix
+  </li>
+  <li>en [3], on sélectionne la version dite &quot;personnelle&quot; car elle est gratuite. Il faut néanmoins s&#x27;inscrire auprès du site.
+  </li>
+  <li>en [4], on télécharge IBExpert
+  </li>
 </ul>
+
 <p>IBExpert est installé dans un dossier analogue au suivant :</p>
 <p><img src="images/100000000000007C000000DAAD43E550.png" style="width:2.3cm;height:4.039cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000007C000000DAAD43E550.png" /></p>
 <p>L&#x27;exécutable est [ibexpert.exe]. Un raccourci est normalement disponible dans le menu [Démarrer] :</p>
@@ -1809,25 +1918,25 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Server
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>(Serveur)
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">peut être [local] ou [remote]. Ici notre serveur est sur la même machine que [IBExpert]. On choisit</p><p style="margin:0;">donc [local]</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">peut être [local] ou [remote]. Ici notre serveur est sur la même machine que [IBExpert]. On choisit</div><div style="margin:0 0 0.5em 0">donc [local]</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Database
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>(Base de données)
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">utiliser le bouton de type [dossier] du combo pour désigner le fichier de la base. Firebird met toute la</p><p style="margin:0;">base dans un unique fichier. C&#x27;est l&#x27;un de ses atouts.</p><p style="margin:0;">On transporte la base d&#x27;un poste à l&#x27;autre par simple copie du fichier.</p><p style="margin:0;">Le suffixe [.fdb] est ajouté automatiquement.</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">utiliser le bouton de type [dossier] du combo pour désigner le fichier de la base. Firebird met toute la</div><div style="margin:0 0 0.5em 0">base dans un unique fichier. C&#x27;est l&#x27;un de ses atouts.</div><div style="margin:0 0 0.5em 0">On transporte la base d&#x27;un poste à l&#x27;autre par simple copie du fichier.</div><div style="margin:0 0 0.5em 0">Le suffixe [.fdb] est ajouté automatiquement.</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Username
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;"><b>SYSDBA</b> est l&#x27;administrateur par défaut des distributions actuelles de Firebird</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0"><b>SYSDBA</b> est l&#x27;administrateur par défaut des distributions actuelles de Firebird</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>Password
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>(Nom de l&#39;utilisateur)
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;"><b>masterkey</b> est le mot de passe de l&#x27;administrateur SYSDBA des distributions</p><p style="margin:0;">actuelles de Firebird</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0"><b>masterkey</b> est le mot de passe de l&#x27;administrateur SYSDBA des distributions</div><div style="margin:0 0 0.5em 0">actuelles de Firebird</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Dialect
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">le dialecte SQL à utiliser</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">le dialecte SQL à utiliser</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Register Database
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>(Référencer la base de données)
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">si la case est cochée, IBExpert présentera un lien vers la base créée après avoir créé celle-ci</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">si la case est cochée, IBExpert présentera un lien vers la base créée après avoir créé celle-ci</div></td></tr></table>
 
 <p>Si en cliquant le bouton [OK] de création, vous obtenez l&#x27;avertissement suivant :</p>
 <p><img src="images/100000000000016100000081ABF4648E.png" style="width:6.537cm;height:2.383cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000016100000081ABF4648E.png" /></p>
@@ -1838,13 +1947,13 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>Charset
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>(Jeu de caractères)
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">Famille de caractères à utiliser. Il est conseillé de prendre dans la liste déroulante la famille</p><p style="margin:0;">[ISO-8859-1] qui permet d&#x27;utiliser les caractères latins accentués.</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">Famille de caractères à utiliser. Il est conseillé de prendre dans la liste déroulante la famille</div><div style="margin:0 0 0.5em 0">[ISO-8859-1] qui permet d&#x27;utiliser les caractères latins accentués.</div></td></tr></table>
 
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>Server version
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>(Version du serveur)
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">[IBExpert] est capable de gérer différents SGBD dérivés d&#x27;Interbase.</p><p style="margin:0;">Prendre la version de Firebird que vous avez installée.</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">[IBExpert] est capable de gérer différents SGBD dérivés d&#x27;Interbase.</div><div style="margin:0 0 0.5em 0">Prendre la version de Firebird que vous avez installée.</div></td></tr></table>
 
 <p>Une fois cette nouvelle fenêtre validée par [Register], on a le résultat [1] dans la fenêtre [Database Explorer]. Cette fenêtre peut être fermée malencontreusement. Pour l&#x27;obtenir de nouveau faire [2] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000043C000000C3FF5D8E14.png" style="display:inline-block; margin:4px;width:14.34cm;height:2.581cm;" class="odt-zoomable" data-zoom-src="images/100000000000043C000000C3FF5D8E14.png" /></td></tr></table>
@@ -1871,15 +1980,22 @@
 <p><img src="images/10000000000001B90000005DC4BC17DC.png" style="width:8.17cm;height:1.72cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000001B90000005DC4BC17DC.png" /></p>
 <p>On retrouve la contrainte de clé primaire que nous avons créée. On peut ajouter d&#x27;autres contraintes :</p>
 <ul>
-<li>des clés étrangères [Foreign Keys]</li>
-<li>des contraintes d&#x27;intégrité de champs [Checks]</li>
-<li>des contraintes d&#x27;unicité de champs [Uniques]</li>
+  <li>des clés étrangères [Foreign Keys]
+  </li>
+  <li>des contraintes d&#x27;intégrité de champs [Checks]
+  </li>
+  <li>des contraintes d&#x27;unicité de champs [Uniques]
+  </li>
 </ul>
+
 <p>Indiquons que :</p>
 <ul>
-<li>les champs [ID, PRIX, STOCKACTUEL, STOKMINIMUM] doivent être &gt;0</li>
-<li>le champ [NOM] doit être non vide et unique</li>
+  <li>les champs [ID, PRIX, STOCKACTUEL, STOKMINIMUM] doivent être &gt;0
+  </li>
+  <li>le champ [NOM] doit être non vide et unique
+  </li>
 </ul>
+
 <p>Ouvrons le panneau [Checks] et cliquons droit dans son espace de définition des contraintes pour ajouter une nouvelle contrainte :</p>
 <p><img src="images/10000000000001480000009E390E3986.png" style="width:6.07cm;height:2.93cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000001480000009E390E3986.png" /></p>
 <p>Définissons les contraintes souhaitées :</p>
@@ -1918,25 +2034,40 @@
 <h3 id="545-lediteur-sql-de-ib-expert">5.4.5. L&#x27;éditeur SQL de [IB-Expert]</h3>
 <p>Le langage SQL (Structured Query Language) permet à un utilisateur de :</p>
 <ol>
-<li>créer des tables en précisant le type de données qu&#x27;elle va stocker, les contraintes que ces données doivent vérifier</li>
-<li>d&#x27;y insérer des données</li>
-<li>d&#x27;en modifier certaines</li>
-<li>d&#x27;en supprimer d&#x27;autres</li>
-<li>d&#x27;en exploiter le contenu pour obtenir des informations</li>
-<li>...</li>
+  <li>créer des tables en précisant le type de données qu&#x27;elle va stocker, les contraintes que ces données doivent vérifier
+  </li>
+  <li>d&#x27;y insérer des données
+  </li>
+  <li>d&#x27;en modifier certaines
+  </li>
+  <li>d&#x27;en supprimer d&#x27;autres
+  </li>
+  <li>d&#x27;en exploiter le contenu pour obtenir des informations
+  </li>
+  <li>...
+  </li>
 </ol>
+
 <p>IBExpert permet à un utilisateur de faire les opérations 1 à 4 de façon graphique. Nous venons de le voir. Lorsque la base contient de nombreuses tables avec chacune des centaines de lignes, on a besoin de renseignements difficiles à obtenir visuellement. Supposons par exemple qu&#x27;un magasin virtuel sur le web ait des milliers d&#x27;acheteurs par mois. Tous les achats sont enregistrés dans une base de données. Au bout de six mois, on découvre qu&#x27;un produit « X » est défaillant. On souhaite contacter toutes les personnes qui l&#x27;ont acheté afin qu&#x27;elles renvoient le produit pour un échange gratuit. Comment trouver les adresses de ces acheteurs  ?</p>
 <ol>
-<li>On peut consulter visuellement toutes les tables et chercher ces acheteurs. Cela prendra quelques heures.</li>
-<li>On peut émettre un ordre SQL qui va donner la liste de ces personnes en quelques secondes</li>
+  <li>On peut consulter visuellement toutes les tables et chercher ces acheteurs. Cela prendra quelques heures.
+  </li>
+  <li>On peut émettre un ordre SQL qui va donner la liste de ces personnes en quelques secondes
+  </li>
 </ol>
+
 <p>Le langage SQL est utile dès </p>
 <ul>
-<li>que la quantité de données dans les tables est importante</li>
-<li>qu&#x27;il y a beaucoup de tables liées entre-elles</li>
-<li>que l&#x27;information à obtenir est répartie sur plusieurs tables</li>
-<li>...</li>
+  <li>que la quantité de données dans les tables est importante
+  </li>
+  <li>qu&#x27;il y a beaucoup de tables liées entre-elles
+  </li>
+  <li>que l&#x27;information à obtenir est répartie sur plusieurs tables
+  </li>
+  <li>...
+  </li>
 </ul>
+
 <p>Nous présentons maintenant l&#x27;éditeur SQL d&#x27;IBExpert. Celui-ci est accesible via l&#x27;option [Tools/SQL Editor] ou [F12] :</p>
 <p><img src="images/10000000000000FB0000005023737073.png" style="width:4.65cm;height:1.48cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000000FB0000005023737073.png" /></p>
 <p>On a alors accès à un éditeur de requêtes SQL évolué avec lequel on peut jouer des requêtes. Tapons une requête :</p>
@@ -1947,8 +2078,10 @@
 <p><img src="images/10000000000001BD0000005254B3265B.png" style="width:8.241cm;height:1.52cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000001BD0000005254B3265B.png" /></p>
 <p>Plusieurs boutons de la barre d&#x27;outils sont utiles :</p>
 <ul>
-<li>le bouton [New Query] permet de passer à une nouvelle requête SQL :</li>
+  <li>le bouton [New Query] permet de passer à une nouvelle requête SQL :
+  </li>
 </ul>
+
 <p><img src="images/10000000000001B60000004FD141CD4F.png" style="width:8.11cm;height:1.461cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000001B60000004FD141CD4F.png" /></p>
 <p>On obtient alors une page d&#x27;édition vierge :</p>
 <p><img src="images/100000000000017D00000051BEAC180F.png" style="width:7.061cm;height:1.499cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000017D00000051BEAC180F.png" /></p>
@@ -2015,29 +2148,46 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D8000001FBE48BE601.png" style="display:inline-block; margin:4px;width:16.404cm;height:6.708cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D8000001FBE48BE601.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : Outils / Extraire la MetaData, pour extraire les méta-données</li>
-<li>en [2] : onglet Méta Objets</li>
-<li>en [3] : sélectionner la table [Articles] dont on veut extraire la structure (méta-données)</li>
-<li>en [4] : pour transférer à droite l&#x27;objet sélectionné à gauche</li>
+  <li>en [1] : Outils / Extraire la MetaData, pour extraire les méta-données
+  </li>
+  <li>en [2] : onglet Méta Objets
+  </li>
+  <li>en [3] : sélectionner la table [Articles] dont on veut extraire la structure (méta-données)
+  </li>
+  <li>en [4] : pour transférer à droite l&#x27;objet sélectionné à gauche
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004EE000001799360975C.png" style="display:inline-block; margin:4px;width:16.695cm;height:4.988cm;" class="odt-zoomable" data-zoom-src="images/10000000000004EE000001799360975C.png" /></td></tr></table>
 
 <ul>
-<li>en [5] : la table [ARTICLES] fera partie des méta-données extraites</li>
-<li>en [6] : l&#x27;onglet [Table de données] sert à sélectionner les tables dont on veut extraire le contenu (dans l&#x27;étape précédente, c&#x27;était la structure de la table qui était exportée)</li>
-<li>en [7] : pour transférer à droite l&#x27;objet sélectionné à gauche</li>
-<li>en [8] : le résultat obtenu</li>
+  <li>en [5] : la table [ARTICLES] fera partie des méta-données extraites
+  </li>
+  <li>en [6] : l&#x27;onglet [Table de données] sert à sélectionner les tables dont on veut extraire le contenu (dans l&#x27;étape précédente, c&#x27;était la structure de la table qui était exportée)
+  </li>
+  <li>en [7] : pour transférer à droite l&#x27;objet sélectionné à gauche
+  </li>
+  <li>en [8] : le résultat obtenu
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000055B0000014162457D6B.png" style="display:inline-block; margin:4px;width:17.997cm;height:4.214cm;" class="odt-zoomable" data-zoom-src="images/100000000000055B0000014162457D6B.png" /></td></tr></table>
 
 <ul>
-<li>en [9] : l&#x27;onglet [Options] permet de configurer certains paramètres de l&#x27;extraction</li>
-<li>en [10] : on décoche les options liées à la génération des ordres SQL permettant se connecter à la base. Ils sont propriétaires à Firebird et de ce fait ne nous intéressent pas.</li>
-<li>en [11] : l&#x27;onglet [Sortie] permet de préciser où sera généré le script SQL</li>
-<li>en [12] : on précise que le script doit être généré dans un fichier</li>
-<li>en [13] : on précise l&#x27;emplacement de ce fichier</li>
-<li>en [14] : on lance la génération du script SQL</li>
+  <li>en [9] : l&#x27;onglet [Options] permet de configurer certains paramètres de l&#x27;extraction
+  </li>
+  <li>en [10] : on décoche les options liées à la génération des ordres SQL permettant se connecter à la base. Ils sont propriétaires à Firebird et de ce fait ne nous intéressent pas.
+  </li>
+  <li>en [11] : l&#x27;onglet [Sortie] permet de préciser où sera généré le script SQL
+  </li>
+  <li>en [12] : on précise que le script doit être généré dans un fichier
+  </li>
+  <li>en [13] : on précise l&#x27;emplacement de ce fichier
+  </li>
+  <li>en [14] : on lance la génération du script SQL
+  </li>
 </ul>
+
 <p>Le script généré, débarrassé de ses commentaires est le suivant :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
@@ -2100,72 +2250,113 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000001040000014E25811D9F.png" style="display:inline-block; margin:4px;width:3.44cm;height:4.419cm;" class="odt-zoomable" data-zoom-src="images/10000000000001040000014E25811D9F.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on choisit de télécharger le pilote JDBC</li>
-<li>en [2] : on choisit un pilote JDBC compatible JDK 1.5</li>
-<li>en [3] : l&#x27;archive contenant le pilote JDBC est [jaybird-full-2.1.1.jar]. On extraiera ce fichier. Il sera utilisé pour tous les exemples JPA avec Firebird.</li>
+  <li>en [1] : on choisit de télécharger le pilote JDBC
+  </li>
+  <li>en [2] : on choisit un pilote JDBC compatible JDK 1.5
+  </li>
+  <li>en [3] : l&#x27;archive contenant le pilote JDBC est [jaybird-full-2.1.1.jar]. On extraiera ce fichier. Il sera utilisé pour tous les exemples JPA avec Firebird.
+  </li>
 </ul>
+
 <p>Nous le plaçons dans un dossier que nous appellerons par la suite &lt;jdbc&gt; :</p>
 <p><img src="images/10000000000000960000004B5F622452.png" style="width:2.78cm;height:1.39cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000000960000004B5F622452.png" /></p>
 <p>Pour vérifier ce pilote JDBC, nous allons utiliser Eclipse et le plugin SQL Explorer (paragraphe <a href="#sqlexplorer">5.2.6</a>). Nous commençons par déclarer le pilote JDBC de Firebird :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000005320000019B710E99B8.png" style="display:inline-block; margin:4px;width:17.595cm;height:5.438cm;" class="odt-zoomable" data-zoom-src="images/10000000000005320000019B710E99B8.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : faire Window / Preferences</li>
-<li>en [2] : choisir l&#x27;option SQL Explorer / JDBC Drivers</li>
-<li>en [3] : choisir le pilote JDBC pour Firebird</li>
-<li>en [4] : passer en phase de configuration</li>
-<li>en [5] : passer dans l&#x27;onglet [Extra Class Path]</li>
-<li>avec [6], désigner le fichier du pilote JDBC. Ceci fait, celui-ci apparaît en [7]. On choisira ici le pilote placé précédemment dans le dossier &lt;jdbc&gt;</li>
-<li>dans [8] : le nom de la classe Java du pilote JDBC. Il peut être obtenu par le bouton [8b].</li>
-<li>on fait [OK] pour valider la configuration</li>
+  <li> en [1] : faire Window / Preferences
+  </li>
+  <li>en [2] : choisir l&#x27;option SQL Explorer / JDBC Drivers
+  </li>
+  <li>en [3] : choisir le pilote JDBC pour Firebird
+  </li>
+  <li>en [4] : passer en phase de configuration
+  </li>
+  <li>en [5] : passer dans l&#x27;onglet [Extra Class Path]
+  </li>
+  <li>avec [6], désigner le fichier du pilote JDBC. Ceci fait, celui-ci apparaît en [7]. On choisira ici le pilote placé précédemment dans le dossier &lt;jdbc&gt;
+  </li>
+  <li>dans [8] : le nom de la classe Java du pilote JDBC. Il peut être obtenu par le bouton [8b].
+  </li>
+  <li>on fait [OK] pour valider la configuration
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000001AB0000009102AB4507.png" style="display:inline-block; margin:4px;width:5.65cm;height:1.919cm;" class="odt-zoomable" data-zoom-src="images/10000000000001AB0000009102AB4507.png" /></td></tr></table>
 
 <ul>
-<li>en [9] : le pilote JDBC de Firebird est désormais configuré. On peut passer à son utilisation.</li>
+  <li>en [9] : le pilote JDBC de Firebird est désormais configuré. On peut passer à son utilisation.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000405000001A16E43F2E8.png" style="display:inline-block; margin:4px;width:13.614cm;height:5.517cm;" class="odt-zoomable" data-zoom-src="images/1000000000000405000001A16E43F2E8.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : ouvrir une nouvelle perspective</li>
-<li>en [2] : choisir la perspective [SQL Explorer]</li>
+  <li>en [1] : ouvrir une nouvelle perspective
+  </li>
+  <li>en [2] : choisir la perspective [SQL Explorer]
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004E20000013076BF12A1.png" style="display:inline-block; margin:4px;width:16.536cm;height:4.022cm;" class="odt-zoomable" data-zoom-src="images/10000000000004E20000013076BF12A1.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : créer une nouvelle connexion</li>
-<li>en [4] : lui donner un nom</li>
-<li>en [5] : choisir dans la liste déroulante le pilote JDBC de Firebird</li>
-<li>en [6] : préciser l&#x27;Url de la base à laquelle on veut se connecter, ici : [jdbc:firebirdsql:localhost/3050:C:\data\2006-2007\eclipse\dvp-jpa\annexes\jpa\jpa.fdb]. [jpa.fdb] est la base créée précédemment avec IBExpert.</li>
-<li>en [7] : le nom de l&#x27;utilisateur de la connexion, ici [sysdba], l&#x27;administrateur de Firebird</li>
-<li>en [8] : son mot de passe [masterkey]</li>
-<li>on valide la configuration de la connexion par [OK]</li>
+  <li>en [3] : créer une nouvelle connexion
+  </li>
+  <li>en [4] : lui donner un nom
+  </li>
+  <li>en [5] : choisir dans la liste déroulante le pilote JDBC de Firebird
+  </li>
+  <li>en [6] : préciser l&#x27;Url de la base à laquelle on veut se connecter, ici : [jdbc:firebirdsql:localhost/3050:C:\data\2006-2007\eclipse\dvp-jpa\annexes\jpa\jpa.fdb]. [jpa.fdb] est la base créée précédemment avec IBExpert.
+  </li>
+  <li>en [7] : le nom de l&#x27;utilisateur de la connexion, ici [sysdba], l&#x27;administrateur de Firebird
+  </li>
+  <li>en [8] : son mot de passe [masterkey]
+  </li>
+  <li>on valide la configuration de la connexion par [OK]
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004DF000002806EFDAAD3.png" style="display:inline-block; margin:4px;width:16.498cm;height:8.467cm;" class="odt-zoomable" data-zoom-src="images/10000000000004DF000002806EFDAAD3.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on double-clique sur le nom de la connexion qu&#x27;on veut ouvrir</li>
-<li>en [2] : on s&#x27;identifie (sysdba, masterkey)</li>
-<li>en [3] : la connexion est ouverte</li>
-<li>en [4] : on a la structure de la base. On y voit la table [ARTICLES]. On la sélectionne.</li>
+  <li>en [1] : on double-clique sur le nom de la connexion qu&#x27;on veut ouvrir
+  </li>
+  <li>en [2] : on s&#x27;identifie (sysdba, masterkey)
+  </li>
+  <li>en [3] : la connexion est ouverte
+  </li>
+  <li>en [4] : on a la structure de la base. On y voit la table [ARTICLES]. On la sélectionne.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D4000000F5FD4F6D5D.png" style="display:inline-block; margin:4px;width:16.351cm;height:3.242cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D4000000F5FD4F6D5D.png" /></td></tr></table>
 
 <ul>
-<li>en [5] : dans la fenêtre [Database Detail], on a les détails de l&#x27;objet sélectionné en [4], ici la table [ARTICLES]</li>
-<li>en [6] : l&#x27;onglet [Columns] donne la structure de la table</li>
-<li>en [7] : l&#x27;onglet [Preview] donne la structure de la table</li>
+  <li>en [5] : dans la fenêtre [Database Detail], on a les détails de l&#x27;objet sélectionné en [4], ici la table [ARTICLES]
+  </li>
+  <li>en [6] : l&#x27;onglet [Columns] donne la structure de la table
+  </li>
+  <li>en [7] : l&#x27;onglet [Preview] donne la structure de la table
+  </li>
 </ul>
+
 <p>On peut émettre des requêtes SQL dans la fenêtre [SQL Editor] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004E8000000C10C5F800E.png" style="display:inline-block; margin:4px;width:16.616cm;height:2.554cm;" class="odt-zoomable" data-zoom-src="images/10000000000004E8000000C10C5F800E.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : choisir une connexion ouverte</li>
-<li>en [2] : taper l&#x27;ordre SQL à exécuter</li>
-<li>en [3] : l&#x27;exécuter</li>
-<li>en [4] : rappel de l&#x27;ordre exécuté</li>
-<li>en [5] : son résultat</li>
+  <li>en [1] : choisir une connexion ouverte
+  </li>
+  <li>en [2] : taper l&#x27;ordre SQL à exécuter
+  </li>
+  <li>en [3] : l&#x27;exécuter
+  </li>
+  <li>en [4] : rappel de l&#x27;ordre exécuté
+  </li>
+  <li>en [5] : son résultat
+  </li>
 </ul>
+
 <p><a id="mysql5"></a></p>
 <h2 id="55-le-sgbd-mysql5">5.5. Le SGBD MySQL5</h2>
 <h3 id="551-installation">5.5.1. Installation</h3>
@@ -2173,33 +2364,48 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D5000000D52DD3C8E2.png" style="display:inline-block; margin:4px;width:16.365cm;height:2.819cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D5000000D52DD3C8E2.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : choisir la version désirée</li>
-<li>en [2] : choisir une version Windows</li>
+  <li>en [1] : choisir la version désirée
+  </li>
+  <li>en [2] : choisir une version Windows
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000048A0000013AF52D42B1.png" style="display:inline-block; margin:4px;width:15.372cm;height:4.154cm;" class="odt-zoomable" data-zoom-src="images/100000000000048A0000013AF52D42B1.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : choisir la version windows désirée</li>
-<li>en [4] : le zip téléchargé contient un exécutable [Setup.exe] [4b] qu&#x27;il faut extraire et exécuter pour installer MySQL5</li>
+  <li>en [3] : choisir la version windows désirée
+  </li>
+  <li>en [4] : le zip téléchargé contient un exécutable [Setup.exe] [4b] qu&#x27;il faut extraire et exécuter pour installer MySQL5
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000054F000001BDE836C66C.png" style="display:inline-block; margin:4px;width:17.979cm;height:5.888cm;" class="odt-zoomable" data-zoom-src="images/100000000000054F000001BDE836C66C.png" /></td></tr></table>
 
 <ul>
-<li>en [5] : choisir une installation typique</li>
-<li>en [6] : une fois l&#x27;installation terminée, on peut configurer le serveur MySQL5</li>
+  <li>en [5] : choisir une installation typique
+  </li>
+  <li>en [6] : une fois l&#x27;installation terminée, on peut configurer le serveur MySQL5
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000055600000186DD0A0B12.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.138cm;" class="odt-zoomable" data-zoom-src="images/100000000000055600000186DD0A0B12.png" /></td></tr></table>
 
 <ul>
-<li>en [7] : choisir une configuration standard, celle qui pose le moins de questions</li>
-<li>en [8] : le serveur MySQL5 sera un service windows</li>
+  <li>en [7] : choisir une configuration standard, celle qui pose le moins de questions
+  </li>
+  <li>en [8] : le serveur MySQL5 sera un service windows
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000055B000001C8F152AD50.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.985cm;" class="odt-zoomable" data-zoom-src="images/100000000000055B000001C8F152AD50.png" /></td></tr></table>
 
 <ul>
-<li>en [9] : par défaut l&#x27;administrateur du serveur est <strong>root</strong> sans mot de passe. On peut garder cette configuration ou donner un nouveau mot de passe à <strong>root</strong>. Si l&#x27;installation de MySQL5 vient derrière une désinstallation d&#x27;une version précédente, cette opération peut échouer. Il y a moins moyen d&#x27;y revenir.</li>
-<li>en [10] : on demande la configuration du serveur</li>
+  <li>en [9] : par défaut l&#x27;administrateur du serveur est <b>root</b> sans mot de passe. On peut garder cette configuration ou donner un nouveau mot de passe à <b>root</b>. Si l&#x27;installation de MySQL5 vient derrière une désinstallation d&#x27;une version précédente, cette opération peut échouer. Il y a moins moyen d&#x27;y revenir.
+  </li>
+  <li>en [10] : on demande la configuration du serveur
+  </li>
 </ul>
+
 <p>L&#x27;installation de MySQL5 donne naissance à un dossier dans [Démarrer / Programmes ] :</p>
 <p><img src="images/10000000000002CC000000607DE6A22C.png" style="width:13.259cm;height:1.78cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002CC000000607DE6A22C.png" /></p>
 <p>On peut utiliser [MySQL Server Instance Config Wizard] pour reconfigurer le serveur :</p>
@@ -2210,120 +2416,175 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000050D0000011A98C066F9.png" style="display:inline-block; margin:4px;width:17.106cm;height:3.731cm;" class="odt-zoomable" data-zoom-src="images/100000000000050D0000011A98C066F9.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : nous changeons le mot de passe de root (ici root/root)</li>
+  <li>en [3] : nous changeons le mot de passe de root (ici root/root)
+  </li>
 </ul>
+
 <h3 id="552-lancer-arreter-mysql5">5.5.2. Lancer / Arrêter MySQL5</h3>
 <p>Le serveur MySQL5 a été installé comme un service windows à démarrage automatique, c.a.d lancé dès le démarrage de windows. Ce mode de fonctionnement est peu pratique. Nous allons le changer :</p>
 <p>[Démarrer / Panneau de configuration / Performances et maintenance / Outils d&#x27;administration / Services ] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000005320000010285D42685.png" style="display:inline-block; margin:4px;width:17.595cm;height:3.413cm;" class="odt-zoomable" data-zoom-src="images/10000000000005320000010285D42685.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : nous double-cliquons sur [Services]</li>
-<li>en [2] : on voit qu&#x27;un service appelé [MySQL] est présent, qu&#x27;il est démarré [3] et que son démarrage est automatique [4].</li>
+  <li>en [1] : nous double-cliquons sur [Services]
+  </li>
+  <li>en [2] : on voit qu&#x27;un service appelé [MySQL] est présent, qu&#x27;il est démarré [3] et que son démarrage est automatique [4].
+  </li>
 </ul>
+
 <p>Pour modifier ce fonctionnement, nous double-cliquons sur le service [MySQL] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000050E000002B3377B5FDF.png" style="display:inline-block; margin:4px;width:17.119cm;height:9.142cm;" class="odt-zoomable" data-zoom-src="images/100000000000050E000002B3377B5FDF.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on met le service en démarrage manuel</li>
-<li>en [2] : on l&#x27;arrête</li>
-<li>en [3] : on valide la nouvelle configuration du service</li>
+  <li>en [1] : on met le service en démarrage manuel
+  </li>
+  <li>en [2] : on l&#x27;arrête
+  </li>
+  <li>en [3] : on valide la nouvelle configuration du service
+  </li>
 </ul>
+
 <p>Pour lancer et arrêter manuellement le service MySQL, on pourra créer deux raccourcis :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000005370000015846B14F83.png" style="display:inline-block; margin:4px;width:17.662cm;height:4.551cm;" class="odt-zoomable" data-zoom-src="images/10000000000005370000015846B14F83.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le raccourci pour lancer MySQL5</li>
-<li>en [2] : le raccourci pour l&#x27;arrêter</li>
+  <li>en [1] : le raccourci pour lancer MySQL5
+  </li>
+  <li>en [2] : le raccourci pour l&#x27;arrêter
+  </li>
 </ul>
+
 <h3 id="553-clients-dadministration-mysql">5.5.3. Clients d&#x27;administration MySQL</h3>
 <p>Sur le site de MySQL, on peut trouver des clients d&#x27;administration du SGBD :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000548000000FA0DDAD1E5.png" style="display:inline-block; margin:4px;width:17.886cm;height:3.307cm;" class="odt-zoomable" data-zoom-src="images/1000000000000548000000FA0DDAD1E5.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : choisir [MySQL GUI Tools] qui rassemble divers clients graphiques permettant soit d&#x27;administrer le SGBD, soit de l&#x27;exploiter</li>
-<li>en [2] : prendre la version Windows qui convient</li>
+  <li>en [1] : choisir [MySQL GUI Tools] qui rassemble divers clients graphiques permettant soit d&#x27;administrer le SGBD, soit de l&#x27;exploiter
+  </li>
+  <li>en [2] : prendre la version Windows qui convient
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D9000000BEBBCB3A3B.png" style="display:inline-block; margin:4px;width:16.418cm;height:2.514cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D9000000BEBBCB3A3B.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : on récupère un fichier .msi à exécuter</li>
-<li>en [4] : une fois l&#x27;installation faite, de nouveaux raccourcis apparaissent dans le dossier [Menu Démarrer / Programmes / mySQL].</li>
+  <li>en [3] : on récupère un fichier .msi à exécuter
+  </li>
+  <li>en [4] : une fois l&#x27;installation faite, de nouveaux raccourcis apparaissent dans le dossier [Menu Démarrer / Programmes / mySQL].
+  </li>
 </ul>
+
 <p>Lançons MySQL (via les raccourcis que vous avez créés), puis lançons [MySQL Administrator] via le menu ci-dessus :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000535000001C8D74BBB25.png" style="display:inline-block; margin:4px;width:17.635cm;height:6.033cm;" class="odt-zoomable" data-zoom-src="images/1000000000000535000001C8D74BBB25.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : mettre le mot de passe de l&#x27;utilisateur root (root ici)</li>
-<li>en [2] : on est connecté et on voit que MySQL est actif</li>
+  <li>en [1] : mettre le mot de passe de l&#x27;utilisateur root (root ici)
+  </li>
+  <li>en [2] : on est connecté et on voit que MySQL est actif
+  </li>
 </ul>
+
 <h3 id="554-creation-dun-utilisateur-jpa-et-dune-base-de-donnees-jpa">5.5.4. Création d&#x27;un utilisateur jpa et d&#x27;une base de données jpa</h3>
 <p>Le tutoriel utilise MySQL5 avec une base de données appelée <strong>jpa</strong> et un utilisateur de même nom. Nous les créons maintenant. D&#x27;abord l&#x27;utilisateur :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004BD000002640D5EA871.png" style="display:inline-block; margin:4px;width:16.048cm;height:8.096cm;" class="odt-zoomable" data-zoom-src="images/10000000000004BD000002640D5EA871.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on sélectionne [User Administration]</li>
-<li>en [2] : on clique droit dans la partie [User accounts] pour créer un nouvel utilisateur</li>
-<li>en [3] : l&#x27;utilisateur s&#x27;appelle <strong>jpa</strong> et son mot de passe est <strong>jpa</strong></li>
-<li>en [4] : on valide la création</li>
-<li>en [5] : l&#x27;utilisateur [jpa] apparaît dans la fenêtre [User Accounts]</li>
+  <li>en [1] : on sélectionne [User Administration]
+  </li>
+  <li>en [2] : on clique droit dans la partie [User accounts] pour créer un nouvel utilisateur
+  </li>
+  <li>en [3] : l&#x27;utilisateur s&#x27;appelle <b>jpa</b> et son mot de passe est <b>jpa</b>
+  </li>
+  <li>en [4] : on valide la création
+  </li>
+  <li>en [5] : l&#x27;utilisateur [jpa] apparaît dans la fenêtre [User Accounts]
+  </li>
 </ul>
+
 <p>La base de données maintenant :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004730000024688D9213F.png" style="display:inline-block; margin:4px;width:15.069cm;height:7.699cm;" class="odt-zoomable" data-zoom-src="images/10000000000004730000024688D9213F.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : choix de l&#x27;option [Catalogs]</li>
-<li>en [2] : clic droit sur la fenêtre [Schemata] pour créer un nouveau schéma (désigne une base de données)</li>
-<li>en [3] : on nomme le nouveau schéma</li>
-<li>en [4] : il apparaît dans la fenêtre [Schemata]</li>
+  <li>en [1] : choix de l&#x27;option [Catalogs]
+  </li>
+  <li>en [2] : clic droit sur la fenêtre [Schemata] pour créer un nouveau schéma (désigne une base de données)
+  </li>
+  <li>en [3] : on nomme le nouveau schéma
+  </li>
+  <li>en [4] : il apparaît dans la fenêtre [Schemata]
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000417000001AA35E18756.png" style="display:inline-block; margin:4px;width:13.852cm;height:5.636cm;" class="odt-zoomable" data-zoom-src="images/1000000000000417000001AA35E18756.png" /></td></tr></table>
 
 <ul>
-<li>en [5] : on sélectionne le schéma [jpa]</li>
-<li>en [6] : les objets du schéma [jpa] apparaissent, notamment les tables. Il n&#x27;y en a pas encore. Un clic droit permettrait d&#x27;en créer. Nous laissons le lecteur le faire.</li>
+  <li>en [5] : on sélectionne le schéma [jpa]
+  </li>
+  <li>en [6] : les objets du schéma [jpa] apparaissent, notamment les tables. Il n&#x27;y en a pas encore. Un clic droit permettrait d&#x27;en créer. Nous laissons le lecteur le faire.
+  </li>
 </ul>
+
 <p>Revenons à l&#x27;utilisateur [jpa] afin de lui donner tous les droits sur le schéma [jpa] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000049D0000023BC9189FD4.png" style="display:inline-block; margin:4px;width:15.625cm;height:7.555cm;" class="odt-zoomable" data-zoom-src="images/100000000000049D0000023BC9189FD4.png" /></td></tr></table>
 
 <ul>
-<li>en [1], puis [2] : on sélectionne l&#x27;utilisateur [jpa]</li>
-<li>en [3] : on sélectionne l&#x27;onglet [Schema Privileges]</li>
-<li>en [4] : on sélectionne le schéma [jpa]</li>
-<li>en [5] : on va donner à l&#x27;utilisateur [jpa] tous les privilèges sur le schéma [jpa]</li>
+  <li>en [1], puis [2] : on sélectionne l&#x27;utilisateur [jpa]
+  </li>
+  <li>en [3] : on sélectionne l&#x27;onglet [Schema Privileges]
+  </li>
+  <li>en [4] : on sélectionne le schéma [jpa]
+  </li>
+  <li>en [5] : on va donner à l&#x27;utilisateur [jpa] tous les privilèges sur le schéma [jpa]
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000003A70000028A9677FFBA.png" style="display:inline-block; margin:4px;width:12.37cm;height:8.599cm;" class="odt-zoomable" data-zoom-src="images/10000000000003A70000028A9677FFBA.png" /></td></tr></table>
 
 <ul>
-<li>en [6] : on valide les changements faits</li>
+  <li>en [6] : on valide les changements faits
+  </li>
 </ul>
+
 <p>Pour vérifier que l&#x27;utilisateur [jpa] peut travailler avec le schéma [jpa], on ferme l&#x27;administrateur MySQL. On le relance et on se connecte cette fois sous le nom [jpa/jpa] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000043D000001A99D4CD68C.png" style="display:inline-block; margin:4px;width:14.355cm;height:5.623cm;" class="odt-zoomable" data-zoom-src="images/100000000000043D000001A99D4CD68C.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on s&#x27;identifie (jpa/jpa)</li>
-<li>en [2] : la connexion a réussi et dans [Schemata], on voit les schémas sur lesquels on a des droits. On voit le schéma [jpa].</li>
+  <li>en [1] : on s&#x27;identifie (jpa/jpa)
+  </li>
+  <li>en [2] : la connexion a réussi et dans [Schemata], on voit les schémas sur lesquels on a des droits. On voit le schéma [jpa].
+  </li>
 </ul>
+
 <p>Nous allons maintenant créer la même table [ARTICLES] qu&#x27;avec le SGBD Firebird en utilisant le script SQL [schema-articles.sql] généré au paragraphe <a href="#firebird-export">5.4.6</a>.</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000051700000173AC336401.png" style="display:inline-block; margin:4px;width:17.238cm;height:4.909cm;" class="odt-zoomable" data-zoom-src="images/100000000000051700000173AC336401.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : utiliser l&#x27;application [MySQL Query Browser]</li>
-<li>en [2], [3], [4] : s&#x27;identifier (jpa / jpa / jpa)</li>
+  <li>en [1] : utiliser l&#x27;application [MySQL Query Browser]
+  </li>
+  <li>en [2], [3], [4] : s&#x27;identifier (jpa / jpa / jpa)
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004520000010BAA15026E.png" style="display:inline-block; margin:4px;width:14.631cm;height:3.533cm;" class="odt-zoomable" data-zoom-src="images/10000000000004520000010BAA15026E.png" /></td></tr></table>
 
 <ul>
-<li>en [5] : ouvrir un script SQL afin de l&#x27;exécuter</li>
-<li>en [6] : désigner le script [schema-articles.sql] créé au paragraphe <a href="#firebird-export">5.4.6</a>.</li>
+  <li>en [5] : ouvrir un script SQL afin de l&#x27;exécuter
+  </li>
+  <li>en [6] : désigner le script [schema-articles.sql] créé au paragraphe <a href="#firebird-export">5.4.6</a>.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000005540000030EC3F9D692.png" style="display:inline-block; margin:4px;width:17.997cm;height:10.317cm;" class="odt-zoomable" data-zoom-src="images/10000000000005540000030EC3F9D692.png" /></td></tr></table>
 
 <ul>
-<li>en [7] : le script chargé</li>
-<li>en [8] : on l&#x27;exécute</li>
-<li>en [9] : la table [ARTICLES] a été créée</li>
+  <li>en [7] : le script chargé
+  </li>
+  <li>en [8] : on l&#x27;exécute
+  </li>
+  <li>en [9] : la table [ARTICLES] a été créée
+  </li>
 </ul>
+
 <p><a id="jdbc-mysql5"></a></p>
 <h3 id="555-pilote-jdbc-de-mysql5">5.5.5. Pilote JDBC de MySQL5</h3>
 <p>Le pilote JDBC de MySQL est téléchargeable au même endroit que le SGBD :</p>
@@ -2332,10 +2593,14 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000002E0000001A4351CAC23.png" style="display:inline-block; margin:4px;width:9.737cm;height:5.556cm;" class="odt-zoomable" data-zoom-src="images/10000000000002E0000001A4351CAC23.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : choisir le pilote JDBC qui convient</li>
-<li>en [2] : prendre la version windows qui convient</li>
-<li>en [3] : dans le zip récupéré, l&#x27;archive Java contenant le pilote JDBC est [mysql-connector-java-5.0.5-bin.jar]. On l&#x27;extraiera afin de l&#x27;utiliser dans les exemples du tutoriel JPA.</li>
+  <li>en [1] : choisir le pilote JDBC qui convient
+  </li>
+  <li>en [2] : prendre la version windows qui convient
+  </li>
+  <li>en [3] : dans le zip récupéré, l&#x27;archive Java contenant le pilote JDBC est [mysql-connector-java-5.0.5-bin.jar]. On l&#x27;extraiera afin de l&#x27;utiliser dans les exemples du tutoriel JPA.
+  </li>
 </ul>
+
 <p>Nous le plaçons comme le précédent (paragraphe <a href="#firebird-jdbc">5.4.7</a> dans le dossier &lt;jdbc&gt; :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000016600000094F7DED8BD.png" style="display:inline-block; margin:4px;width:4.736cm;height:1.958cm;" class="odt-zoomable" data-zoom-src="images/100000000000016600000094F7DED8BD.png" /></td></tr></table>
 
@@ -2343,16 +2608,23 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000519000001E9393480F4.png" style="display:inline-block; margin:4px;width:17.265cm;height:6.47cm;" class="odt-zoomable" data-zoom-src="images/1000000000000519000001E9393480F4.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on a désigné l&#x27;archive du pilote JDBC de MySQL5</li>
-<li>en [2] : le pilote JDBC de MySQL5 est disponible</li>
+  <li>en [1] : on a désigné l&#x27;archive du pilote JDBC de MySQL5
+  </li>
+  <li>en [2] : le pilote JDBC de MySQL5 est disponible
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004BF000002913C09438E.png" style="display:inline-block; margin:4px;width:16.074cm;height:8.692cm;" class="odt-zoomable" data-zoom-src="images/10000000000004BF000002913C09438E.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : définition de la connexion (user, password)=(jpa, jpa)</li>
-<li>en [4] : la connexion est active</li>
-<li>en [5] : la base connectée</li>
+  <li>en [3] : définition de la connexion (user, password)=(jpa, jpa)
+  </li>
+  <li>en [4] : la connexion est active
+  </li>
+  <li>en [5] : la base connectée
+  </li>
 </ul>
+
 <p><a id="postgresql"></a></p>
 <h2 id="56-le-sgbd-postgresql">5.6. Le SGBD PostgreSQL</h2>
 <h3 id="561-installation">5.6.1. Installation</h3>
@@ -2360,33 +2632,48 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000052C0000023C0337490C.png" style="display:inline-block; margin:4px;width:17.515cm;height:7.567cm;" class="odt-zoomable" data-zoom-src="images/100000000000052C0000023C0337490C.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : les site de téléchargement de PostgreSQL</li>
-<li>en [2] : choisir une version Windows</li>
-<li>en [3] : choisir une version avec installateur</li>
+  <li>en [1] : les site de téléchargement de PostgreSQL
+  </li>
+  <li>en [2] : choisir une version Windows
+  </li>
+  <li>en [3] : choisir une version avec installateur
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004BE00000239A6E5C1B6.png" style="display:inline-block; margin:4px;width:16.06cm;height:7.528cm;" class="odt-zoomable" data-zoom-src="images/10000000000004BE00000239A6E5C1B6.png" /></td></tr></table>
 
 <ul>
-<li>en [4] : le contenu du fichier zip téléchargé. Double-cliquer sur le fichier [postgresql-8.2.msi]</li>
-<li>en [5] : la première page de l&#x27;assistant d&#x27;installation</li>
+  <li>en [4] : le contenu du fichier zip téléchargé. Double-cliquer sur le fichier [postgresql-8.2.msi]
+  </li>
+  <li>en [5] : la première page de l&#x27;assistant d&#x27;installation
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000052B000001F9BA237623.png" style="display:inline-block; margin:4px;width:17.503cm;height:6.682cm;" class="odt-zoomable" data-zoom-src="images/100000000000052B000001F9BA237623.png" /></td></tr></table>
 
 <ul>
-<li>en [6] : choisir une installation typique en acceptant les valeurs par défaut</li>
-<li>en [6b] : création du compte windows qui lancera le service PostgreSQL, ici le compte <strong>pgres</strong> avec le mot de passe <strong>pgres</strong>.</li>
+  <li>en [6] : choisir une installation typique en acceptant les valeurs par défaut
+  </li>
+  <li>en [6b] : création du compte windows qui lancera le service PostgreSQL, ici le compte <b>pgres</b> avec le mot de passe <b>pgres</b>.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000050C000001E4430F8601.png" style="display:inline-block; margin:4px;width:17.092cm;height:6.403cm;" class="odt-zoomable" data-zoom-src="images/100000000000050C000001E4430F8601.png" /></td></tr></table>
 
 <ul>
-<li>en [7] : laisser PostgreSQL créer le compte [pgres] si celui-ci n&#x27;existe pas déjà</li>
-<li>en [8] : définir le compte administrateur du SGBD, ici <strong>postgres</strong> avec le mot de passe <strong>postgres</strong></li>
+  <li>en [7] : laisser PostgreSQL créer le compte [pgres] si celui-ci n&#x27;existe pas déjà
+  </li>
+  <li>en [8] : définir le compte administrateur du SGBD, ici <b>postgres</b> avec le mot de passe <b>postgres</b>
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000535000001F9D1DEB881.png" style="display:inline-block; margin:4px;width:17.635cm;height:6.682cm;" class="odt-zoomable" data-zoom-src="images/1000000000000535000001F9D1DEB881.png" /></td></tr></table>
 
 <ul>
-<li>en [9] et [10] : accepter les valeurs par défaut jusqu&#x27;à la fin de l&#x27;assistant. PostgreSQL va être installé.</li>
+  <li>en [9] et [10] : accepter les valeurs par défaut jusqu&#x27;à la fin de l&#x27;assistant. PostgreSQL va être installé.
+  </li>
 </ul>
+
 <p>L&#x27;installation de PostgreSQL donne naissance à un dossier dans [Démarrer / Programmes ] :</p>
 <p><img src="images/1000000000000200000000CE7F8C83EF.png" style="width:9.479cm;height:3.821cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/1000000000000200000000CE7F8C83EF.png" /></p>
 <h3 id="562-lancer-arreter-postgresql">5.6.2. Lancer / Arrêter PostgreSQL</h3>
@@ -2395,89 +2682,134 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000559000001152C68F64D.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.641cm;" class="odt-zoomable" data-zoom-src="images/1000000000000559000001152C68F64D.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : nous double-cliquons sur [Services]</li>
-<li>en [2] : on voit qu&#x27;un service appelé [PostgreSQL] est présent, qu&#x27;il est démarré [3] et que son démarrage est automatique [4].</li>
+  <li>en [1] : nous double-cliquons sur [Services]
+  </li>
+  <li>en [2] : on voit qu&#x27;un service appelé [PostgreSQL] est présent, qu&#x27;il est démarré [3] et que son démarrage est automatique [4].
+  </li>
 </ul>
+
 <p>Pour modifier ce fonctionnement, nous double-cliquons sur le service [PostgreSQL] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000050900000299CCB29439.png" style="display:inline-block; margin:4px;width:17.053cm;height:8.798cm;" class="odt-zoomable" data-zoom-src="images/100000000000050900000299CCB29439.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on met le service en démarrage manuel</li>
-<li>en [2] : on l&#x27;arrête</li>
-<li>en [3] : on valide la nouvelle configuration du service</li>
+  <li>en [1] : on met le service en démarrage manuel
+  </li>
+  <li>en [2] : on l&#x27;arrête
+  </li>
+  <li>en [3] : on valide la nouvelle configuration du service
+  </li>
 </ul>
+
 <p>Pour lancer et arrêter manuellement le service PostgreSQL, on pourra utiliser les raccourcis du dossier [PostgreSQL] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000002E00000012684A5A9A7.png" style="display:inline-block; margin:4px;width:9.737cm;height:3.889cm;" class="odt-zoomable" data-zoom-src="images/10000000000002E00000012684A5A9A7.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le raccourci pour lancer PostgreSQL</li>
-<li>en [2] : le raccourci pour l&#x27;arrêter</li>
+  <li>en [1] : le raccourci pour lancer PostgreSQL
+  </li>
+  <li>en [2] : le raccourci pour l&#x27;arrêter
+  </li>
 </ul>
+
 <h3 id="563-administrer-postgresql">5.6.3. Administrer PostgreSQL</h3>
 <p>Sur la copie d&#x27;écran ci-dessus, l&#x27;application [pgAdmin III] (3) permet d&#x27;administrer le SGBD PostgreSQL. Lançons le SGBD, puis [pgAdmin III] via le menu ci-dessus :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000047B000000F2A2B97286.png" style="display:inline-block; margin:4px;width:15.175cm;height:3.201cm;" class="odt-zoomable" data-zoom-src="images/100000000000047B000000F2A2B97286.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : double-cliquer sur le serveur PostgreSQL pour s&#x27;y connecter</li>
-<li>en [2,3] : s&#x27;identifier comme administrateur du SGBD, ici (postgres / postgres)</li>
+  <li>en [1] : double-cliquer sur le serveur PostgreSQL pour s&#x27;y connecter
+  </li>
+  <li>en [2,3] : s&#x27;identifier comme administrateur du SGBD, ici (postgres / postgres)
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000001D7000001B0A0120A5E.png" style="display:inline-block; margin:4px;width:6.232cm;height:5.715cm;" class="odt-zoomable" data-zoom-src="images/10000000000001D7000001B0A0120A5E.png" /></td></tr></table>
 
 <ul>
-<li>en [4] : l&#x27;unique base existante</li>
-<li>en [5] : l&#x27;unique utilisateur existant</li>
+  <li>en [4] : l&#x27;unique base existante
+  </li>
+  <li>en [5] : l&#x27;unique utilisateur existant
+  </li>
 </ul>
+
 <h3 id="564-creation-dun-utilisateur-jpa-et-dune-base-de-donnees-jpa">5.6.4. Création d&#x27;un utilisateur jpa et d&#x27;une base de données jpa</h3>
 <p>Le tutoriel utilise PostgreSQL avec une base de données appelée <strong>jpa</strong> et un utilisateur de même nom. Nous les créons maintenant. D&#x27;abord l&#x27;utilisateur :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000049B000002673403C368.png" style="display:inline-block; margin:4px;width:15.598cm;height:8.137cm;" class="odt-zoomable" data-zoom-src="images/100000000000049B000002673403C368.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on crée un nouveau rôle (~utilisateur)</li>
-<li>en [2] : création de l&#x27;utilisateur <strong>jpa</strong></li>
-<li>en [3] : son mot de passe est <strong>jpa</strong></li>
-<li>en [4] : on répète le mot de passe</li>
-<li>en [5] : on autorise l&#x27;utiliateur à créer des bases de données</li>
-<li>en [6] : l&#x27;utilisateur [jpa] apparaît parmi les rôles de connexion</li>
+  <li>en [1] : on crée un nouveau rôle (~utilisateur)
+  </li>
+  <li>en [2] : création de l&#x27;utilisateur <b>jpa</b>
+  </li>
+  <li>en [3] : son mot de passe est <b>jpa</b>
+  </li>
+  <li>en [4] : on répète le mot de passe
+  </li>
+  <li>en [5] : on autorise l&#x27;utiliateur à créer des bases de données
+  </li>
+  <li>en [6] : l&#x27;utilisateur [jpa] apparaît parmi les rôles de connexion
+  </li>
 </ul>
+
 <p>La base de données maintenant :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004AF00000235DA45D266.png" style="display:inline-block; margin:4px;width:15.863cm;height:7.475cm;" class="odt-zoomable" data-zoom-src="images/10000000000004AF00000235DA45D266.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on crée une nouvelle connexion au serveur</li>
-<li>en [2] : elle s&#x27;appellera <strong>jpa</strong></li>
-<li>en [3] : machine à laquelle on veut se connecter</li>
-<li>en [4] : l&#x27;utilisateur qui se connecte</li>
-<li>en [5] : son mot de passe. On valide la configuration de la connexion par [OK]</li>
-<li>en [6] : la nouvelle connexion a été créée. Elle appartient à l&#x27;utilisateur <strong>jpa</strong>. Celui-ci va maintenant créer une nouvelle base de données :</li>
+  <li>en [1] : on crée une nouvelle connexion au serveur
+  </li>
+  <li>en [2] : elle s&#x27;appellera <b>jpa</b>
+  </li>
+  <li>en [3] : machine à laquelle on veut se connecter
+  </li>
+  <li>en [4] : l&#x27;utilisateur qui se connecte
+  </li>
+  <li>en [5] : son mot de passe. On valide la configuration de la connexion par [OK]
+  </li>
+  <li>en [6] : la nouvelle connexion a été créée. Elle appartient à l&#x27;utilisateur <b>jpa</b>. Celui-ci va maintenant créer une nouvelle base de données :
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004730000028FC2117F73.png" style="display:inline-block; margin:4px;width:15.069cm;height:8.666cm;" class="odt-zoomable" data-zoom-src="images/10000000000004730000028FC2117F73.png" /></td></tr></table>
 
 <ul>
-<li>n [1] : on ajoute une nouvelle base</li>
-<li>en [2] : son nom est <strong>jpa</strong></li>
-<li>en [3] : son propriétaire est l&#x27;utilisateur <strong>jpa</strong> créé précédemment. On valide par [OK]</li>
-<li>en [4] : la base <strong>jpa</strong> a été créée. Un simple clic dessus nous connecte à elle et nous fait découvrir sa structure :</li>
+  <li>n [1] : on ajoute une nouvelle base
+  </li>
+  <li>en [2] : son nom est <b>jpa</b>
+  </li>
+  <li>en [3] : son propriétaire est l&#x27;utilisateur <b>jpa</b> créé précédemment. On valide par [OK]
+  </li>
+  <li>en [4] : la base <b>jpa</b> a été créée. Un simple clic dessus nous connecte à elle et nous fait découvrir sa structure :
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000025C00000283E131AB8D.png" style="display:inline-block; margin:4px;width:7.99cm;height:8.507cm;" class="odt-zoomable" data-zoom-src="images/100000000000025C00000283E131AB8D.png" /></td></tr></table>
 
 <ul>
-<li>en [5] : les objets du schéma [jpa] apparaissent, notamment les tables. Il n&#x27;y en a pas encore. Un clic droit permettrait d&#x27;en créer. Nous laissons le lecteur le faire.</li>
+  <li>en [5] : les objets du schéma [jpa] apparaissent, notamment les tables. Il n&#x27;y en a pas encore. Un clic droit permettrait d&#x27;en créer. Nous laissons le lecteur le faire.
+  </li>
 </ul>
+
 <p>Nous allons maintenant créer la même table [ARTICLES] qu&#x27;avec les SGBD précédents en utilisant le script SQL [schema-articles.sql] généré au paragraphe <a href="#firebird-export">5.4.6</a>.</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004770000025EA8F57698.png" style="display:inline-block; margin:4px;width:15.122cm;height:8.017cm;" class="odt-zoomable" data-zoom-src="images/10000000000004770000025EA8F57698.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : ouvrir l&#x27;éditeur SQL</li>
-<li>en [2] : ouvrir un script SQL</li>
-<li>en [3]: désigner le script [schema-articles.sql] créé au paragraphe <a href="#firebird-export">5.4.6</a>.</li>
+  <li>en [1] : ouvrir l&#x27;éditeur SQL
+  </li>
+  <li>en [2] : ouvrir un script SQL
+  </li>
+  <li>en [3]: désigner le script [schema-articles.sql] créé au paragraphe <a href="#firebird-export">5.4.6</a>.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004ED0000041ABC7801E3.png" style="display:inline-block; margin:4px;width:16.683cm;height:13.891cm;" class="odt-zoomable" data-zoom-src="images/10000000000004ED0000041ABC7801E3.png" /></td></tr></table>
 
 <ul>
-<li>en [4] : le script chargé. On l&#x27;exécute.</li>
-<li>en [5] : la table [ARTICLES] a été créée.</li>
-<li>en [6, 7] : son contenu</li>
+  <li>en [4] : le script chargé. On l&#x27;exécute.
+  </li>
+  <li>en [5] : la table [ARTICLES] a été créée.
+  </li>
+  <li>en [6, 7] : son contenu
+  </li>
 </ul>
+
 <h3 id="565-pilote-jdbc-de-postgresql">5.6.5. Pilote JDBC de PostgreSQL</h3>
 <p>Le pilote JDBC de PostgreSQL est disponible dans le dossier [jdbc] du dossier d&#x27;installation de PostgreSQL :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000018F000000EA0CF44746.png" style="display:inline-block; margin:4px;width:5.279cm;height:3.096cm;" class="odt-zoomable" data-zoom-src="images/100000000000018F000000EA0CF44746.png" /></td></tr></table>
@@ -2489,17 +2821,25 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004F30000022130A4FFED.png" style="display:inline-block; margin:4px;width:16.762cm;height:7.211cm;" class="odt-zoomable" data-zoom-src="images/10000000000004F30000022130A4FFED.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on a désigné l&#x27;archive du pilote JDBC de PostgreSQL</li>
-<li>en [2] : le pilote JDBC de PostgreSQL est disponible</li>
+  <li>en [1] : on a désigné l&#x27;archive du pilote JDBC de PostgreSQL
+  </li>
+  <li>en [2] : le pilote JDBC de PostgreSQL est disponible
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000050E0000037F9E8BAFE0.png" style="display:inline-block; margin:4px;width:17.119cm;height:11.841cm;" class="odt-zoomable" data-zoom-src="images/100000000000050E0000037F9E8BAFE0.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : définition de la connexion (user, password)=(jpa, jpa)</li>
-<li>en [4] : la connexion est active</li>
-<li>en [5] : la base connectée</li>
-<li>en [6] : le contenu de la table [ARTICLES]</li>
+  <li>en [3] : définition de la connexion (user, password)=(jpa, jpa)
+  </li>
+  <li>en [4] : la connexion est active
+  </li>
+  <li>en [5] : la base connectée
+  </li>
+  <li>en [6] : le contenu de la table [ARTICLES]
+  </li>
 </ul>
+
 <p><a id="oracle10g"></a></p>
 <h2 id="57-le-sgbd-oracle-10g-express">5.7. Le SGBD Oracle 10g Express</h2>
 <h3 id="571-installation">5.7.1. Installation</h3>
@@ -2507,27 +2847,39 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000551000001B89C4333A6.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.817cm;" class="odt-zoomable" data-zoom-src="images/1000000000000551000001B89C4333A6.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le site de téléchargement d&#x27;Oracle 10g Express</li>
-<li>en [2] : choisir une version Windows. Une fois téléchargé le fichier, l&#x27;exécuter :</li>
+  <li>en [1] : le site de téléchargement d&#x27;Oracle 10g Express
+  </li>
+  <li>en [2] : choisir une version Windows. Une fois téléchargé le fichier, l&#x27;exécuter :
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004DF000002395D044BE4.png" style="display:inline-block; margin:4px;width:16.498cm;height:7.528cm;" class="odt-zoomable" data-zoom-src="images/10000000000004DF000002395D044BE4.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : double-cliquer sur le fichier [OracleXE.exe]</li>
-<li>en [2] : la première page de l&#x27;assistant d&#x27;installation</li>
+  <li>en [1] : double-cliquer sur le fichier [OracleXE.exe]
+  </li>
+  <li>en [2] : la première page de l&#x27;assistant d&#x27;installation
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000051D000001E4BF48FFBE.png" style="display:inline-block; margin:4px;width:17.318cm;height:6.403cm;" class="odt-zoomable" data-zoom-src="images/100000000000051D000001E4BF48FFBE.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : accepter la licence</li>
-<li>en [4] : accepter les valeurs par défaut.</li>
+  <li>en [3] : accepter la licence
+  </li>
+  <li>en [4] : accepter les valeurs par défaut.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000051D000001E66425D86F.png" style="display:inline-block; margin:4px;width:17.318cm;height:6.429cm;" class="odt-zoomable" data-zoom-src="images/100000000000051D000001E66425D86F.png" /></td></tr></table>
 
 <ul>
-<li>en [5,6] : l&#x27;utilisateur SYSTEM aura le mot de passe <strong>system</strong>.</li>
-<li>en [7] : on lance l&#x27;installation</li>
+  <li>en [5,6] : l&#x27;utilisateur SYSTEM aura le mot de passe <b>system</b>.
+  </li>
+  <li>en [7] : on lance l&#x27;installation
+  </li>
 </ul>
+
 <p>L&#x27;installation de Oracle 10g Express donne naissance à un dossier dans [Démarrer / Programmes ] :</p>
 <p><img src="images/1000000000000275000000DC49EC1E1B.png" style="width:11.65cm;height:4.069cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/1000000000000275000000DC49EC1E1B.png" /></p>
 <h3 id="572-lancer-arreter-oracle-10g">5.7.2. Lancer / Arrêter Oracle 10g</h3>
@@ -2536,41 +2888,60 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000052C0000010F1766E327.png" style="display:inline-block; margin:4px;width:17.515cm;height:3.586cm;" class="odt-zoomable" data-zoom-src="images/100000000000052C0000010F1766E327.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : nous double-cliquons sur [Services]</li>
-<li>en [2] : on voit qu&#x27;un service appelé [OracleServiceXE] est présent, qu&#x27;il est démarré [3] et que son démarrage est automatique [4].</li>
-<li>en [5] : un autre service d&#x27;Oracle, appelé &quot; Listener &quot; est également actif et à démarrage automatique.</li>
+  <li>en [1] : nous double-cliquons sur [Services]
+  </li>
+  <li>en [2] : on voit qu&#x27;un service appelé [OracleServiceXE] est présent, qu&#x27;il est démarré [3] et que son démarrage est automatique [4].
+  </li>
+  <li>en [5] : un autre service d&#x27;Oracle, appelé &quot; Listener &quot; est également actif et à démarrage automatique.
+  </li>
 </ul>
+
 <p>Pour modifier ce fonctionnement, nous double-cliquons sur le service [OracleServiceXE] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000517000002B50E34F301.png" style="display:inline-block; margin:4px;width:17.238cm;height:9.169cm;" class="odt-zoomable" data-zoom-src="images/1000000000000517000002B50E34F301.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on met le service en démarrage manuel</li>
-<li>en [2] : on l&#x27;arrête</li>
-<li>en [3] : on valide la nouvelle configuration du service</li>
+  <li>en [1] : on met le service en démarrage manuel
+  </li>
+  <li>en [2] : on l&#x27;arrête
+  </li>
+  <li>en [3] : on valide la nouvelle configuration du service
+  </li>
 </ul>
+
 <p>On procèdera de même avec le service [OracleXETNSListener] (cf [5] plus haut). Pour lancer et arrêter manuellement le service OracleServiceXE, on pourra utiliser les raccourcis du dossier [Oracle] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000039400000149B81A2DD5.png" style="display:inline-block; margin:4px;width:12.118cm;height:4.353cm;" class="odt-zoomable" data-zoom-src="images/100000000000039400000149B81A2DD5.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : pour démarrer le SGBD</li>
-<li>en [2] : pour l&#x27;arrêter</li>
-<li>en [3] : pour l&#x27;administrer (ce qui le lance s&#x27;il ne l&#x27;est pas déjà)</li>
+  <li>en [1] : pour démarrer le SGBD
+  </li>
+  <li>en [2] : pour l&#x27;arrêter
+  </li>
+  <li>en [3] : pour l&#x27;administrer (ce qui le lance s&#x27;il ne l&#x27;est pas déjà)
+  </li>
 </ul>
+
 <h3 id="573-creation-dun-utilisateur-jpa-et-dune-base-de-donnees-jpa">5.7.3. Création d&#x27;un utilisateur jpa et d&#x27;une base de données jpa</h3>
 <p>Sur la copie d&#x27;écran ci-dessus, l&#x27;application [3] permet d&#x27;administrer le SGBD Oracle 10g Express. Lançons le SGBD [1], puis l&#x27;application d&#x27;administration [3] via le menu ci-dessus :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004B9000001D8022FD93B.png" style="display:inline-block; margin:4px;width:15.995cm;height:6.244cm;" class="odt-zoomable" data-zoom-src="images/10000000000004B9000001D8022FD93B.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : s&#x27;identifier comme administrateur du SGBD, ici (system / system)</li>
-<li>en [2] : on crée un nouvel utilisateur</li>
+  <li>en [1] : s&#x27;identifier comme administrateur du SGBD, ici (system / system)
+  </li>
+  <li>en [2] : on crée un nouvel utilisateur
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000523000001DA101CCADC.png" style="display:inline-block; margin:4px;width:17.397cm;height:6.271cm;" class="odt-zoomable" data-zoom-src="images/1000000000000523000001DA101CCADC.png" /></td></tr></table>
 
 <ul>
-<li>en [4] : nom de l&#x27;utilisateur</li>
-<li>en [5, 6] : son mot de passe, ici <strong>jpa</strong></li>
-<li>en [7] : l&#x27;utilisateur <strong>jpa</strong> a été créé</li>
+  <li>en [4] : nom de l&#x27;utilisateur
+  </li>
+  <li>en [5, 6] : son mot de passe, ici <b>jpa</b>
+  </li>
+  <li>en [7] : l&#x27;utilisateur <b>jpa</b> a été créé
+  </li>
 </ul>
+
 <p>Sous Oracle, un utilisateur est automatiquement associé à une base de données de même nom. La base de données <strong>jpa</strong> existe donc en même temps que l&#x27;utilisateur <strong>jpa</strong>.</p>
 <h3 id="574-creation-de-la-table-articles-de-la-base-de-donnees-jpa">5.7.4. Création de la table [ARTICLES] de la base de données jpa</h3>
 <p>OracleXE a été installé avec un client SQL travaillant en mode ligne. On peut travailler plus confortablement avec <a id="sqldeveloper"></a>SQL Developer également fourni par Oracle. On le trouve sur le site :</p>
@@ -2578,47 +2949,73 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000052B000000FF6D0E8EE0.png" style="display:inline-block; margin:4px;width:17.503cm;height:3.374cm;" class="odt-zoomable" data-zoom-src="images/100000000000052B000000FF6D0E8EE0.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le site de téléchargement</li>
-<li>en [2] : prendre une version windows sans Jre si celui-ci est déjà installé (le cas ici), [SQL Developer] étant une application Java.</li>
+  <li>en [1] : le site de téléchargement
+  </li>
+  <li>en [2] : prendre une version windows sans Jre si celui-ci est déjà installé (le cas ici), [SQL Developer] étant une application Java.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000049E00000145460297BB.png" style="display:inline-block; margin:4px;width:15.637cm;height:4.3cm;" class="odt-zoomable" data-zoom-src="images/100000000000049E00000145460297BB.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : décompresser le zip téléchargé</li>
-<li>en [4] : lancer l&#x27;exécutable [sqldeveloper.exe]</li>
+  <li>en [3] : décompresser le zip téléchargé
+  </li>
+  <li>en [4] : lancer l&#x27;exécutable [sqldeveloper.exe]
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000048E0000013D360647C1.png" style="display:inline-block; margin:4px;width:15.425cm;height:4.195cm;" class="odt-zoomable" data-zoom-src="images/100000000000048E0000013D360647C1.png" /></td></tr></table>
 
 <ul>
-<li>en [5] : au 1er lancement de [SQL Developer], indiquer le chemin du Jre installé sur la machine</li>
-<li>en [5b] : créer une nouvelle connexion</li>
+  <li>en [5] : au 1er lancement de [SQL Developer], indiquer le chemin du Jre installé sur la machine
+  </li>
+  <li>en [5b] : créer une nouvelle connexion
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004990000024EEAB74F93.png" style="display:inline-block; margin:4px;width:15.572cm;height:7.805cm;" class="odt-zoomable" data-zoom-src="images/10000000000004990000024EEAB74F93.png" /></td></tr></table>
 
 <ul>
-<li>en [6] : SQL Developer permet de se connecter à divers SGBD. Choisir Oracle.</li>
-<li>en [7] : nom donné à la connexion qu&#x27;on est en train de créer</li>
-<li>en [8] : propriétaire de la connexion</li>
-<li>en [9] : son mot de passe (<strong>jpa</strong>)</li>
-<li>en [10] : garder les valeurs par défaut</li>
-<li>en [11] : pour tester la connexion (Oracle doit être lancé)</li>
-<li>en [12] : pour terminer la configuration de la connexion</li>
-<li>en [13] : les objets de la base jpa</li>
-<li>en [14] : on peut créer des tables. Comme dans les cas précédents, nous allons créer la table [ARTICLES] à partir du script créé au paragraphe <a href="#firebird-export">5.4.6</a>.</li>
+  <li>en [6] : SQL Developer permet de se connecter à divers SGBD. Choisir Oracle.
+  </li>
+  <li>en [7] : nom donné à la connexion qu&#x27;on est en train de créer
+  </li>
+  <li>en [8] : propriétaire de la connexion
+  </li>
+  <li>en [9] : son mot de passe (<b>jpa</b>)
+  </li>
+  <li>en [10] : garder les valeurs par défaut
+  </li>
+  <li>en [11] : pour tester la connexion (Oracle doit être lancé)
+  </li>
+  <li>en [12] : pour terminer la configuration de la connexion
+  </li>
+  <li>en [13] : les objets de la base jpa
+  </li>
+  <li>en [14] : on peut créer des tables. Comme dans les cas précédents, nous allons créer la table [ARTICLES] à partir du script créé au paragraphe <a href="#firebird-export">5.4.6</a>.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004A10000021025C00EA8.png" style="display:inline-block; margin:4px;width:15.677cm;height:6.985cm;" class="odt-zoomable" data-zoom-src="images/10000000000004A10000021025C00EA8.png" /></td></tr></table>
 
 <ul>
-<li>en [15] : on ouvre un script SQL</li>
-<li>en [16] : on désigne le script SQL créé au paragraphe <a href="#firebird-export">5.4.6</a>.</li>
-<li>en [17] : le script qui va être exécuté</li>
+  <li>en [15] : on ouvre un script SQL
+  </li>
+  <li>en [16] : on désigne le script SQL créé au paragraphe <a href="#firebird-export">5.4.6</a>.
+  </li>
+  <li>en [17] : le script qui va être exécuté
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004330000018716D6D82E.png" style="display:inline-block; margin:4px;width:14.222cm;height:5.173cm;" class="odt-zoomable" data-zoom-src="images/10000000000004330000018716D6D82E.png" /></td></tr></table>
 
 <ul>
-<li>en [18] : le résultat de l&#x27;exécution : la table [ARTICLES] a été créée. On double-clique dessus pour avoir accès à ses propriétés.</li>
-<li>en [19] : le contenu de la table.</li>
+  <li>en [18] : le résultat de l&#x27;exécution : la table [ARTICLES] a été créée. On double-clique dessus pour avoir accès à ses propriétés.
+  </li>
+  <li>en [19] : le contenu de la table.
+  </li>
 </ul>
+
 <h3 id="575-pilote-jdbc-de-oraclexe">5.7.5. Pilote JDBC de OracleXE</h3>
 <p>Le pilote JDBC de OracleXE est disponible dans le dossier [jdbc/lib] du dossier d&#x27;installation de OracleXE [1] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000043C000000B37A8E4EF8.png" style="display:inline-block; margin:4px;width:14.34cm;height:2.369cm;" class="odt-zoomable" data-zoom-src="images/100000000000043C000000B37A8E4EF8.png" /></td></tr></table>
@@ -2628,17 +3025,25 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000050E0000023B5B1FB3F4.png" style="display:inline-block; margin:4px;width:17.119cm;height:7.555cm;" class="odt-zoomable" data-zoom-src="images/100000000000050E0000023B5B1FB3F4.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on a désigné l&#x27;archive du pilote JDBC de OracleXE</li>
-<li>en [2] : le pilote JDBC de OracleXE est disponible</li>
+  <li>en [1] : on a désigné l&#x27;archive du pilote JDBC de OracleXE
+  </li>
+  <li>en [2] : le pilote JDBC de OracleXE est disponible
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000050E000003651FC04984.png" style="display:inline-block; margin:4px;width:17.119cm;height:11.497cm;" class="odt-zoomable" data-zoom-src="images/100000000000050E000003651FC04984.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : définition de la connexion (user, password)=(jpa, jpa)</li>
-<li>en [4] : la connexion est active</li>
-<li>en [5] : la base connectée</li>
-<li>en [6] : le contenu de la table [ARTICLES]</li>
+  <li>en [3] : définition de la connexion (user, password)=(jpa, jpa)
+  </li>
+  <li>en [4] : la connexion est active
+  </li>
+  <li>en [5] : la base connectée
+  </li>
+  <li>en [6] : le contenu de la table [ARTICLES]
+  </li>
 </ul>
+
 <p><a id="sqlserver2005"></a></p>
 <h2 id="58-le-sgbd-sql-server-express-2005">5.8. Le SGBD SQL Server Express 2005</h2>
 <h3 id="581-installation">5.8.1. Installation</h3>
@@ -2646,54 +3051,77 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000039100000380D8D67F94.png" style="display:inline-block; margin:4px;width:12.079cm;height:11.853cm;" class="odt-zoomable" data-zoom-src="images/100000000000039100000380D8D67F94.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : d&#x27;abord télécharger et installer la plate-forme .NET 2.0</li>
-<li>en [2] : puis installer et télécharger SQL Server Express 2005</li>
-<li>en [3] : puis installer et télécharger SQL Server Management Studio Express qui permet d&#x27;administrer SQL Server</li>
+  <li>en [1] : d&#x27;abord télécharger et installer la plate-forme .NET 2.0
+  </li>
+  <li>en [2] : puis installer et télécharger SQL Server Express 2005
+  </li>
+  <li>en [3] : puis installer et télécharger SQL Server Management Studio Express qui permet d&#x27;administrer SQL Server
+  </li>
 </ul>
+
 <p>L&#x27;installation de SQL Server Express donne naissance à un dossier dans [Démarrer / Programmes ] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004A600000098D2AAD4C2.png" style="display:inline-block; margin:4px;width:15.743cm;height:2.011cm;" class="odt-zoomable" data-zoom-src="images/10000000000004A600000098D2AAD4C2.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : l&#x27;application de configuration de SQL Server. Permet également de lancer / arrêter le serveur</li>
-<li>en [2] : l&#x27;application d&#x27;administration du serveur</li>
+  <li>en [1] : l&#x27;application de configuration de SQL Server. Permet également de lancer / arrêter le serveur
+  </li>
+  <li>en [2] : l&#x27;application d&#x27;administration du serveur
+  </li>
 </ul>
+
 <h3 id="582-lancer-arreter-sql-server">5.8.2. Lancer / Arrêter SQL Server</h3>
 <p>Comme pour les SGBD précédents, SQL server Express a été installé comme un service windows à démarrage automatique. Nous changeons cette configuration :</p>
 <p>[Démarrer / Panneau de configuration / Performances et maintenance / Outils d&#x27;administration / Services ] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000532000001082A31E730.png" style="display:inline-block; margin:4px;width:17.595cm;height:3.493cm;" class="odt-zoomable" data-zoom-src="images/1000000000000532000001082A31E730.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : nous double-cliquons sur [Services]</li>
-<li>en [2] : on voit qu&#x27;un service appelé [SQL Server] est présent, qu&#x27;il est démarré [3] et que son démarrage est automatique [4].</li>
-<li>en [5] : un autre service lié à SQL Server, appelé &quot;SQL Server Browser&quot; est également actif et à démarrage automatique.</li>
+  <li>en [1] : nous double-cliquons sur [Services]
+  </li>
+  <li>en [2] : on voit qu&#x27;un service appelé [SQL Server] est présent, qu&#x27;il est démarré [3] et que son démarrage est automatique [4].
+  </li>
+  <li>en [5] : un autre service lié à SQL Server, appelé &quot;SQL Server Browser&quot; est également actif et à démarrage automatique.
+  </li>
 </ul>
+
 <p>Pour modifier ce fonctionnement, nous double-cliquons sur le service [SQL Server] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000005010000029A0B2A820D.png" style="display:inline-block; margin:4px;width:16.947cm;height:8.811cm;" class="odt-zoomable" data-zoom-src="images/10000000000005010000029A0B2A820D.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on met le service en démarrage manuel</li>
-<li>en [2] : on l&#x27;arrête</li>
-<li>en [3] : on valide la nouvelle configuration du service</li>
+  <li>en [1] : on met le service en démarrage manuel
+  </li>
+  <li>en [2] : on l&#x27;arrête
+  </li>
+  <li>en [3] : on valide la nouvelle configuration du service
+  </li>
 </ul>
+
 <p>On procèdera de même avec le service [SQL Server Browser] (cf [5] plus haut). Pour lancer et arrêter manuellement le service SQL server, on pourra utiliser l&#x27;application [1] du dossier [SQL server] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004AF000000876EC154C0.png" style="display:inline-block; margin:4px;width:15.863cm;height:1.787cm;" class="odt-zoomable" data-zoom-src="images/10000000000004AF000000876EC154C0.png" /></td></tr></table>
 
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004E90000020D5F491E8D.png" style="display:inline-block; margin:4px;width:16.63cm;height:6.946cm;" class="odt-zoomable" data-zoom-src="images/10000000000004E90000020D5F491E8D.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : s&#x27;assurer que le protocole TCP/IP est actif (enabled) puis passer aux propriétés du protocole.</li>
-<li>en [2] : dans l&#x27;onglet [IP Addresses], option [IPAll] :<ul>
-<li>le champ [TCP Dynamic ports] est laissé vide</li>
-<li>le port d&#x27;écoute du serveur est fixé à 1433 dans [TCP Port]</li>
+  <li>en [1] : s&#x27;assurer que le protocole TCP/IP est actif (enabled) puis passer aux propriétés du protocole.
+  </li>
+  <li>en [2] : dans l&#x27;onglet [IP Addresses], option [IPAll] :
+    <ul>
+      <li>le champ [TCP Dynamic ports] est laissé vide
+      </li>
+      <li>le port d&#x27;écoute du serveur est fixé à 1433 dans [TCP Port]
+      </li>
+    </ul>
+  </li>
 </ul>
-</li>
-</ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004E800000173846BF915.png" style="display:inline-block; margin:4px;width:16.616cm;height:4.909cm;" class="odt-zoomable" data-zoom-src="images/10000000000004E800000173846BF915.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : un clic droit sur le service [SQL Server] donne accès aux options de démarrage / arrêt du serveur. Ici, on le lance.</li>
-<li>en [4] : SQL Server est lancé</li>
+  <li>en [3] : un clic droit sur le service [SQL Server] donne accès aux options de démarrage / arrêt du serveur. Ici, on le lance.
+  </li>
+  <li>en [4] : SQL Server est lancé
+  </li>
 </ul>
+
 <h3 id="583-creation-dun-utilisateur-jpa-et-dune-base-de-donnees-jpa">5.8.3. Création d&#x27;un utilisateur jpa et d&#x27;une base de données jpa</h3>
 <p>Lançons le SGBD comme indiqué ci-dessus, puis l&#x27;application d&#x27;administration [1] via le menu ci-dessous :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000035A000000B43D13A485.png" style="display:inline-block; margin:4px;width:11.351cm;height:2.381cm;" class="odt-zoomable" data-zoom-src="images/100000000000035A000000B43D13A485.png" /></td></tr></table>
@@ -2701,87 +3129,133 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004C6000001D96E48EBDB.png" style="display:inline-block; margin:4px;width:16.166cm;height:6.258cm;" class="odt-zoomable" data-zoom-src="images/10000000000004C6000001D96E48EBDB.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on se connecte à SQL Server en tant qu&#x27;<strong>administrateur</strong> Windows</li>
-<li>en [2] : on configure les propriétés de la connexion</li>
+  <li>en [1] : on se connecte à SQL Server en tant qu&#x27;<b>administrateur</b> Windows
+  </li>
+  <li>en [2] : on configure les propriétés de la connexion
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004B7000001365CC63AC0.png" style="display:inline-block; margin:4px;width:15.968cm;height:4.101cm;" class="odt-zoomable" data-zoom-src="images/10000000000004B7000001365CC63AC0.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : on autorise un mode mixte de connexion au serveur : soit avec un login windows (un utilisateur windows), soit avec un login SQL Server (compte défini au sein de SQL Server, indépendant de tout compte windows).</li>
-<li>en [3b] : on crée un utilisateur SQL Server</li>
+  <li>en [3] : on autorise un mode mixte de connexion au serveur : soit avec un login windows (un utilisateur windows), soit avec un login SQL Server (compte défini au sein de SQL Server, indépendant de tout compte windows).
+  </li>
+  <li>en [3b] : on crée un utilisateur SQL Server
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004C90000013EB781701B.png" style="display:inline-block; margin:4px;width:16.207cm;height:4.207cm;" class="odt-zoomable" data-zoom-src="images/10000000000004C90000013EB781701B.png" /></td></tr></table>
 
 <ul>
-<li>en [4] : option [General]</li>
-<li>en [5] : le login</li>
-<li>en [6] : le mot de passe (<strong>jpa</strong> ici)</li>
-<li>en [7] : option [Server Roles]</li>
-<li>en [8] : l&#x27;utilisateur <strong>jpa</strong> aura le droit de créer des bases de données</li>
+  <li>en [4] : option [General]
+  </li>
+  <li>en [5] : le login
+  </li>
+  <li>en [6] : le mot de passe (<b>jpa</b> ici)
+  </li>
+  <li>en [7] : option [Server Roles]
+  </li>
+  <li>en [8] : l&#x27;utilisateur <b>jpa</b> aura le droit de créer des bases de données
+  </li>
 </ul>
+
 <p>On valide cette configuration :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000046000000103C4A8E400.png" style="display:inline-block; margin:4px;width:14.817cm;height:3.427cm;" class="odt-zoomable" data-zoom-src="images/100000000000046000000103C4A8E400.png" /></td></tr></table>
 
 <ul>
-<li>en [9] : l&#x27;utilisateur <strong>jpa</strong> a été créé</li>
-<li>en [10] : on se déconnecte</li>
-<li>en [11] : on se reconnecte</li>
+  <li>en [9] : l&#x27;utilisateur <b>jpa</b> a été créé
+  </li>
+  <li>en [10] : on se déconnecte
+  </li>
+  <li>en [11] : on se reconnecte
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000047700000196090F04FD.png" style="display:inline-block; margin:4px;width:15.122cm;height:5.371cm;" class="odt-zoomable" data-zoom-src="images/100000000000047700000196090F04FD.png" /></td></tr></table>
 
 <ul>
-<li>en [12] : on se connecte en tant qu&#x27;utilisateur jpa/jpa</li>
-<li>en [13] : une fois connecté, l&#x27;utilisateur <strong>jpa</strong> crée une base de données</li>
+  <li>en [12] : on se connecte en tant qu&#x27;utilisateur jpa/jpa
+  </li>
+  <li>en [13] : une fois connecté, l&#x27;utilisateur <b>jpa</b> crée une base de données
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000492000001BFA6828A08.png" style="display:inline-block; margin:4px;width:15.478cm;height:5.914cm;" class="odt-zoomable" data-zoom-src="images/1000000000000492000001BFA6828A08.png" /></td></tr></table>
 
 <ul>
-<li>en [14] : la base s&#x27;appellera <strong>jpa</strong></li>
-<li>en [15] : et appartiendra à l&#x27;utilisateur <strong>jpa</strong></li>
-<li>en [16] : la base <strong>jpa</strong> a été créée</li>
+  <li>en [14] : la base s&#x27;appellera <b>jpa</b>
+  </li>
+  <li>en [15] : et appartiendra à l&#x27;utilisateur <b>jpa</b>
+  </li>
+  <li>en [16] : la base <b>jpa</b> a été créée
+  </li>
 </ul>
+
 <h3 id="584-creation-de-la-table-articles-de-la-base-de-donnees-jpa">5.8.4. Création de la table [ARTICLES] de la base de données jpa</h3>
 <p>Comme dans les exemples précédents, nous allons créer la table [ARTICLES] à partir du script créé au paragraphe <a href="#firebird-export">5.4.6</a>.</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000523000002DA86F9503E.png" style="display:inline-block; margin:4px;width:17.397cm;height:9.657cm;" class="odt-zoomable" data-zoom-src="images/1000000000000523000002DA86F9503E.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on ouvre un script SQL</li>
-<li>en [2] : on désigne le script SQL créé au paragraphe <a href="#firebird-export">5.4.6</a>, page <a href="#firebird-export">240</a>.</li>
-<li>en [3] : on doit s&#x27;identifier de nouveau (jpa/jpa)</li>
-<li>en [4] : le script qui va être exécuté</li>
-<li>en [5] : sélectionner la base dans laquelle le script va être exécuté</li>
-<li>en [6] : l&#x27;exécuter</li>
+  <li>en [1] : on ouvre un script SQL
+  </li>
+  <li>en [2] : on désigne le script SQL créé au paragraphe <a href="#firebird-export">5.4.6</a>, page <a href="#firebird-export">240</a>.
+  </li>
+  <li>en [3] : on doit s&#x27;identifier de nouveau (jpa/jpa)
+  </li>
+  <li>en [4] : le script qui va être exécuté
+  </li>
+  <li>en [5] : sélectionner la base dans laquelle le script va être exécuté
+  </li>
+  <li>en [6] : l&#x27;exécuter
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000052C0000017D3A61093A.png" style="display:inline-block; margin:4px;width:17.515cm;height:5.041cm;" class="odt-zoomable" data-zoom-src="images/100000000000052C0000017D3A61093A.png" /></td></tr></table>
 
 <ul>
-<li>en [7] : le résultat de l&#x27;exécution : la table [ARTICLES] a été créée.</li>
-<li>en [8] : on demande à voir son contenu</li>
-<li>en [9] : le contenu de la table.</li>
+  <li>en [7] : le résultat de l&#x27;exécution : la table [ARTICLES] a été créée.
+  </li>
+  <li>en [8] : on demande à voir son contenu
+  </li>
+  <li>en [9] : le contenu de la table.
+  </li>
 </ul>
+
 <h3 id="585-pilote-jdbc-de-sql-server-express">5.8.5. Pilote JDBC de SQL Server Express</h3>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000054C0000018695FDA4ED.png" style="display:inline-block; margin:4px;width:17.939cm;height:5.159cm;" class="odt-zoomable" data-zoom-src="images/100000000000054C0000018695FDA4ED.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : une recherche sur Google avec le texte [Microsoft SQL Server 2005 JDBC Driver] nous amène à la page de téléchargement du pilote JDBC. Nous sélectionnons la version la version la plus récente</li>
-<li>en [2] : le fichier téléchargé. On double-clique dessus. Une décompression a lieu et donne naissance à un dossier dans lequel on trouve le pilote Jdbc [3]</li>
-<li>en [4] : nous plaçons l&#x27;archive Jdbc [sqljdbc.jar] comme les précédentes (paragraphe <a href="#firebird-jdbc">5.4.7</a>) dans le dossier &lt;jdbc&gt;</li>
+  <li>en [1] : une recherche sur Google avec le texte [Microsoft SQL Server 2005 JDBC Driver] nous amène à la page de téléchargement du pilote JDBC. Nous sélectionnons la version la version la plus récente
+  </li>
+  <li>en [2] : le fichier téléchargé. On double-clique dessus. Une décompression a lieu et donne naissance à un dossier dans lequel on trouve le pilote Jdbc [3]
+  </li>
+  <li>en [4] : nous plaçons l&#x27;archive Jdbc [sqljdbc.jar] comme les précédentes (paragraphe <a href="#firebird-jdbc">5.4.7</a>) dans le dossier &lt;jdbc&gt;
+  </li>
 </ul>
+
 <p>Pour tester ce pilote JDBC, nous allons utiliser Eclipse et le plugin SQL Explorer. Le lecteur est invité à suivre la démarche expliquée au paragraphe <a href="#firebird-jdbc">5.4.7</a>. Nous présentons quelques copies d&#x27;écran significatives :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004FC0000022558FB21A7.png" style="display:inline-block; margin:4px;width:16.88cm;height:7.264cm;" class="odt-zoomable" data-zoom-src="images/10000000000004FC0000022558FB21A7.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on a désigné l&#x27;archive du pilote JDBC de SQL Server</li>
-<li>en [2] : le pilote JDBC de SQL Server est disponible</li>
+  <li>en [1] : on a désigné l&#x27;archive du pilote JDBC de SQL Server
+  </li>
+  <li>en [2] : le pilote JDBC de SQL Server est disponible
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004F90000032DFBEC43B3.png" style="display:inline-block; margin:4px;width:16.842cm;height:10.756cm;" class="odt-zoomable" data-zoom-src="images/10000000000004F90000032DFBEC43B3.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : définition de la connexion (user, password)=(jpa, jpa)</li>
-<li>en [4] : la connexion est active</li>
-<li>en [5] : la base connectée</li>
-<li>en [6] : le contenu de la table [ARTICLES]</li>
+  <li>en [3] : définition de la connexion (user, password)=(jpa, jpa)
+  </li>
+  <li>en [4] : la connexion est active
+  </li>
+  <li>en [5] : la base connectée
+  </li>
+  <li>en [6] : le contenu de la table [ARTICLES]
+  </li>
 </ul>
+
 <p><a id="hsqldb"></a></p>
 <h2 id="59-le-sgbd-hsqldb">5.9. Le SGBD HSQLDB</h2>
 <h3 id="591-installation">5.9.1. Installation</h3>
@@ -2790,30 +3264,41 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004DB0000013939DE8DD7.png" style="display:inline-block; margin:4px;width:16.445cm;height:4.142cm;" class="odt-zoomable" data-zoom-src="images/10000000000004DB0000013939DE8DD7.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le site de téléchargement</li>
-<li>en [2] : prendre la version la plus récente</li>
+  <li>en [1] : le site de téléchargement
+  </li>
+  <li>en [2] : prendre la version la plus récente
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004B1000001C7E77ED3E5.png" style="display:inline-block; margin:4px;width:15.889cm;height:6.02cm;" class="odt-zoomable" data-zoom-src="images/10000000000004B1000001C7E77ED3E5.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : décompresser le fichier zip téléchargé</li>
-<li>en [4] : le dossier [hsqldb] issu de la décompression</li>
-<li>en [5] : le dossier [demo] qui contient le script permettant de lancer le serveur [hsql] [6] et en [7], celui permettant de lancer un outil rustique d&#x27;administration du serveur.</li>
+  <li>en [3] : décompresser le fichier zip téléchargé
+  </li>
+  <li>en [4] : le dossier [hsqldb] issu de la décompression
+  </li>
+  <li>en [5] : le dossier [demo] qui contient le script permettant de lancer le serveur [hsql] [6] et en [7], celui permettant de lancer un outil rustique d&#x27;administration du serveur.
+  </li>
 </ul>
+
 <h3 id="592-lancer-arreter-hsqldb">5.9.2. Lancer / Arrêter HSQLDB</h3>
 <p>Pour lancer le serveur HSQLDB on double-clique sur l&#x27;application [runManager.bat] [6] ci-dessus :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000003AB0000015309900600.png" style="display:inline-block; margin:4px;width:12.423cm;height:4.486cm;" class="odt-zoomable" data-zoom-src="images/10000000000003AB0000015309900600.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on voit que pour arrêter le serveur, il suffira de faire Ctrl-C dans la fenêtre.</li>
+  <li>en [1] : on voit que pour arrêter le serveur, il suffira de faire Ctrl-C dans la fenêtre.
+  </li>
 </ul>
+
 <h3 id="593-la-base-de-donnees-test">5.9.3. La base de données [test]</h3>
 <p>La base de données gérée par défaut se trouve dans le dossier [data] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004F6000000DA557C93D5.png" style="display:inline-block; margin:4px;width:16.801cm;height:2.884cm;" class="odt-zoomable" data-zoom-src="images/10000000000004F6000000DA557C93D5.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : au démarrage, le SGBD HSQL exécute le script appelé [test.script]</li>
+  <li>en [1] : au démarrage, le SGBD HSQL exécute le script appelé [test.script]
+  </li>
 </ul>
+
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
 <span class="normal"><a href="#__codelineno-31-2">2</a></span>
 <span class="normal"><a href="#__codelineno-31-3">3</a></span>
@@ -2823,68 +3308,103 @@
 <a id="__codelineno-31-4" name="__codelineno-31-4"></a>SET WRITE_DELAY 10
 </code></pre></div></td></tr></table></div>
 <ul>
-<li>ligne 1 : un schéma [public] est créé</li>
-<li>ligne 2 : un utilisateur [sa] avec un mot de passe vide est créé</li>
-<li>ligne 3 : l&#x27;utilisateur [sa] reçoit les droits d&#x27;administration</li>
+  <li>ligne 1 : un schéma [public] est créé
+  </li>
+  <li>ligne 2 : un utilisateur [sa] avec un mot de passe vide est créé
+  </li>
+  <li>ligne 3 : l&#x27;utilisateur [sa] reçoit les droits d&#x27;administration
+  </li>
 </ul>
+
 <p>Au final, un utilisateur ayant des droits d&#x27;administration a été créé. C&#x27;est cet utilisateur que nous utiliserons par la suite.</p>
 <h3 id="594-pilote-jdbc-de-hsql">5.9.4. Pilote JDBC de HSQL</h3>
 <p>Le pilote Jdbc du SGBD HSQL se trouve dans le dossier [lib] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000003CB000000E75015CBB8.png" style="display:inline-block; margin:4px;width:12.846cm;height:3.057cm;" class="odt-zoomable" data-zoom-src="images/10000000000003CB000000E75015CBB8.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : l&#x27;archive [hsqldb.jar] contient le pilote Jdbc du SGBD HSQL</li>
-<li>en [2] : nous plaçons cette archive comme les précédentes (paragraphe <a href="#firebird-jdbc">5.4.7</a>) dans le dossier &lt;jdbc&gt;</li>
+  <li>en [1] : l&#x27;archive [hsqldb.jar] contient le pilote Jdbc du SGBD HSQL
+  </li>
+  <li>en [2] : nous plaçons cette archive comme les précédentes (paragraphe <a href="#firebird-jdbc">5.4.7</a>) dans le dossier &lt;jdbc&gt;
+  </li>
 </ul>
+
 <p>Pour vérifier ce pilote JDBC, nous allons utiliser Eclipse et le plugin SQL Explorer. Le lecteur est invité à suivre la démarche expliquée au paragraphe <a href="#firebird-jdbc">5.4.7</a>. Nous présentons quelques copies d&#x27;écran significatives :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000554000001C92CD1F222.png" style="display:inline-block; margin:4px;width:17.997cm;height:6.029cm;" class="odt-zoomable" data-zoom-src="images/1000000000000554000001C92CD1F222.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : [window / preferences / SQL Explorer / JDBC Drivers]</li>
-<li>en [2] : on configure le server [HSQLDB]</li>
-<li>en [3] : on désigne l&#x27;archive [hsqldb.jar] contenant le pilote Jdbc</li>
-<li>en [4] : le nom de la classe Java du pilote Jdbc</li>
-<li>en [5] : le pilote Jdbc est configuré</li>
+  <li>en [1] : [window / preferences / SQL Explorer / JDBC Drivers]
+  </li>
+  <li>en [2] : on configure le server [HSQLDB]
+  </li>
+  <li>en [3] : on désigne l&#x27;archive [hsqldb.jar] contenant le pilote Jdbc
+  </li>
+  <li>en [4] : le nom de la classe Java du pilote Jdbc
+  </li>
+  <li>en [5] : le pilote Jdbc est configuré
+  </li>
 </ul>
+
 <p>Ceci fait, on se connecte au serveur HSQL. On lance celui-ci auparavant.</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004C800000150F3630D2A.png" style="display:inline-block; margin:4px;width:16.193cm;height:4.445cm;" class="odt-zoomable" data-zoom-src="images/10000000000004C800000150F3630D2A.png" /></td></tr></table>
 
 <ul>
-<li>en [6] : on crée une nouvelle connexion</li>
-<li>en [7] : on lui donne un nom</li>
-<li>en [8] : on veut se connecter au serveur HSQLDB</li>
-<li>en [9] : l&#x27;url de la base de données à laquelle on veut se connecter. Ce sera la base [test] vue précédemment.</li>
-<li>en [10] : on se connecte en tant qu&#x27;utilisateur [sa]. On a vu qu&#x27;il était administrateur du SGBD.</li>
-<li>en [11] : l&#x27;utilisateur [sa] n&#x27;a pas de mot de passe.</li>
+  <li>en [6] : on crée une nouvelle connexion
+  </li>
+  <li>en [7] : on lui donne un nom
+  </li>
+  <li>en [8] : on veut se connecter au serveur HSQLDB
+  </li>
+  <li>en [9] : l&#x27;url de la base de données à laquelle on veut se connecter. Ce sera la base [test] vue précédemment.
+  </li>
+  <li>en [10] : on se connecte en tant qu&#x27;utilisateur [sa]. On a vu qu&#x27;il était administrateur du SGBD.
+  </li>
+  <li>en [11] : l&#x27;utilisateur [sa] n&#x27;a pas de mot de passe.
+  </li>
 </ul>
+
 <p>On valide la configuration de la connexion.</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004FE00000139A3B49112.png" style="display:inline-block; margin:4px;width:16.907cm;height:4.142cm;" class="odt-zoomable" data-zoom-src="images/10000000000004FE00000139A3B49112.png" /></td></tr></table>
 
 <ul>
-<li>en [12] : on se connecte</li>
-<li>en [13] : on s&#x27;identifie</li>
-<li>en [14] : on est connecté</li>
+  <li>en [12] : on se connecte
+  </li>
+  <li>en [13] : on s&#x27;identifie
+  </li>
+  <li>en [14] : on est connecté
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004880000010103F3A754.png" style="display:inline-block; margin:4px;width:15.346cm;height:3.401cm;" class="odt-zoomable" data-zoom-src="images/10000000000004880000010103F3A754.png" /></td></tr></table>
 
 <ul>
-<li>en [15] : le schéma [PUBLIC] n&#x27;a pas encore de table</li>
-<li>en [16] : on va créer la table [ARTICLES] à partir du script [schema-articles.sql] créé au paragraphe <a href="#firebird-export">5.4.6</a>.</li>
-<li>en [17] : on sélectionne le script</li>
+  <li>en [15] : le schéma [PUBLIC] n&#x27;a pas encore de table
+  </li>
+  <li>en [16] : on va créer la table [ARTICLES] à partir du script [schema-articles.sql] créé au paragraphe <a href="#firebird-export">5.4.6</a>.
+  </li>
+  <li>en [17] : on sélectionne le script
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D7000001958A30EB1D.png" style="display:inline-block; margin:4px;width:16.392cm;height:5.359cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D7000001958A30EB1D.png" /></td></tr></table>
 
 <ul>
-<li>en [18] : le script à exécuter</li>
-<li>en [19] : on l&#x27;exécute après l&#x27;avoir débarrassé de tous ses commentaires car HSQLB n&#x27;accepte pas.</li>
+  <li>en [18] : le script à exécuter
+  </li>
+  <li>en [19] : on l&#x27;exécute après l&#x27;avoir débarrassé de tous ses commentaires car HSQLB n&#x27;accepte pas.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000482000001BF46D42436.png" style="display:inline-block; margin:4px;width:15.266cm;height:5.914cm;" class="odt-zoomable" data-zoom-src="images/1000000000000482000001BF46D42436.png" /></td></tr></table>
 
 <ul>
-<li>une fois l&#x27;exécution du script faite, on rafraîchit en [20] l&#x27;affichage de la base</li>
-<li>en [21] : la table [ARTICLES] est bien là</li>
-<li>en [22] : son contenu</li>
+  <li>une fois l&#x27;exécution du script faite, on rafraîchit en [20] l&#x27;affichage de la base
+  </li>
+  <li>en [21] : la table [ARTICLES] est bien là
+  </li>
+  <li>en [22] : son contenu
+  </li>
 </ul>
+
 <p>Arrêtons, puis relançons le serveur HSQLDB. Ceci fait, examinons le fichier [test.script] :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
 <span class="normal"><a href="#__codelineno-32-2">2</a></span>
@@ -2912,116 +3432,171 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D0000001A7E7CF870E.png" style="display:inline-block; margin:4px;width:16.298cm;height:5.597cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D0000001A7E7CF870E.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le site de téléchargement</li>
-<li>en [2,3] : prendre la version la plus récente</li>
+  <li>en [1] : le site de téléchargement
+  </li>
+  <li>en [2,3] : prendre la version la plus récente
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000484000001EE7302ACD1.png" style="display:inline-block; margin:4px;width:15.293cm;height:6.535cm;" class="odt-zoomable" data-zoom-src="images/1000000000000484000001EE7302ACD1.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : décompresser le fichier zip téléchargé</li>
-<li>en [4] : le dossier [db-derby-*-bin] issu de la décompression</li>
-<li>en [5] : le dossier [bin] qui contient le script permettant de lancer le serveur [db derby] [6] et en [7], celui de l&#x27;arrêter.</li>
+  <li>en [3] : décompresser le fichier zip téléchargé
+  </li>
+  <li>en [4] : le dossier [db-derby-*-bin] issu de la décompression
+  </li>
+  <li>en [5] : le dossier [bin] qui contient le script permettant de lancer le serveur [db derby] [6] et en [7], celui de l&#x27;arrêter.
+  </li>
 </ul>
+
 <h3 id="5102-lancer-arreter-apache-derby-db-derby">5.10.2. Lancer / Arrêter Apache Derby (Db Derby)</h3>
 <p>Pour lancer le serveur Db Derby on double-clique sur l&#x27;application [startNetworkServer] [6] ci-dessus :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000003E2000000773F3CD61E.png" style="display:inline-block; margin:4px;width:13.15cm;height:1.575cm;" class="odt-zoomable" data-zoom-src="images/10000000000003E2000000773F3CD61E.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le serveur est démarré. On l&#x27;arrêtera avec l&#x27;application [stopNetworkServer] [7] ci-dessus.</li>
+  <li>en [1] : le serveur est démarré. On l&#x27;arrêtera avec l&#x27;application [stopNetworkServer] [7] ci-dessus.
+  </li>
 </ul>
+
 <h3 id="5103-pilote-jdbc-de-db-derby">5.10.3. Pilote JDBC de Db Derby</h3>
 <p>Le pilote Jdbc du SGBD Db Derby se trouve dans le dossier [lib] du dossier d&#x27;installation :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000403000001193A546E6B.png" style="display:inline-block; margin:4px;width:13.587cm;height:3.718cm;" class="odt-zoomable" data-zoom-src="images/1000000000000403000001193A546E6B.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : l&#x27;archive [derbyclient.jar] contient le pilote Jdbc du SGBD Db Derby</li>
-<li>en [2] : nous plaçons cette archive comme les précédentes (paragraphe <a href="#firebird-jdbc">5.4.7</a>) dans le dossier &lt;jdbc&gt;</li>
+  <li>en [1] : l&#x27;archive [derbyclient.jar] contient le pilote Jdbc du SGBD Db Derby
+  </li>
+  <li>en [2] : nous plaçons cette archive comme les précédentes (paragraphe <a href="#firebird-jdbc">5.4.7</a>) dans le dossier &lt;jdbc&gt;
+  </li>
 </ul>
+
 <p>Pour tester ce pilote JDBC, nous allons utiliser Eclipse et le plugin SQL Explorer. Le lecteur est invité à suivre la démarche expliquée au paragraphe <a href="#firebird-jdbc">5.4.7</a>. Nous présentons quelques copies d&#x27;écran significatives :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000042A000000B52D119908.png" style="display:inline-block; margin:4px;width:14.102cm;height:2.395cm;" class="odt-zoomable" data-zoom-src="images/100000000000042A000000B52D119908.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : [window / preferences / SQL Explorer / JDBC Drivers]</li>
-<li>en [2] : le pilote Jdbc d&#x27;Apache Derby n&#x27;est pas dans la liste. On l&#x27;ajoute.</li>
+  <li>en [1] : [window / preferences / SQL Explorer / JDBC Drivers]
+  </li>
+  <li>en [2] : le pilote Jdbc d&#x27;Apache Derby n&#x27;est pas dans la liste. On l&#x27;ajoute.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000048600000237ABB6C02E.png" style="display:inline-block; margin:4px;width:15.319cm;height:7.502cm;" class="odt-zoomable" data-zoom-src="images/100000000000048600000237ABB6C02E.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : on donne un nom au nouveau pilote</li>
-<li>en [4] : on précise la forme des Url gérées par le pilote Jdbc</li>
-<li>en [5] : on a désigné l&#x27;archive .jar du pilote Jdbc</li>
-<li>en [5b] : le nom de la classe Java du pilote Jdbc</li>
-<li>en [5c] : le pilote Jdbc est configuré</li>
+  <li>en [3] : on donne un nom au nouveau pilote
+  </li>
+  <li>en [4] : on précise la forme des Url gérées par le pilote Jdbc
+  </li>
+  <li>en [5] : on a désigné l&#x27;archive .jar du pilote Jdbc
+  </li>
+  <li>en [5b] : le nom de la classe Java du pilote Jdbc
+  </li>
+  <li>en [5c] : le pilote Jdbc est configuré
+  </li>
 </ul>
+
 <p>Ceci fait, on se connecte au serveur Apache Derby. On lance celui-ci auparavant.</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000052E0000015C0BABCAD0.png" style="display:inline-block; margin:4px;width:17.542cm;height:4.604cm;" class="odt-zoomable" data-zoom-src="images/100000000000052E0000015C0BABCAD0.png" /></td></tr></table>
 
 <ul>
-<li>en [6] : on crée une nouvelle connexion</li>
-<li>en [7] : on lui donne un nom</li>
-<li>en [8] : on veut se connecter au serveur Apache Derby</li>
-<li>en [9] : l&#x27;url de la base de données à laquelle on veut se connecter. Derrière le début standard [jdbc:derby://localhost:1527], on mettra le chemin d&#x27;un dossier du disque contenant une base de données Derby. L&#x27;option [create=true] permet de créer ce dossier s&#x27;il n&#x27;existe pas encore.</li>
-<li>en [10,11] : on se connecte en tant qu&#x27;utilisateur [jpa/jpa]. Je n&#x27;ai pas creusé la question mais il semble qu&#x27;on puisse mettre ce qu&#x27;on veut comme login / mot de passe. On déclare ici le propriétaire de la base, si create=true.</li>
+  <li>en [6] : on crée une nouvelle connexion
+  </li>
+  <li>en [7] : on lui donne un nom
+  </li>
+  <li>en [8] : on veut se connecter au serveur Apache Derby
+  </li>
+  <li>en [9] : l&#x27;url de la base de données à laquelle on veut se connecter. Derrière le début standard [jdbc:derby://localhost:1527], on mettra le chemin d&#x27;un dossier du disque contenant une base de données Derby. L&#x27;option [create=true] permet de créer ce dossier s&#x27;il n&#x27;existe pas encore.
+  </li>
+  <li>en [10,11] : on se connecte en tant qu&#x27;utilisateur [jpa/jpa]. Je n&#x27;ai pas creusé la question mais il semble qu&#x27;on puisse mettre ce qu&#x27;on veut comme login / mot de passe. On déclare ici le propriétaire de la base, si create=true.
+  </li>
 </ul>
+
 <p>On valide la configuration de la connexion.</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000055700000171FD653D0B.png" style="display:inline-block; margin:4px;width:17.997cm;height:4.858cm;" class="odt-zoomable" data-zoom-src="images/100000000000055700000171FD653D0B.png" /></td></tr></table>
 
 <ul>
-<li>en [12] : on se connecte</li>
-<li>en [13] : on s&#x27;identifie (jpa/jpa)</li>
-<li>en [14] : on est connecté</li>
+  <li>en [12] : on se connecte
+  </li>
+  <li>en [13] : on s&#x27;identifie (jpa/jpa)
+  </li>
+  <li>en [14] : on est connecté
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004CE000001856D0F9E74.png" style="display:inline-block; margin:4px;width:16.272cm;height:5.147cm;" class="odt-zoomable" data-zoom-src="images/10000000000004CE000001856D0F9E74.png" /></td></tr></table>
 
 <ul>
-<li>en [15] : le schéma [jpa] n&#x27;apparaît pas encore.</li>
-<li>en [16] : on va créer la table [ARTICLES] à partir du script [schema-articles.sql] créé au paragraphe <a href="#firebird-export">5.4.6</a>.</li>
-<li>en [17] : on sélectionne le script</li>
+  <li>en [15] : le schéma [jpa] n&#x27;apparaît pas encore.
+  </li>
+  <li>en [16] : on va créer la table [ARTICLES] à partir du script [schema-articles.sql] créé au paragraphe <a href="#firebird-export">5.4.6</a>.
+  </li>
+  <li>en [17] : on sélectionne le script
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004BC00000192D472E05E.png" style="display:inline-block; margin:4px;width:16.034cm;height:5.318cm;" class="odt-zoomable" data-zoom-src="images/10000000000004BC00000192D472E05E.png" /></td></tr></table>
 
 <ul>
-<li>en [18] : le script à exécuter</li>
-<li>en [19] : on l&#x27;exécute après l&#x27;avoir débarrassé de tous ses commentaires car Apache Derby comme HSQLB ne les accepte pas.</li>
+  <li>en [18] : le script à exécuter
+  </li>
+  <li>en [19] : on l&#x27;exécute après l&#x27;avoir débarrassé de tous ses commentaires car Apache Derby comme HSQLB ne les accepte pas.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000487000001A78CB81876.png" style="display:inline-block; margin:4px;width:15.333cm;height:5.597cm;" class="odt-zoomable" data-zoom-src="images/1000000000000487000001A78CB81876.png" /></td></tr></table>
 
 <ul>
-<li>une fois l&#x27;exécution du script faite, on rafraîchit en [20] l&#x27;affichage de la base</li>
-<li>en [21] : le schéma [jpa] et la table [ARTICLES] sont bien là</li>
-<li>en [22] : le contenu de la table [ARTICLES]</li>
+  <li>une fois l&#x27;exécution du script faite, on rafraîchit en [20] l&#x27;affichage de la base
+  </li>
+  <li>en [21] : le schéma [jpa] et la table [ARTICLES] sont bien là
+  </li>
+  <li>en [22] : le contenu de la table [ARTICLES]
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000111000000C99A23D2EC.png" style="display:inline-block; margin:4px;width:3.612cm;height:2.66cm;" class="odt-zoomable" data-zoom-src="images/1000000000000111000000C99A23D2EC.png" /></td></tr></table>
 
 <ul>
-<li>en [23] : le contenu du dossier [derby\jpa] dans lequel a été créée la base de données.</li>
+  <li>en [23] : le contenu du dossier [derby\jpa] dans lequel a été créée la base de données.
+  </li>
 </ul>
+
 <p><a id="spring2"></a></p>
 <h2 id="511-le-framework-spring-2">5.11. Le framework Spring 2</h2>
 <p>Le framework Spring 2 est disponible à l&#x27;url [http://www.springframework.org/download] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000005220000011C7F57F493.png" style="display:inline-block; margin:4px;width:17.383cm;height:3.757cm;" class="odt-zoomable" data-zoom-src="images/10000000000005220000011C7F57F493.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on télécharge la dernière version</li>
-<li>en [2] : on télécharge la version dite &quot;avec dépendances&quot; car elle contient les archives .jar des outils tierces que Spring intègre et dont on a tout le temps besoin.</li>
+  <li>en [1] : on télécharge la dernière version
+  </li>
+  <li>en [2] : on télécharge la version dite &quot;avec dépendances&quot; car elle contient les archives .jar des outils tierces que Spring intègre et dont on a tout le temps besoin.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000003FE0000023235F82D2D.png" style="display:inline-block; margin:4px;width:13.52cm;height:7.435cm;" class="odt-zoomable" data-zoom-src="images/10000000000003FE0000023235F82D2D.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : on décompresse l&#x27;archive téléchargée</li>
-<li>en [4] : le dossier d&#x27;installation de Spring 2.1</li>
+  <li>en [3] : on décompresse l&#x27;archive téléchargée
+  </li>
+  <li>en [4] : le dossier d&#x27;installation de Spring 2.1
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000003E10000024B21D750CF.png" style="display:inline-block; margin:4px;width:13.137cm;height:7.766cm;" class="odt-zoomable" data-zoom-src="images/10000000000003E10000024B21D750CF.png" /></td></tr></table>
 
 <ul>
-<li>en [5] : dans le dossier &lt;dist&gt;, on trouve les archives de Spring. L&#x27;archive [spring.jar] réunit toutes les classes du framework Spring. Celles-ci sont également disponibles par modules dans le dossier &lt;modules&gt; en [6]. Si l&#x27;on connaît les modules dont on a besoin, on peut les trouver ici. On évite ainsi d&#x27;inclure dans l&#x27;application des archives dont elle n&#x27;a pas besoin.</li>
+  <li>en [5] : dans le dossier &lt;dist&gt;, on trouve les archives de Spring. L&#x27;archive [spring.jar] réunit toutes les classes du framework Spring. Celles-ci sont également disponibles par modules dans le dossier &lt;modules&gt; en [6]. Si l&#x27;on connaît les modules dont on a besoin, on peut les trouver ici. On évite ainsi d&#x27;inclure dans l&#x27;application des archives dont elle n&#x27;a pas besoin.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000043100000123B2521E36.png" style="display:inline-block; margin:4px;width:14.196cm;height:3.851cm;" class="odt-zoomable" data-zoom-src="images/100000000000043100000123B2521E36.png" /></td></tr></table>
 
 <ul>
-<li>en [7] : le dossier &lt;lib&gt; contient les archives des outils tiers utilisés par Spring</li>
-<li>en [8] : quelques archives du projet [jakarta-commons]</li>
+  <li>en [7] : le dossier &lt;lib&gt; contient les archives des outils tiers utilisés par Spring
+  </li>
+  <li>en [8] : quelques archives du projet [jakarta-commons]
+  </li>
 </ul>
+
 <p>Lorsque le tutoriel utilise des archives de Spring, il faut aller les chercher soit dans le dossier &lt;dist&gt;, soit dans le dossier &lt;lib&gt; du dossier d&#x27;installation de Spring.</p>
 <p><a id="jbossejb3"></a></p>
 <h2 id="512-le-conteneur-ejb3-de-jboss">5.12. Le conteneur EJB3 de JBoss</h2>
@@ -3029,14 +3604,19 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004BE0000019DBEAE32FA.png" style="display:inline-block; margin:4px;width:16.06cm;height:5.465cm;" class="odt-zoomable" data-zoom-src="images/10000000000004BE0000019DBEAE32FA.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : on télécharge JBoss EJB3. On peut remarquer la date du produit (septembre 2006), alors qu&#x27;on télécharge en mai 2007. On peut se demander si ce produit évolue encore.</li>
-<li>en [2] : le fichier téléchargé</li>
+  <li>en [1] : on télécharge JBoss EJB3. On peut remarquer la date du produit (septembre 2006), alors qu&#x27;on télécharge en mai 2007. On peut se demander si ce produit évolue encore.
+  </li>
+  <li>en [2] : le fichier téléchargé
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000002C90000011603DC17D8.png" style="display:inline-block; margin:4px;width:9.433cm;height:3.678cm;" class="odt-zoomable" data-zoom-src="images/10000000000002C90000011603DC17D8.png" /></td></tr></table>
 
 <ul>
-<li>en [3] : le fichier zip décompressé</li>
-<li>en [4] : les archives [hibernate-all.jar, jboss-ejb3-all.jar, thirdparty-all.jar] forment le conteneur EJB3 de JBoss. Il faut les mettre dans le classpath de l&#x27;application utilisant ce conteneur.</li>
+  <li>en [3] : le fichier zip décompressé
+  </li>
+  <li>en [4] : les archives [hibernate-all.jar, jboss-ejb3-all.jar, thirdparty-all.jar] forment le conteneur EJB3 de JBoss. Il faut les mettre dans le classpath de l&#x27;application utilisant ce conteneur.
+  </li>
 </ul>
 
 

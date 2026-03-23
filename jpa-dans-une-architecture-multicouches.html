@@ -886,9 +886,12 @@
 <p>Java EE5 a été conçu pour corriger les lacunes de la précédente spécification EE. Les EJB 2.x sont devenus les EJB3. Ceux-ci sont des POJOs tagués par des annotations qui en font des objets particuliers lorsqu&#x27;ils sont au sein d&#x27;un conteneur EJB3. Dans celui-ci, l&#x27;EJB3 va pouvoir bénéficier des services du conteneur (pool de connexions, gestionnaire de transactions, ...). En-dehors du conteneur EJB3, l&#x27;EJB3 devient un objet Java normal. Ses annotations EJB sont ignorées.</p>
 <p>Ci-dessus, nous avons représenté Spring et JBoss EJB3 comme infrastructure (framework) possible de notre architecture multi-couches. C&#x27;est cette infrastructure qui délivrera les services dont nous avons besoin : un pool de connexions et un gestionnaire de transactions.</p>
 <ul>
-<li>avec Spring, les couches seront implémentées avec des POJOs. Ceux-ci auront accès aux services de Spring (pool de connexions, gestionnaire de transaction) par injection de dépendances dans ces POJOs : lors de la construction de ceux-ci, Spring leur injecte des références sur les services dont il vont avoir besoin.</li>
-<li>JBoss EJB3 est un conteneur EJB pouvant fonctionner en-dehors d&#x27;un serveur d&#x27;application. Son principe de fonctionnement (pour le développeur) est analogue à celui décrit pour Spring. Nous trouverons peu de différences.</li>
+  <li>avec Spring, les couches seront implémentées avec des POJOs. Ceux-ci auront accès aux services de Spring (pool de connexions, gestionnaire de transaction) par injection de dépendances dans ces POJOs : lors de la construction de ceux-ci, Spring leur injecte des références sur les services dont il vont avoir besoin.
+  </li>
+  <li>JBoss EJB3 est un conteneur EJB pouvant fonctionner en-dehors d&#x27;un serveur d&#x27;application. Son principe de fonctionnement (pour le développeur) est analogue à celui décrit pour Spring. Nous trouverons peu de différences.
+  </li>
 </ul>
+
 <p>Nous terminerons le document avec un exemple d&#x27;application web à trois couches, basique mais néanmoins représentative :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000517000000FA6B23F30D.png" style="display:inline-block; margin:4px;width:17.238cm;height:3.307cm;" class="odt-zoomable" data-zoom-src="images/1000000000000517000000FA6B23F30D.png" /></td></tr></table>
 
@@ -906,17 +909,26 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000050000000131962BA7B2.png" style="display:inline-block; margin:4px;width:16.933cm;height:4.036cm;" class="odt-zoomable" data-zoom-src="images/100000000000050000000131962BA7B2.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le projet Eclipse. Il sera trouvé en [6] dans les exemples du tutoriel [5]. On l&#x27;importera.</li>
-<li>en [2] : les codes Java des couches présentés en paquetages :<ul>
-<li>[entites] : le paquetage des entités JPA</li>
-<li>[dao] : la couche d&#x27;accès aux données - s&#x27;appuie sur la couche JPA</li>
-<li>[service] : une couche de services plus que de métier. On y utilisera le service de transactions des conteneurs.</li>
-<li>[tests] : regroupe les programmes de tests.</li>
+  <li>en [1] : le projet Eclipse. Il sera trouvé en [6] dans les exemples du tutoriel [5]. On l&#x27;importera.
+  </li>
+  <li>en [2] : les codes Java des couches présentés en paquetages :
+    <ul>
+      <li>[entites] : le paquetage des entités JPA
+      </li>
+      <li>[dao] : la couche d&#x27;accès aux données - s&#x27;appuie sur la couche JPA
+      </li>
+      <li>[service] : une couche de services plus que de métier. On y utilisera le service de transactions des conteneurs.
+      </li>
+      <li>[tests] : regroupe les programmes de tests.
+      </li>
+    </ul>
+  </li>
+  <li>en [3] : la bibliothèque [jpa-spring] regroupe les jars nécessaires à Spring (voir aussi [7] et [8]).
+  </li>
+  <li>en [4] : le dossier [conf] rassemble les fichiers de configuration de Spring pour chacun des SGBD utilisés dans ce tutoriel.
+  </li>
 </ul>
-</li>
-<li>en [3] : la bibliothèque [jpa-spring] regroupe les jars nécessaires à Spring (voir aussi [7] et [8]).</li>
-<li>en [4] : le dossier [conf] rassemble les fichiers de configuration de Spring pour chacun des SGBD utilisés dans ce tutoriel.</li>
-</ul>
+
 <p><a id="spring-jpa-personne-entite"></a></p>
 <h3 id="312-les-entites-jpa">3.1.2. Les entités JPA</h3>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000044E000000C03BD07FFD.png" style="display:inline-block; margin:4px;width:14.579cm;height:2.54cm;" class="odt-zoomable" data-zoom-src="images/100000000000044E000000C03BD07FFD.png" /></td></tr></table>
@@ -1068,23 +1080,38 @@
 </code></pre></div>
 
 <ul>
-<li>tout d&#x27;abord, on notera la simplicité de l&#x27;implémentation [Dao]. Celle-ci est due à l&#x27;utilisation de la couche JPA qui fait l&#x27;essentiel du travail d&#x27;accès aux données.</li>
-<li>ligne 10 : la classe [Dao] implémente l&#x27;interface [IDao]</li>
-<li>ligne 13 : l&#x27;objet de type [EntityManager] qui va être utilisé pour manipuler le contexte de persistance JPA. Par abus de langage, nous le confondrons parfois avec le contexte de persistance lui-même. Le contexte de persistance contiendra des entités <em>Personne</em>.</li>
-<li>ligne 12 : nulle part dans le code, le champ [EntityManager em] n&#x27;est initialisé. Il le sera au démarrage de l&#x27;application par Spring. C&#x27;est l&#x27;annotation JPA <strong>@PersistenceContext</strong> de la ligne 12 qui demande à Spring d&#x27;injecter dans <em>em</em>, un gestionnaire de contexte de persistance.</li>
-<li>lignes 26-28 : la liste de toutes les personnes est obtenue par une requête JPQL.</li>
-<li>lignes 32-35 : la liste de toutes les personnes ayant un nom correspondant à un certain modèle est obtenue par une requête JPQL.</li>
-<li>lignes 38-40 : la personne ayant tel identifiant est obtenue par la méthode <strong>find</strong> de l&#x27;API JPA. Rend un pointeur <em>null</em> si la personne n&#x27;existe pas.</li>
-<li>lignes 43-46 : une personne est rendue persistante par la méthode <strong>persist</strong> de l&#x27;API JPA. La méthode rend la personne persistante.</li>
-<li>lignes 49-51 : la mise à jour d&#x27;une personne est réalisée par la méthode <strong>merge</strong> de l&#x27;API JPA. Cette méthode n&#x27;a de sens que si la personne ainsi mise à jour était auparavant détachée. La méthode rend la personne persistante ainsi créée.</li>
-<li>lignes 16-22 : la suppression de la personne dont on nous passe l&#x27;identifiant en pramètre se fait en deux temps :<ul>
-<li>ligne 17 : elle est cherchée dans le contexte de persistance</li>
-<li>lignes 18-20 : si on ne la trouve pas, on lance une exception avec un code erreur 2</li>
-<li>ligne 21 : si on l&#x27;a trouvée on l&#x27;enlève du contexte de persistance avec la méthode <strong>remove</strong> de l&#x27;API JPA.</li>
+  <li>tout d&#x27;abord, on notera la simplicité de l&#x27;implémentation [Dao]. Celle-ci est due à l&#x27;utilisation de la couche JPA qui fait l&#x27;essentiel du travail d&#x27;accès aux données.
+  </li>
+  <li>ligne 10 : la classe [Dao] implémente l&#x27;interface [IDao]
+  </li>
+  <li>ligne 13 : l&#x27;objet de type [EntityManager] qui va être utilisé pour manipuler le contexte de persistance JPA. Par abus de langage, nous le confondrons parfois avec le contexte de persistance lui-même. Le contexte de persistance contiendra des entités <i>Personne</i>.
+  </li>
+  <li>ligne 12 : nulle part dans le code, le champ [EntityManager em] n&#x27;est initialisé. Il le sera au démarrage de l&#x27;application par Spring. C&#x27;est l&#x27;annotation JPA <b>@PersistenceContext</b> de la ligne 12 qui demande à Spring d&#x27;injecter dans <i>em</i>, un gestionnaire de contexte de persistance.
+  </li>
+  <li>lignes 26-28 : la liste de toutes les personnes est obtenue par une requête JPQL.
+  </li>
+  <li>lignes 32-35 : la liste de toutes les personnes ayant un nom correspondant à un certain modèle est obtenue par une requête JPQL.
+  </li>
+  <li>lignes 38-40 : la personne ayant tel identifiant est obtenue par la méthode <b>find</b> de l&#x27;API JPA. Rend un pointeur <i>null</i> si la personne n&#x27;existe pas.
+  </li>
+  <li>lignes 43-46 : une personne est rendue persistante par la méthode <b>persist</b> de l&#x27;API JPA. La méthode rend la personne persistante.
+  </li>
+  <li>lignes 49-51 : la mise à jour d&#x27;une personne est réalisée par la méthode <b>merge</b> de l&#x27;API JPA. Cette méthode n&#x27;a de sens que si la personne ainsi mise à jour était auparavant détachée. La méthode rend la personne persistante ainsi créée.
+  </li>
+  <li>lignes 16-22 : la suppression de la personne dont on nous passe l&#x27;identifiant en pramètre se fait en deux temps :
+    <ul>
+      <li>ligne 17 : elle est cherchée dans le contexte de persistance
+      </li>
+      <li>lignes 18-20 : si on ne la trouve pas, on lance une exception avec un code erreur 2
+      </li>
+      <li>ligne 21 : si on l&#x27;a trouvée on l&#x27;enlève du contexte de persistance avec la méthode <b>remove</b> de l&#x27;API JPA.
+      </li>
+    </ul>
+  </li>
+  <li>ce qui n&#x27;est pas visible pour l&#x27;instant est que chaque méthode sera exécutée au sein d&#x27;une transaction démarrée par la couche [service].
+  </li>
 </ul>
-</li>
-<li>ce qui n&#x27;est pas visible pour l&#x27;instant est que chaque méthode sera exécutée au sein d&#x27;une transaction démarrée par la couche [service].</li>
-</ul>
+
 <p>L&#x27;application a son propre type d&#x27;exception nommé [DaoException] :</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line"><span style="font-weight:bold;color:#7f0055">package</span><span style="color:#000000"> dao;</span></span>
@@ -1129,9 +1156,12 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 4 : [DaoException] dérive de [RuntimeException]. C&#x27;est donc un type d&#x27;exceptions que le compilateur ne nous oblige pas à gérer par un try / catch ou à mettre dans la signture des méthodes. C&#x27;est pour cette raison, que [DaoException] n&#x27;est pas dans la signature de la méthode [deleteOne] de l&#x27;interface [IDao]. Cela permet à cette interface d&#x27;être implémentée par une classe lançant un autre type d&#x27;exceptions pourvu que celui-ci dérive égaleemnt de [RuntimeException].</li>
-<li>pour différencier les erreurs qui peuvent se produire, on utilise le code erreur de la ligne 7. Les trois constructeurs des lignes 14, 19 et 24 sont ceux de la classe parente [RuntimeException] auxquels on a rajouté un paramètre : celui du code d&#x27;erreur qu&#x27;on veut donner à l&#x27;exception.</li>
+  <li>ligne 4 : [DaoException] dérive de [RuntimeException]. C&#x27;est donc un type d&#x27;exceptions que le compilateur ne nous oblige pas à gérer par un try / catch ou à mettre dans la signture des méthodes. C&#x27;est pour cette raison, que [DaoException] n&#x27;est pas dans la signature de la méthode [deleteOne] de l&#x27;interface [IDao]. Cela permet à cette interface d&#x27;être implémentée par une classe lançant un autre type d&#x27;exceptions pourvu que celui-ci dérive égaleemnt de [RuntimeException].
+  </li>
+  <li>pour différencier les erreurs qui peuvent se produire, on utilise le code erreur de la ligne 7. Les trois constructeurs des lignes 14, 19 et 24 sont ceux de la classe parente [RuntimeException] auxquels on a rajouté un paramètre : celui du code d&#x27;erreur qu&#x27;on veut donner à l&#x27;exception.
+  </li>
 </ul>
+
 <p><a id="spring-jpa-personne-service"></a></p>
 <h3 id="314-la-couche-metier-service">3.1.4. La couche [metier / service]</h3>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000043A000000C521F1A783.png" style="display:inline-block; margin:4px;width:14.314cm;height:2.607cm;" class="odt-zoomable" data-zoom-src="images/100000000000043A000000C521F1A783.png" /></td></tr></table>
@@ -1176,10 +1206,14 @@
 </code></pre></div>
 
 <ul>
-<li>lignes 8-24 : l&#x27;interface [IService] reprend les méthodes de l&#x27;interface [IDao]</li>
-<li>ligne 27 : la méthode [deleteArray] permet de supprimer un ensemble de personnes au sein d&#x27;une transaction : toutes les personnes sont supprimées ou aucune.</li>
-<li>lignes 30 et 33 : des méthodes analogues à [deleteArray] pour sauvegarder (ligne 30) ou mettre à jour (ligne 33) un ensemble de personnes au sein d&#x27;une transaction.</li>
+  <li>lignes 8-24 : l&#x27;interface [IService] reprend les méthodes de l&#x27;interface [IDao]
+  </li>
+  <li>ligne 27 : la méthode [deleteArray] permet de supprimer un ensemble de personnes au sein d&#x27;une transaction : toutes les personnes sont supprimées ou aucune.
+  </li>
+  <li>lignes 30 et 33 : des méthodes analogues à [deleteArray] pour sauvegarder (ligne 30) ou mettre à jour (ligne 33) un ensemble de personnes au sein d&#x27;une transaction.
+  </li>
 </ul>
+
 <p>L&#x27;implémentation [Service] de l&#x27;interface [IService] est la suivante :</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line"><span style="font-weight:bold;color:#7f0055">package</span><span style="color:#000000"> service;</span></span>
@@ -1260,11 +1294,16 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 6 : l&#x27;annotation Spring <strong>@Transactional</strong> indique que toutes les méthodes de la classe doivent s&#x27;exécuter au sein d&#x27;une transaction. Une transaction sera commencée avant le début d&#x27;exécution de la méthode et fermée après exécution. Si une exception de type [RuntimeException] ou dérivé se produit au cours de l&#x27;exécution de la méthode, un <strong>rollback</strong> automatique annule toute la transaction, sinon un <strong>commit</strong> automatique la valide. On retiendra que le code Java n&#x27;a pas besoin de se soucier des transactions. Elles sont gérées par Spring.</li>
-<li>ligne 10 : une référence sur la couche [dao]. Nous verrons ultérieurement que cette référence est initialisée par Spring au démarrage de l&#x27;application.</li>
-<li>les méthodes de [Service] se contentent d&#x27;appeler les méthodes de l&#x27;interface [IDao dao] de la ligne 10. Nous laissons le lecteur prendre connaissance du code. Il n&#x27;y a pas de difficultés particulières.</li>
-<li>nous avons dit précédemment que chaque méthode de [Service] s&#x27;exécutait dans une transaction. Celle-ci est attachée au thread d&#x27;exécution de la méthode. Dans ce thread, sont exécutées des méthodes de la couche [dao]. Celles-ci seront automatiquement rattachées à la transaction du thread d&#x27;exécution. La méthode [deleteArray] (ligne 21), par exemple, est amenée à exécuter N fois la méthode [deleteOne] de la couche [dao]. Ces N exécutions se feront au sein du thread d&#x27;exécution de la méthode [deleteArray], donc au sein de la même transaction. Aussi seront-elles soit toutes validées (commit) si les choses se passent bien ou toutes annulées (rollback) si une exception se produit dans l&#x27;une des N exécutions de la méthode [deleteOne] de la couche [dao].</li>
+  <li>ligne 6 : l&#x27;annotation Spring <b>@Transactional</b> indique que toutes les méthodes de la classe doivent s&#x27;exécuter au sein d&#x27;une transaction. Une transaction sera commencée avant le début d&#x27;exécution de la méthode et fermée après exécution. Si une exception de type [RuntimeException] ou dérivé se produit au cours de l&#x27;exécution de la méthode, un <b>rollback</b> automatique annule toute la transaction, sinon un <b>commit</b> automatique la valide. On retiendra que le code Java n&#x27;a pas besoin de se soucier des transactions. Elles sont gérées par Spring.
+  </li>
+  <li>ligne 10 : une référence sur la couche [dao]. Nous verrons ultérieurement que cette référence est initialisée par Spring au démarrage de l&#x27;application.
+  </li>
+  <li>les méthodes de [Service] se contentent d&#x27;appeler les méthodes de l&#x27;interface [IDao dao] de la ligne 10. Nous laissons le lecteur prendre connaissance du code. Il n&#x27;y a pas de difficultés particulières.
+  </li>
+  <li>nous avons dit précédemment que chaque méthode de [Service] s&#x27;exécutait dans une transaction. Celle-ci est attachée au thread d&#x27;exécution de la méthode. Dans ce thread, sont exécutées des méthodes de la couche [dao]. Celles-ci seront automatiquement rattachées à la transaction du thread d&#x27;exécution. La méthode [deleteArray] (ligne 21), par exemple, est amenée à exécuter N fois la méthode [deleteOne] de la couche [dao]. Ces N exécutions se feront au sein du thread d&#x27;exécution de la méthode [deleteArray], donc au sein de la même transaction. Aussi seront-elles soit toutes validées (commit) si les choses se passent bien ou toutes annulées (rollback) si une exception se produit dans l&#x27;une des N exécutions de la méthode [deleteOne] de la couche [dao].
+  </li>
 </ul>
+
 <p><a id="spring-jpa-personne-conf"></a></p>
 <h3 id="315-configuration-des-couches">3.1.5. Configuration des couches</h3>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000000AE0000009D3F15F0B3.png" style="display:inline-block; margin:4px;width:3.221cm;height:2.91cm;" class="odt-zoomable" data-zoom-src="images/10000000000000AE0000009D3F15F0B3.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000002A40000008AA20FB27F.png" style="display:inline-block; margin:4px;width:8.943cm;height:1.826cm;" class="odt-zoomable" data-zoom-src="images/10000000000002A40000008AA20FB27F.png" /></td></tr></table>
@@ -1280,8 +1319,10 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 4 : le fichier déclare une unité de persistance appelée <em>jpa</em> qui utilise des transactions &quot;locales&quot;, c.a.d. non fournies par un conteneur EJB3. Ces transactions sont créées et gérées par Spring et font l&#x27;objet de configurations dans le fichier [spring-config.xml].</li>
+  <li>ligne 4 : le fichier déclare une unité de persistance appelée <i>jpa</i> qui utilise des transactions &quot;locales&quot;, c.a.d. non fournies par un conteneur EJB3. Ces transactions sont créées et gérées par Spring et font l&#x27;objet de configurations dans le fichier [spring-config.xml].
+  </li>
 </ul>
+
 <p><u><strong>spring-config.xml</strong></u></p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
 <span class="odt-code-line"><span style="color:#008080">&lt;?</span><span style="color:#3f7f7f">xml </span><span style="color:#7f007f">version</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;1.0&quot; </span><span style="color:#7f007f">encoding</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;UTF-8&quot;</span><span style="color:#008080">?&gt;</span></span>
@@ -1347,42 +1388,68 @@
 </code></pre></div>
 
 <ul>
-<li>lignes 2-5 : la balise racine &lt;beans&gt; du fichier de configuration. Nous ne commentons pas les divers attributs de cette balise. On prendra soin de faire un copier / coller parce que se tromper dans l&#x27;un de ces attributs provoque des erreurs parfois difficiles à comprendre.</li>
-<li>ligne 8 : le bean &quot;dao&quot; est une référence sur une instance de la classe [dao.Dao]. Une instance unique sera créée (singleton) et implémentera la couche [dao] de l&#x27;application.</li>
-<li>lignes 9-11 : instanciation de la couche [service]. Le bean &quot;service&quot; est une référence sur une instance de la classe [service.Service]. Une instance unique sera créée (singleton) et implémentera la couche [service] de l&#x27;application. Nous avons vu que la classe [service.Service] avait un champ privé [IDao dao]. Ce champ est initialisé ligne 10 par le bean &quot;dao&quot; défini ligne 8.</li>
-<li>au final les lignes 8-11 ont configuré les couches [dao] et [service]. Nous verrons plus loin à quel moment et comment elles seront instanciées.</li>
-<li>lignes 35-42 : une source de données est définie. Nous avons déjà rencontré la notion de source de données lors de l&#x27;étude des entités JPA avec Hibernate :</li>
+  <li>lignes 2-5 : la balise racine &lt;beans&gt; du fichier de configuration. Nous ne commentons pas les divers attributs de cette balise. On prendra soin de faire un copier / coller parce que se tromper dans l&#x27;un de ces attributs provoque des erreurs parfois difficiles à comprendre.
+  </li>
+  <li>ligne 8 : le bean &quot;dao&quot; est une référence sur une instance de la classe [dao.Dao]. Une instance unique sera créée (singleton) et implémentera la couche [dao] de l&#x27;application.
+  </li>
+  <li>lignes 9-11 : instanciation de la couche [service]. Le bean &quot;service&quot; est une référence sur une instance de la classe [service.Service]. Une instance unique sera créée (singleton) et implémentera la couche [service] de l&#x27;application. Nous avons vu que la classe [service.Service] avait un champ privé [IDao dao]. Ce champ est initialisé ligne 10 par le bean &quot;dao&quot; défini ligne 8.
+  </li>
+  <li>au final les lignes 8-11 ont configuré les couches [dao] et [service]. Nous verrons plus loin à quel moment et comment elles seront instanciées.
+  </li>
+  <li>lignes 35-42 : une source de données est définie. Nous avons déjà rencontré la notion de source de données lors de l&#x27;étude des entités JPA avec Hibernate :
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D3000000C2DD02A982.png" style="display:inline-block; margin:4px;width:16.339cm;height:2.566cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D3000000C2DD02A982.png" /></td></tr></table>
 
 <p>Ci-dessus, [c3p0] appelé &quot;pool de connexions&quot; aurait pu être appelé &quot;source de données&quot;. Une source de données fournit le service de &quot;pool de connexions&quot;. Avec Spring, nous utiliserons une source de données autre que [c3p0]. C&#x27;est [DBCP] du projet <em>Apache commons DBCP</em> [http://jakarta.apache.org/commons/dbcp/]. Les archives de [DBCP] ont été placées dans la bibliothèque utilisateur [jpa-spring] :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000000B900000078D27BF689.png" style="display:inline-block; margin:4px;width:3.431cm;height:2.221cm;" class="odt-zoomable" data-zoom-src="images/10000000000000B900000078D27BF689.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">&nbsp;</td></tr></table>
 
 <ul>
-<li>lignes 38-41 : pour créer des connexions avec la base de données cible, la source de données a besoin de connaître le pilote Jdbc utilisé (ligne 38), l&#x27;url de la base de données (ligne 39), l&#x27;utilisateur de la connexion et son mot de passe (lignes 40-41).</li>
-<li>lignes 14-32 : configurent la couche JPA</li>
-<li>lignes 14-15 : définissent un bean de type [EntityManagerFactory] capable de créer des objets de type [EntityManager] pour gérer les contextes de persistance. La classe instanciée [LocalContainerEntityManagerFactoryBean] est fournie par Spring. Elle a besoin d&#x27;un certain nombre de paramètres pour s&#x27;instancier, définis lignes 16-31.</li>
-<li>ligne 16 : la source de données à utiliser pour obtenir des connexions au SGBD. C&#x27;est la source [DBCP] définie aux lignes 35-42.</li>
-<li>lignes 17-27 : l&#x27;implémentation JPA à utiliser</li>
-<li>lignes 18-26 : définissent Hibernate (ligne 19) comme implémentation JPA à utiliser</li>
-<li>lignes 23-24 : le dialecte SQL qu&#x27;Hibernate doit utiliser avec le SGBD cible, ici MySQL5.</li>
-<li>ligne 25 : demande qu&#x27;au démarrage de l&#x27;application, la base de données soit générée (drop et create).</li>
-<li>lignes 28-31 : définissent un &quot;chargeur de classes&quot;. Je ne saurai pas expliquer de façon claire le rôle de ce bean utilisé par l&#x27;EntityManagerFactory de la couche JPA. Toujours est-il, qu&#x27;il implique de passer à la JVM qui exécute l&#x27;application, le nom d&#x27;une archive dont le contenu va gérer le chargement des classes au démarrage de l&#x27;application. Ici, cette archive est [spring-agent.jar] placée dans la bibliothèque utilisateur [jpa-spring] (voir plus haut). Nous verrons qu&#x27;Hibernate n&#x27;a pas besoin de cet agent mais que Toplink lui en a besoin.</li>
-<li>lignes 45-50 : définissent le gestionnaire de transactions à utiliser</li>
-<li>ligne 45 : indique que les transactions sont gérées avec des annotations Java (elles auraient pu être également déclarées dans <em>spring-config.xml</em>). C&#x27;est en particulier l&#x27;annotation <strong>@Transactional</strong> rencontrée dans la classe [Service] (ligne 6).</li>
-<li>lignes 46-50 : le gestionnaire de transactions</li>
-<li>ligne 47 : le gestionnaire de transactions est une classe fournie par Spring</li>
-<li>lignes 48-49 : le gestionnaire de transactions de Spring a besoin de connaître l&#x27;EntityManagerFactory qui gère la couche JPA. C&#x27;est celui défini aux lignes 14-32.</li>
-<li>lignes 57-58 : définissent la classe qui gère les annotations de persistance Spring trouvées dans le code Java, telles l&#x27;annotation <strong>@PersistenceContext</strong> de la classe [dao.Dao] (ligne 12).</li>
-<li>lignes 53-54 : définissent la classe Spring qui gère notamment l&#x27;annotation @<strong>Repository</strong> qui rend une classe ainsi annotée, éligible pour la traduction des exceptions natives du pilote Jdbc du SGBD en exceptions génériques Spring de type [DataAccessException]. Cette traduction encapsule l&#x27;exception Jdbc native dans un type [DataAccessException] ayant diverses sous-classes :</li>
+  <li>lignes 38-41 : pour créer des connexions avec la base de données cible, la source de données a besoin de connaître le pilote Jdbc utilisé (ligne 38), l&#x27;url de la base de données (ligne 39), l&#x27;utilisateur de la connexion et son mot de passe (lignes 40-41).
+  </li>
+  <li>lignes 14-32 : configurent la couche JPA
+  </li>
+  <li>lignes 14-15 : définissent un bean de type [EntityManagerFactory] capable de créer des objets de type [EntityManager] pour gérer les contextes de persistance. La classe instanciée [LocalContainerEntityManagerFactoryBean] est fournie par Spring. Elle a besoin d&#x27;un certain nombre de paramètres pour s&#x27;instancier, définis lignes 16-31.
+  </li>
+  <li>ligne 16 : la source de données à utiliser pour obtenir des connexions au SGBD. C&#x27;est la source [DBCP] définie aux lignes 35-42.
+  </li>
+  <li>lignes 17-27 : l&#x27;implémentation JPA à utiliser
+  </li>
+  <li>lignes 18-26 : définissent Hibernate (ligne 19) comme implémentation JPA à utiliser
+  </li>
+  <li>lignes 23-24 : le dialecte SQL qu&#x27;Hibernate doit utiliser avec le SGBD cible, ici MySQL5.
+  </li>
+  <li>ligne 25 : demande qu&#x27;au démarrage de l&#x27;application, la base de données soit générée (drop et create).
+  </li>
+  <li>lignes 28-31 : définissent un &quot;chargeur de classes&quot;. Je ne saurai pas expliquer de façon claire le rôle de ce bean utilisé par l&#x27;EntityManagerFactory de la couche JPA. Toujours est-il, qu&#x27;il implique de passer à la JVM qui exécute l&#x27;application, le nom d&#x27;une archive dont le contenu va gérer le chargement des classes au démarrage de l&#x27;application. Ici, cette archive est [spring-agent.jar] placée dans la bibliothèque utilisateur [jpa-spring] (voir plus haut). Nous verrons qu&#x27;Hibernate n&#x27;a pas besoin de cet agent mais que Toplink lui en a besoin.
+  </li>
+  <li>lignes 45-50 : définissent le gestionnaire de transactions à utiliser
+  </li>
+  <li>ligne 45 : indique que les transactions sont gérées avec des annotations Java (elles auraient pu être également déclarées dans <i>spring-config.xml</i>). C&#x27;est en particulier l&#x27;annotation <b>@Transactional</b> rencontrée dans la classe [Service] (ligne 6).
+  </li>
+  <li>lignes 46-50 : le gestionnaire de transactions
+  </li>
+  <li>ligne 47 : le gestionnaire de transactions est une classe fournie par Spring
+  </li>
+  <li>lignes 48-49 : le gestionnaire de transactions de Spring a besoin de connaître l&#x27;EntityManagerFactory qui gère la couche JPA. C&#x27;est celui défini aux lignes 14-32.
+  </li>
+  <li>lignes 57-58 : définissent la classe qui gère les annotations de persistance Spring trouvées dans le code Java, telles l&#x27;annotation <b>@PersistenceContext</b> de la classe [dao.Dao] (ligne 12).
+  </li>
+  <li>lignes 53-54 : définissent la classe Spring qui gère notamment l&#x27;annotation @<b>Repository</b> qui rend une classe ainsi annotée, éligible pour la traduction des exceptions natives du pilote Jdbc du SGBD en exceptions génériques Spring de type [DataAccessException]. Cette traduction encapsule l&#x27;exception Jdbc native dans un type [DataAccessException] ayant diverses sous-classes :
+  </li>
 </ul>
+
 <p><img src="images/10000000000001C00000009BC508DC35.png" style="width:8.301cm;height:2.87cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000001C00000009BC508DC35.png" /></p>
 <p>Cette traduction permet au programme client de gérer les exceptions de façon générique quelque soit le SGBD cible. Nous n&#x27;avons pas utilisé l&#x27;annotation @<strong>Repository</strong> dans notre code Java. Aussi les lignes 53-54 sont-elles inutiles. Nous les avons laissées par simple souci d&#x27;information.</p>
 <p>Nous en avons fini avec le fichier de configuration de Spring. Il est complexe et bien des choses restent obscures. Il a été tiré de la documentation Spring. Heureusement, son adaptation à diverses situations se résume souvent à deux modifications :</p>
 <ul>
-<li>celle de la base de données cible : lignes 38-41. Nous donnerons un exemple Oracle.</li>
-<li>celle de l&#x27;implémentation JPA : lignes 14-32. Nous donnerons un exemple Toplink.</li>
+  <li>celle de la base de données cible : lignes 38-41. Nous donnerons un exemple Oracle.
+  </li>
+  <li>celle de l&#x27;implémentation JPA : lignes 14-32. Nous donnerons un exemple Toplink.
+  </li>
 </ul>
+
 <p><a id="spring-jpa-personne-initdb"></a></p>
 <h3 id="316-programme-client-initdb">3.1.6. Programme client [InitDB]</h3>
 <p>Nous abordons l&#x27;écriture d&#x27;un premier client de l&#x27;architecture décrite précédemment :</p>
@@ -1439,22 +1506,32 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 12 : le fichier [spring-config.xml] est exploité pour créer un objet [<span style="color: #000000">ApplicationContext ctx] qui est une image mémoire du fichier. Les beans définis dans </span>[spring-config.xml] sont instanciés à cette occasion.</li>
-<li>ligne 14 : on demande au contexte d&#x27;application <strong>ctx</strong> une référence sur la couche [service]. On sait que celle-ci est représentée par un bean s&#x27;appelant &quot;service&quot;.</li>
-<li>ligne 16 : la base est vidée au moyen de la méthode <em>clean</em> des lignes 41-45 :<ul>
-<li>lignes 42-44 : on demande la liste de toutes les personnes au contexte de persistance et on boucle sur elles pour les supprimer une à une. On se rappelle peut-être que [spring-config.xml] précise que la base de données doit être générée au démarrage de l&#x27;application. Aussi dans notre cas, l&#x27;appel de la méthode <em>clean</em> est inutile puisqu&#x27;on part d&#x27;une base vide.</li>
+  <li>ligne 12 : le fichier [spring-config.xml] est exploité pour créer un objet [<span style="color: #000000">ApplicationContext ctx] qui est une image mémoire du fichier. Les beans définis dans </span>[spring-config.xml] sont instanciés à cette occasion.
+  </li>
+  <li>ligne 14 : on demande au contexte d&#x27;application <b>ctx</b> une référence sur la couche [service]. On sait que celle-ci est représentée par un bean s&#x27;appelant &quot;service&quot;.
+  </li>
+  <li>ligne 16 : la base est vidée au moyen de la méthode <i>clean</i> des lignes 41-45 :
+    <ul>
+      <li>lignes 42-44 : on demande la liste de toutes les personnes au contexte de persistance et on boucle sur elles pour les supprimer une à une. On se rappelle peut-être que [spring-config.xml] précise que la base de données doit être générée au démarrage de l&#x27;application. Aussi dans notre cas, l&#x27;appel de la méthode <i>clean</i> est inutile puisqu&#x27;on part d&#x27;une base vide.
+      </li>
+    </ul>
+  </li>
+  <li>ligne 18 : la méthode <i>fill</i> remplit la base. Celle-ci est définie lignes 32-38 :
+    <ul>
+      <li>lignes 34-35 : deux personnes sont créées
+      </li>
+      <li>ligne 37 : on demande à la couche [service] de les rendre persistantes.
+      </li>
+    </ul>
+  </li>
+  <li>ligne 20 : la méthode <i>dumpPersonnes</i> affiche les personnes persistantes. Elle est définie aux lignes 24-29
+    <ul>
+      <li>lignes 26-28 : on demande la liste de toutes les personnes persistantes à la couche [service] et on les affiche sur la console.
+      </li>
+    </ul>
+  </li>
 </ul>
-</li>
-<li>ligne 18 : la méthode <em>fill</em> remplit la base. Celle-ci est définie lignes 32-38 :<ul>
-<li>lignes 34-35 : deux personnes sont créées</li>
-<li>ligne 37 : on demande à la couche [service] de les rendre persistantes.</li>
-</ul>
-</li>
-<li>ligne 20 : la méthode <em>dumpPersonnes</em> affiche les personnes persistantes. Elle est définie aux lignes 24-29<ul>
-<li>lignes 26-28 : on demande la liste de toutes les personnes persistantes à la couche [service] et on les affiche sur la console.</li>
-</ul>
-</li>
-</ul>
+
 <p>L&#x27;exécution de [InitDB] donne le résultat suivant :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
@@ -1533,12 +1610,18 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 9 : l&#x27;annotation <strong>@BeforeClass</strong> désigne la méthode à exécuter pour initialiser la configuration nécessaire aux tests. Elle est exécutée avant que le premier test ne soit exécuté. L&#x27;annotation <strong>@AfterClass</strong> non utilisée ici, désigne la méthode à exécuter une fois que tous les tests ont été exécutés.</li>
-<li>lignes 10-17 : la méthode <strong>init</strong> annotée par <strong>@BeforeClass</strong> exploite le fichier de configuration de Spring pour instancier les différentes couches de l&#x27;application et avoir une référence sur la couche [service]. Tous les tests utilisent ensuite cette référence.</li>
-<li>ligne 19 : l&#x27;annotation <strong>@BeforeMethod</strong> désigne la méthode à exécuter avant chaque test. L&#x27;annotation <strong>@AfterMethod</strong>, non utilisée ici, désigne la méthode à exécuter après chaque test.</li>
-<li>lignes 20-25 : la méthode <strong>setUp</strong> annotée par <strong>@BeforeMethod</strong> vide la base (<em>clean</em> lignes 52-56) puis la remplit avec deux personnes (<em>fill</em> lignes 42-49).</li>
-<li>ligne 59 : l&#x27;annotation <strong>@Test</strong> désigne une méthode de test à exécuter. Nous décrivons maintenant ces tests.</li>
+  <li>ligne 9 : l&#x27;annotation <b>@BeforeClass</b> désigne la méthode à exécuter pour initialiser la configuration nécessaire aux tests. Elle est exécutée avant que le premier test ne soit exécuté. L&#x27;annotation <b>@AfterClass</b> non utilisée ici, désigne la méthode à exécuter une fois que tous les tests ont été exécutés.
+  </li>
+  <li>lignes 10-17 : la méthode <b>init</b> annotée par <b>@BeforeClass</b> exploite le fichier de configuration de Spring pour instancier les différentes couches de l&#x27;application et avoir une référence sur la couche [service]. Tous les tests utilisent ensuite cette référence.
+  </li>
+  <li>ligne 19 : l&#x27;annotation <b>@BeforeMethod</b> désigne la méthode à exécuter avant chaque test. L&#x27;annotation <b>@AfterMethod</b>, non utilisée ici, désigne la méthode à exécuter après chaque test.
+  </li>
+  <li>lignes 20-25 : la méthode <b>setUp</b> annotée par <b>@BeforeMethod</b> vide la base (<i>clean</i> lignes 52-56) puis la remplit avec deux personnes (<i>fill</i> lignes 42-49).
+  </li>
+  <li>ligne 59 : l&#x27;annotation <b>@Test</b> désigne une méthode de test à exécuter. Nous décrivons maintenant ces tests.
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line"><span style="color:#646464">@Test</span><span style="color:#000000">()</span></span>
 <span class="odt-code-line"><span style="color:#000000">    </span><span style="font-weight:bold;color:#7f0055">public</span><span style="color:#000000"> </span><span style="font-weight:bold;color:#7f0055">void</span><span style="color:#000000"> test01() {</span></span>
@@ -1576,16 +1659,26 @@
 </code></pre></div>
 
 <ul>
-<li>lignes 2-8 : le test 01. Il faut se rappeler qu&#x27;au départ de chaque test, la base contient deux personnes de noms respectifs <strong>p1</strong> et <strong>p2</strong>.</li>
-<li>ligne 6 : on demande la liste des personnes</li>
-<li>lignes 7 : on vérifie que le nombre de personnes de la liste obtenue est 2</li>
-<li>ligne 14 : on demande la liste des personnes ayant un nom commençant par <strong>p1</strong></li>
-<li>on vérifie que la liste obtenue n&#x27;a qu&#x27;un élément (ligne 15) et que le prénom de l&#x27;unique personne obtenue est &quot;Paul&quot; (ligne 17)</li>
-<li>ligne 24 : on crée une personne nommée <strong>p3</strong></li>
-<li>ligne 25 : on la persiste</li>
-<li>ligne 28 : on la redemande au contexte de persistance pour vérification</li>
-<li>ligne 32 : on vérifie que la personne obtenue a bien le nom <strong>p3</strong>.</li>
+  <li>lignes 2-8 : le test 01. Il faut se rappeler qu&#x27;au départ de chaque test, la base contient deux personnes de noms respectifs <b>p1</b> et <b>p2</b>.
+  </li>
+  <li>ligne 6 : on demande la liste des personnes
+  </li>
+  <li>lignes 7 : on vérifie que le nombre de personnes de la liste obtenue est 2
+  </li>
+  <li>ligne 14 : on demande la liste des personnes ayant un nom commençant par <b>p1</b>
+  </li>
+  <li>on vérifie que la liste obtenue n&#x27;a qu&#x27;un élément (ligne 15) et que le prénom de l&#x27;unique personne obtenue est &quot;Paul&quot; (ligne 17)
+  </li>
+  <li>ligne 24 : on crée une personne nommée <b>p3</b>
+  </li>
+  <li>ligne 25 : on la persiste
+  </li>
+  <li>ligne 28 : on la redemande au contexte de persistance pour vérification
+  </li>
+  <li>ligne 32 : on vérifie que la personne obtenue a bien le nom <b>p3</b>.
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line"><span style="color:#646464">@Test</span><span style="color:#000000">()</span></span>
 <span class="odt-code-line"><span style="color:#000000">    </span><span style="font-weight:bold;color:#7f0055">public</span><span style="color:#000000"> </span><span style="font-weight:bold;color:#7f0055">void</span><span style="color:#000000"> test04() </span><span style="font-weight:bold;color:#7f0055">throws</span><span style="color:#000000"> ParseException {</span></span>
@@ -1613,14 +1706,22 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 5 : on demande la personne <strong>p1</strong></li>
-<li>ligne 10 : on vérifie son nom</li>
-<li>ligne 11 : on note son n° de version</li>
-<li>ligne 13 : on modifie son prénom</li>
-<li>ligne 15 : on sauvegarde la modification</li>
-<li>ligne 17 : on redemande la personne <strong>p1</strong></li>
-<li>ligne 21 : on vérifie que son n° de version a augmenté de 1</li>
+  <li>ligne 5 : on demande la personne <b>p1</b>
+  </li>
+  <li>ligne 10 : on vérifie son nom
+  </li>
+  <li>ligne 11 : on note son n° de version
+  </li>
+  <li>ligne 13 : on modifie son prénom
+  </li>
+  <li>ligne 15 : on sauvegarde la modification
+  </li>
+  <li>ligne 17 : on redemande la personne <b>p1</b>
+  </li>
+  <li>ligne 21 : on vérifie que son n° de version a augmenté de 1
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line"><span style="color:#646464">@Test</span><span style="color:#000000">()</span></span>
 <span class="odt-code-line"><span style="color:#000000">    </span><span style="font-weight:bold;color:#7f0055">public</span><span style="color:#000000"> </span><span style="font-weight:bold;color:#7f0055">void</span><span style="color:#000000"> test05() {</span></span>
@@ -1644,12 +1745,18 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 5 : on demande la personne <strong>p2</strong></li>
-<li>ligne 10 : on vérifie son nom</li>
-<li>ligne 12 : on la supprime</li>
-<li>ligne 14 : on la redemande</li>
-<li>ligne 16 : on vérifie qu&#x27;on ne l&#x27;a pas trouvée</li>
+  <li>ligne 5 : on demande la personne <b>p2</b>
+  </li>
+  <li>ligne 10 : on vérifie son nom
+  </li>
+  <li>ligne 12 : on la supprime
+  </li>
+  <li>ligne 14 : on la redemande
+  </li>
+  <li>ligne 16 : on vérifie qu&#x27;on ne l&#x27;a pas trouvée
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-text">
 <span class="odt-code-line"><span style="color:#646464">@Test</span><span style="color:#000000">()</span></span>
 <span class="odt-code-line"><span style="color:#000000">    </span><span style="font-weight:bold;color:#7f0055">public</span><span style="color:#000000"> </span><span style="font-weight:bold;color:#7f0055">void</span><span style="color:#000000"> test06() </span><span style="font-weight:bold;color:#7f0055">throws</span><span style="color:#000000"> ParseException {</span></span>
@@ -1678,18 +1785,24 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 5 : on crée un tableau de trois personnes dont deux ont le même nom &quot;p4&quot;. Cela enfreint la règle d&#x27;unicité du nom de l&#x27;@Entity <em>Personne</em> :</li>
+  <li>ligne 5 : on crée un tableau de trois personnes dont deux ont le même nom &quot;p4&quot;. Cela enfreint la règle d&#x27;unicité du nom de l&#x27;@Entity <i>Personne</i> :
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-text">
 <span class="odt-code-line"><span style="color:#000000">    </span><span style="color:#646464">@Column</span><span style="color:#000000">(name = </span><span style="color:#2a00ff">&quot;NOM&quot;</span><span style="color:#000000">, length = 30, nullable = </span><span style="font-weight:bold;color:#7f0055">false</span><span style="color:#000000">, unique = </span><span style="font-weight:bold;color:#7f0055">true</span><span style="color:#000000">)</span></span>
 <span class="odt-code-line"><span style="font-weight:bold;color:#7f0055">private</span><span style="color:#000000"> String </span><span style="color:#0000c0">nom</span><span style="color:#000000">;</span></span>
 </code></pre></div>
 
 <ul>
-<li>ligne 11 : le tableau des trois personnes est mis dans le contexte de persistance. L&#x27;ajout de la seconde personne <strong>p4</strong> devrait échouer. Comme la méthode [saveArray] se déroule dans une transaction, toutes les insertions qui ont pu être faites avant seront annulées. Au final, aucun ajout ne sera fait.</li>
-<li>ligne 18 : on vérifie que [saveArray] a bien lancé une exception</li>
-<li>lignes 20-21 : on vérifie que la personne <strong>p3</strong> qui aurait pu être ajoutée ne l&#x27;a pas été.</li>
+  <li>ligne 11 : le tableau des trois personnes est mis dans le contexte de persistance. L&#x27;ajout de la seconde personne <b>p4</b> devrait échouer. Comme la méthode [saveArray] se déroule dans une transaction, toutes les insertions qui ont pu être faites avant seront annulées. Au final, aucun ajout ne sera fait.
+  </li>
+  <li>ligne 18 : on vérifie que [saveArray] a bien lancé une exception
+  </li>
+  <li>lignes 20-21 : on vérifie que la personne <b>p3</b> qui aurait pu être ajoutée ne l&#x27;a pas été.
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line"><span style="color:#646464">@Test</span><span style="color:#000000">()</span></span>
 <span class="odt-code-line"><span style="color:#000000">    </span><span style="font-weight:bold;color:#7f0055">public</span><span style="color:#000000"> </span><span style="font-weight:bold;color:#7f0055">void</span><span style="color:#000000"> test07() {</span></span>
@@ -1731,14 +1844,22 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 6 : on demande la personne <strong>p1</strong></li>
-<li>ligne 12 : on augmente de 1 son nombre d&#x27;enfants</li>
-<li>ligne 14 : on met à jour la personne <strong>p1</strong> dans le contexte de persistance. La méthode [updateOne] rend la nouvelle version <strong>newp1</strong> persistante de <strong>p1</strong>. Elle diffère de <strong>p1</strong> par son n° de version qui a du être incrémenté.</li>
-<li>ligne 15 : on vérifie le nombre d&#x27;enfants de <strong>newp1</strong>.</li>
-<li>ligne 21 : on redemande une mise à jour de la personne p1 à partir de l&#x27;ancienne version <strong>p1</strong>. On doit avoir une exception car <strong>p1</strong> n&#x27;est pas la dernière version de la personne p1. Cette dernière version est <strong>newp1</strong>.</li>
-<li>ligne 23 : on vérifie que l&#x27;erreur a bien eu lieu</li>
-<li>lignes 27-35 : on vérifie que si une mise à jour est faite à partir de la dernière version <strong>newp1</strong>, alors les choses se passent bien.</li>
+  <li>ligne 6 : on demande la personne <b>p1</b>
+  </li>
+  <li>ligne 12 : on augmente de 1 son nombre d&#x27;enfants
+  </li>
+  <li>ligne 14 : on met à jour la personne <b>p1</b> dans le contexte de persistance. La méthode [updateOne] rend la nouvelle version <b>newp1</b> persistante de <b>p1</b>. Elle diffère de <b>p1</b> par son n° de version qui a du être incrémenté.
+  </li>
+  <li>ligne 15 : on vérifie le nombre d&#x27;enfants de <b>newp1</b>.
+  </li>
+  <li>ligne 21 : on redemande une mise à jour de la personne p1 à partir de l&#x27;ancienne version <b>p1</b>. On doit avoir une exception car <b>p1</b> n&#x27;est pas la dernière version de la personne p1. Cette dernière version est <b>newp1</b>.
+  </li>
+  <li>ligne 23 : on vérifie que l&#x27;erreur a bien eu lieu
+  </li>
+  <li>lignes 27-35 : on vérifie que si une mise à jour est faite à partir de la dernière version <b>newp1</b>, alors les choses se passent bien.
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line"><span style="color:#646464">@Test</span><span style="color:#000000">()</span></span>
 <span class="odt-code-line"><span style="color:#000000">    </span><span style="font-weight:bold;color:#7f0055">public</span><span style="color:#000000"> </span><span style="font-weight:bold;color:#7f0055">void</span><span style="color:#000000"> test08() {</span></span>
@@ -1771,8 +1892,10 @@
 </code></pre></div>
 
 <ul>
-<li>le test 8 est similaire au test 6 : il vérifie le <em>rollback</em> sur un <strong>updateArray</strong> opérant sur un tableau de deux personnes où la deuxième n&#x27;a pas été initialisée correctement. D&#x27;un point de vue JPA, l&#x27;opération <strong>merge</strong> sur la seconde personne qui n&#x27;existe pas déjà va générer un ordre SQL <em>insert</em> qui va échouer à cause des contraintes <em>nullable=false</em> qui existe sur certains des champs de l&#x27;entité <em>Personne</em>.</li>
+  <li>le test 8 est similaire au test 6 : il vérifie le <i>rollback</i> sur un <b>updateArray</b> opérant sur un tableau de deux personnes où la deuxième n&#x27;a pas été initialisée correctement. D&#x27;un point de vue JPA, l&#x27;opération <b>merge</b> sur la seconde personne qui n&#x27;existe pas déjà va générer un ordre SQL <i>insert</i> qui va échouer à cause des contraintes <i>nullable=false</i> qui existe sur certains des champs de l&#x27;entité <i>Personne</i>.
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line"><span style="color:#646464">@Test</span><span style="color:#000000">()</span></span>
 <span class="odt-code-line"><span style="color:#000000">    </span><span style="font-weight:bold;color:#7f0055">public</span><span style="color:#000000"> </span><span style="font-weight:bold;color:#7f0055">void</span><span style="color:#000000"> test09() {</span></span>
@@ -1805,8 +1928,10 @@
 </code></pre></div>
 
 <ul>
-<li>le test 9 est similaire au précédent : il vérifie le <em>rollback</em> sur un <strong>deleteArray</strong> opérant sur un tableau de deux personnes où la deuxième n&#x27;existe pas. Or dans ce cas, la méthode [deleteOne] de la couche [dao] lance une exception.</li>
+  <li>le test 9 est similaire au précédent : il vérifie le <i>rollback</i> sur un <b>deleteArray</b> opérant sur un tableau de deux personnes où la deuxième n&#x27;existe pas. Or dans ce cas, la méthode [deleteOne] de la couche [dao] lance une exception.
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-javascript">
 <span class="odt-code-line">// optimistic locking - accès multi-threads</span>
 <span class="odt-code-line"><span style="color:#000000">    </span><span style="color:#646464">@Test</span><span style="color:#000000">()</span></span>
@@ -1840,15 +1965,24 @@
 </code></pre></div>
 
 <ul>
-<li>l&#x27;idée du test 10 est de lancer N threads (ligne 9) pour incrémenter en parallèle le nombre d&#x27;enfants d&#x27;une personne. On veut vérifier que le système du n° de version résiste bien à ce cas de figure. Il a été créé pour cela.</li>
-<li>lignes 5-6 : une personne nommée <strong>p3</strong> est créée puis persistée. Elle a 0 enfant au départ.</li>
-<li>ligne 7 : on note son identifiant.</li>
-<li>lignes 9-14 : on lance N threads en parallèle, tous chargés d&#x27;incrémenter de 1 le nombre d&#x27;enfants de <strong>p3</strong>.</li>
-<li>lignes 16-18 : on attend la fin de tous les threads</li>
-<li>ligne 20 : on demande à voir la personne <strong>p3</strong></li>
-<li>ligne 22 : on vérifie qu&#x27;elle a maintenant N enfants</li>
-<li>ligne 24 : la personne <strong>p3</strong> est supprimée.</li>
+  <li>l&#x27;idée du test 10 est de lancer N threads (ligne 9) pour incrémenter en parallèle le nombre d&#x27;enfants d&#x27;une personne. On veut vérifier que le système du n° de version résiste bien à ce cas de figure. Il a été créé pour cela.
+  </li>
+  <li>lignes 5-6 : une personne nommée <b>p3</b> est créée puis persistée. Elle a 0 enfant au départ.
+  </li>
+  <li>ligne 7 : on note son identifiant.
+  </li>
+  <li>lignes 9-14 : on lance N threads en parallèle, tous chargés d&#x27;incrémenter de 1 le nombre d&#x27;enfants de <b>p3</b>.
+  </li>
+  <li>lignes 16-18 : on attend la fin de tous les threads
+  </li>
+  <li>ligne 20 : on demande à voir la personne <b>p3</b>
+  </li>
+  <li>ligne 22 : on vérifie qu&#x27;elle a maintenant N enfants
+  </li>
+  <li>ligne 24 : la personne <b>p3</b> est supprimée.
+  </li>
 </ul>
+
 <p>Le thread [ThreadMajEnfants] est le suivant :</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line"><span style="font-weight:bold;color:#7f0055">package</span><span style="color:#000000"> tests;</span></span>
@@ -1926,17 +2060,28 @@
 </code></pre></div>
 
 <ul>
-<li>lignes 15-19 : le constructeur mémorise les informations dont il a besoin pour travailler : son nom (ligne 16), la référence sur la couche [service] qu&#x27;il doit utiliser (ligne 17) et l&#x27;identifiant de la personne <strong>p</strong> dont il doit incrémenter le nombre d&#x27;enfants (ligne 18).</li>
-<li>lignes 22-66 : la méthode [run] exécutée par tous les threads en parallèle.</li>
-<li>ligne 29 : le thread essaie de façon répétée d&#x27;incrémenter le nombre d&#x27;enfants de la personne <strong>p</strong>. Il ne s&#x27;arrête que lorsqu&#x27;il a réussi.</li>
-<li>ligne 31 : la personne <strong>p</strong> est demandée</li>
-<li>ligne 36 : son nombre d&#x27;enfants est incrémenté en mémoire</li>
-<li>lignes 38-47 : on fait une pause de 10 ms. Cela va permettre à d&#x27;autres threads d&#x27;obtenir la même version de la personne <strong>p</strong>. On aura donc au même moment plusieurs threads détenant la même version de la personne <strong>p</strong> et voulant la modifier. C&#x27;est ce qui est désiré.</li>
-<li>ligne 52 : une fois la pause terminée, le thread demande à la couche [service] de persister la modification. On sait qu&#x27;il y aura de temps en temps des exceptions, aussi a-t-on entouré l&#x27;opération d&#x27;un try / catch.</li>
-<li>ligne 55 : les tests montrent qu&#x27;on a des exceptions de type [<span style="color: #000000">javax.persistence.OptimisticLockException]. C&#x27;est normal : c&#x27;est l&#x27;exception lancée par la couche JPA lorsqu&#x27;un thread veut modifier la personne </span><strong><span style="color: #000000">p</span></strong><span style="color: #000000"> sans avoir la dernière version de celle-ci. Cette exception est ignorée pour laisser le thread tenter de nouveau l&#x27;opération jusqu&#x27;à ce qu&#x27;il y arrive.</span></li>
-<li><span style="color: #000000">ligne 57 : les tests montrent qu&#x27;on a également des exceptions de type [org.springframework.transaction.UnexpectedRollbackException]. C&#x27;est ennuyeux et inattendu. Je n&#x27;ai pas d&#x27;explications à donner. Nous voilà dépendants de Spring alors qu&#x27;on aurait voulu éviter cela. Cela signifie que si on exécute notre application dans JBoss Ejb3 par exemple, le code du thread devra être changé. L&#x27;exception Spring est ici aussi ignorée pour laisser le thread tenter de nouveau l&#x27;opération d&#x27;incrémentation.</span></li>
-<li><span style="color: #000000">ligne 59 : les autres types d&#x27;exception sont remontés à l&#x27;application.</span></li>
+  <li>lignes 15-19 : le constructeur mémorise les informations dont il a besoin pour travailler : son nom (ligne 16), la référence sur la couche [service] qu&#x27;il doit utiliser (ligne 17) et l&#x27;identifiant de la personne <b>p</b> dont il doit incrémenter le nombre d&#x27;enfants (ligne 18).
+  </li>
+  <li>lignes 22-66 : la méthode [run] exécutée par tous les threads en parallèle.
+  </li>
+  <li>ligne 29 : le thread essaie de façon répétée d&#x27;incrémenter le nombre d&#x27;enfants de la personne <b>p</b>. Il ne s&#x27;arrête que lorsqu&#x27;il a réussi.
+  </li>
+  <li>ligne 31 : la personne <b>p</b> est demandée
+  </li>
+  <li>ligne 36 : son nombre d&#x27;enfants est incrémenté en mémoire
+  </li>
+  <li>lignes 38-47 : on fait une pause de 10 ms. Cela va permettre à d&#x27;autres threads d&#x27;obtenir la même version de la personne <b>p</b>. On aura donc au même moment plusieurs threads détenant la même version de la personne <b>p</b> et voulant la modifier. C&#x27;est ce qui est désiré.
+  </li>
+  <li>ligne 52 : une fois la pause terminée, le thread demande à la couche [service] de persister la modification. On sait qu&#x27;il y aura de temps en temps des exceptions, aussi a-t-on entouré l&#x27;opération d&#x27;un try / catch.
+  </li>
+  <li>ligne 55 : les tests montrent qu&#x27;on a des exceptions de type [<span style="color: #000000">javax.persistence.OptimisticLockException]. C&#x27;est normal : c&#x27;est l&#x27;exception lancée par la couche JPA lorsqu&#x27;un thread veut modifier la personne </span><b><span style="color: #000000">p</span></b><span style="color: #000000"> sans avoir la dernière version de celle-ci. Cette exception est ignorée pour laisser le thread tenter de nouveau l&#x27;opération jusqu&#x27;à ce qu&#x27;il y arrive.</span>
+  </li>
+  <li><span style="color: #000000">ligne 57 : les tests montrent qu&#x27;on a également des exceptions de type [org.springframework.transaction.UnexpectedRollbackException]. C&#x27;est ennuyeux et inattendu. Je n&#x27;ai pas d&#x27;explications à donner. Nous voilà dépendants de Spring alors qu&#x27;on aurait voulu éviter cela. Cela signifie que si on exécute notre application dans JBoss Ejb3 par exemple, le code du thread devra être changé. L&#x27;exception Spring est ici aussi ignorée pour laisser le thread tenter de nouveau l&#x27;opération d&#x27;incrémentation.</span>
+  </li>
+  <li><span style="color: #000000">ligne 59 : les autres types d&#x27;exception sont remontés à l&#x27;application.</span>
+  </li>
 </ul>
+
 <p><span style="color: #000000">Lorsque [TestNG] est exécuté on obtient les résultats suivants :</span></p>
 <p><img src="images/1000000000000129000000F26B65DA0A.png" style="width:5.5cm;height:4.48cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/1000000000000129000000F26B65DA0A.png" /></p>
 <p>Les 10 tests ont été passés avec succès.</p>
@@ -1950,8 +2095,10 @@
 </code></pre></div>
 
 <ul>
-<li><span style="color: #000000">ligne 4 : un objet [EntityManager] est injecté dans le champ <strong>em</strong> grâce à l&#x27;annotation JPA <strong>@PersistenceContext</strong>. La couche [dao] est instanciée une unique fois. C&#x27;est un singleton utilisé par tous les threads utilisant la couche JPA. Ainsi donc l&#x27;EntityManager <strong>em</strong> est-il commun à tous les threads. On peut le vérifier en affichant la valeur de <strong>em</strong> dans la méthode [updateOne] utilisée par les threads [ThreadMajEnfants] : on a la même valeur pour tous les threads.</span></li>
+  <li><span style="color: #000000">ligne 4 : un objet [EntityManager] est injecté dans le champ <b>em</b> grâce à l&#x27;annotation JPA <b>@PersistenceContext</b>. La couche [dao] est instanciée une unique fois. C&#x27;est un singleton utilisé par tous les threads utilisant la couche JPA. Ainsi donc l&#x27;EntityManager <b>em</b> est-il commun à tous les threads. On peut le vérifier en affichant la valeur de <b>em</b> dans la méthode [updateOne] utilisée par les threads [ThreadMajEnfants] : on a la même valeur pour tous les threads.</span>
+  </li>
 </ul>
+
 <p><span style="color: #000000">Du coup, on peut se demander si les objets persistants des différents threads manipulés par l&#x27;EntityManager <strong>em</strong> qui est le même pour tous les threads, ne vont pas se mélanger et créer des conflits entre-eux. Un exemple de ce qui pourrait se passer se trouve dans [ThreadMajEnfants] :</span></p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-text">
 <span class="odt-code-line"><span style="color:#000000">        </span><span style="font-weight:bold;color:#7f0055">while</span><span style="color:#000000"> (!fini) {</span></span>
@@ -1976,16 +2123,23 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 3 : un thread T1 récupère la personne <strong>p</strong></li>
-<li>ligne 8 : elle incrémente le nombre d&#x27;enfants de <strong>p</strong></li>
-<li>ligne 14 : le thread T1 fait une pause</li>
+  <li>ligne 3 : un thread T1 récupère la personne <b>p</b>
+  </li>
+  <li>ligne 8 : elle incrémente le nombre d&#x27;enfants de <b>p</b>
+  </li>
+  <li>ligne 14 : le thread T1 fait une pause
+  </li>
 </ul>
+
 <p>Un thread T2 prend la main et exécute lui aussi la ligne 3 : il demande la même personne <strong>p</strong> que T1. Si le contexte de persistance des threads était le même, la personne <strong>p</strong> étant déjà dans le contexte grâce à T1 devrait être rendue à T2. En effet, la méthode [getOne] utilise la méthode <em>[EntityManager].find</em> de l&#x27;API JPA et cette méthode ne fait un accès à la base que si l&#x27;objet demandé ne fait pas partie du contexte de persistance, sinon elle rend l&#x27;objet du contexte de persistance. Si tel était le cas, T1 et T2 détiendraient la même personne <strong>p</strong>. T2 incrémenterait alors le nombre d&#x27;enfants de <strong>p</strong> de 1 de nouveau (ligne 8). Si l&#x27;un des threads réussit sa mise à jour après la pause, alors le nombre d&#x27;enfants de <strong>p</strong> aura été augmenté de 2 et non de 1 comme prévu. On pourrait alors s&#x27;attendre à ce que les N threads passent le nombre d&#x27;enfants non pas à N mais à davantage. Or ce n&#x27;est pas le cas. On peut alors conclure que T1 et T2 n&#x27;ont pas la même référence <strong>p</strong>. On le vérifie en faisant afficher l&#x27;adresse de <strong>p</strong> par les threads : elle est différente pour chacun d&#x27;eux.</p>
 <p>Il semblerait donc que les threads :</p>
 <ul>
-<li>partagent le même gestionnaire de contexte de persistance (EntityManager)</li>
-<li>mais ont chacun un contexte de persistance qui leur est propre.</li>
+  <li>partagent le même gestionnaire de contexte de persistance (EntityManager)
+  </li>
+  <li>mais ont chacun un contexte de persistance qui leur est propre.
+  </li>
 </ul>
+
 <p>Ce ne sont que des suppositions et l&#x27;avis d&#x27;un expert serait utile ici.</p>
 <h3 id="318-changer-de-sgbd">3.1.8. Changer de SGBD</h3>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000453000000EBB7A3CD5E.png" style="display:inline-block; margin:4px;width:14.646cm;height:3.11cm;" class="odt-zoomable" data-zoom-src="images/1000000000000453000000EBB7A3CD5E.png" /></td></tr></table>
@@ -2028,9 +2182,12 @@
 
 <p>Seules certaines lignes changent vis à vis du même fichier utilisé précédemment pour MySQL5 :</p>
 <ul>
-<li>ligne 14 : le dialecte SQL qu&#x27;Hibernate doit utiliser</li>
-<li>lignes 25-28 : les caractéristiques de la connexion Jdbc avec le SGBD</li>
+  <li>ligne 14 : le dialecte SQL qu&#x27;Hibernate doit utiliser
+  </li>
+  <li>lignes 25-28 : les caractéristiques de la connexion Jdbc avec le SGBD
+  </li>
 </ul>
+
 <p>Le lecteur est invité à répéter les tests décrits pour MySQL5 avec d&#x27;autres SGBD.</p>
 <p><a id="spring-agent-toplink"></a></p>
 <h3 id="319-changer-dimplementation-jpa">3.1.9. Changer d&#x27;implémentation JPA</h3>
@@ -2041,9 +2198,12 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004A900000154BC1E6393.png" style="display:inline-block; margin:4px;width:15.783cm;height:4.498cm;" class="odt-zoomable" data-zoom-src="images/10000000000004A900000154BC1E6393.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le projet Eclipse. Il est identique au précédent. Seuls changent le fichier de configuration [spring-config.xml] [2] et la bibliothèque [jpa-toplink] qui remplace la bibliothèque [jpa-hibernate].</li>
-<li>en [3] : le dossier des exemples de ce tutoriel. En [4] le projet Eclipse à importer.</li>
+  <li>en [1] : le projet Eclipse. Il est identique au précédent. Seuls changent le fichier de configuration [spring-config.xml] [2] et la bibliothèque [jpa-toplink] qui remplace la bibliothèque [jpa-hibernate].
+  </li>
+  <li>en [3] : le dossier des exemples de ce tutoriel. En [4] le projet Eclipse à importer.
+  </li>
 </ul>
+
 <p>Le fichier de configuration [spring-config.xml] pour Toplink devient le suivant :</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
 <span class="odt-code-line"><span style="color:#008080">&lt;?</span><span style="color:#3f7f7f">xml </span><span style="color:#7f007f">version</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;1.0&quot; </span><span style="color:#7f007f">encoding</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;UTF-8&quot;</span><span style="color:#008080">?&gt;</span></span>
@@ -2102,9 +2262,12 @@
 
 <p>Peu de lignes doivent être changées pour passer d&#x27;Hibernate à Toplink :</p>
 <ul>
-<li>ligne 19 : l&#x27;implémentation JPA est désormais faite par Toplink</li>
-<li>ligne 23 : la propriété [databasePlatform] a une autre valeur qu&#x27;avec Hibernate : le nom d&#x27;une classe propre à Toplink. Où trouver ce nom a été expliqué au paragraphe <a href="les-entites-jpa.html#conf-jpa-toplink">2.1.15.2</a>.</li>
+  <li>ligne 19 : l&#x27;implémentation JPA est désormais faite par Toplink
+  </li>
+  <li>ligne 23 : la propriété [databasePlatform] a une autre valeur qu&#x27;avec Hibernate : le nom d&#x27;une classe propre à Toplink. Où trouver ce nom a été expliqué au paragraphe <a href="les-entites-jpa.html#conf-jpa-toplink">2.1.15.2</a>.
+  </li>
 </ul>
+
 <p>C&#x27;est tout. On notera la facilité avec laquelle on peut changer de SGBD ou d&#x27;implémentation JPA avec Spring.</p>
 <p>On n&#x27;a quand même pas tout a fait fini. Lorsqu&#x27;on exécute [InitDB] par exemple, on a une exception pas simple à comprendre :</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
@@ -2136,46 +2299,74 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000003DC000001505A01A3F6.png" style="display:inline-block; margin:4px;width:13.07cm;height:4.445cm;" class="odt-zoomable" data-zoom-src="images/10000000000003DC000001505A01A3F6.png" /></td></tr></table>
 
 <ul>
-<li>le fichier [spring-agent.jar] est dans le dossier &lt;exemples&gt;/lib [1]. Il est fourni avec la distribution Spring 2.x (cf paragraphe <a href="annexes.html#spring2">5.11</a>).</li>
-<li>en [3], on crée une configuration d&#x27;exécution [Run/Run...]</li>
-<li>en [4], on  crée une configuration d&#x27;exécution Java (il y a diverses sortes de configurations d&#x27;exécution)</li>
+  <li>le fichier [spring-agent.jar] est dans le dossier &lt;exemples&gt;/lib [1]. Il est fourni avec la distribution Spring 2.x (cf paragraphe <a href="annexes.html#spring2">5.11</a>).
+  </li>
+  <li>en [3], on crée une configuration d&#x27;exécution [Run/Run...]
+  </li>
+  <li>en [4], on  crée une configuration d&#x27;exécution Java (il y a diverses sortes de configurations d&#x27;exécution)
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000055100000166F91F71CC.png" style="display:inline-block; margin:4px;width:17.997cm;height:4.733cm;" class="odt-zoomable" data-zoom-src="images/100000000000055100000166F91F71CC.png" /></td></tr></table>
 
 <ul>
-<li>en [5], on choisit l&#x27;onglet [Main]</li>
-<li>en [6], on donne un nom à la configuration</li>
-<li>en [7], on nomme le projet Eclipse concerné par cette configuration (utiliser le bouton Browse)</li>
-<li>en [8], on nomme la classe Java qui contient la méthode [main] (utiliser le bouton Browse)</li>
-<li>en [9], on passe dans l&#x27;onglet [Arguments]. Dans celui-ci on peut préciser deux types d&#x27;arguments :<ul>
-<li>en [9], ceux passés à la méthode [main]</li>
-<li>en [10], ceux passés à la JVM qui va exécuter le code. L&#x27;agent Spring est défini à l&#x27;aide du paramètre <strong>-javaagent:valeur</strong> de la JVM. La valeur est le chemin du fichier [spring-agent.jar].</li>
+  <li>en [5], on choisit l&#x27;onglet [Main]
+  </li>
+  <li>en [6], on donne un nom à la configuration
+  </li>
+  <li>en [7], on nomme le projet Eclipse concerné par cette configuration (utiliser le bouton Browse)
+  </li>
+  <li>en [8], on nomme la classe Java qui contient la méthode [main] (utiliser le bouton Browse)
+  </li>
+  <li>en [9], on passe dans l&#x27;onglet [Arguments]. Dans celui-ci on peut préciser deux types d&#x27;arguments :
+    <ul>
+      <li>en [9], ceux passés à la méthode [main]
+      </li>
+      <li>en [10], ceux passés à la JVM qui va exécuter le code. L&#x27;agent Spring est défini à l&#x27;aide du paramètre <b>-javaagent:valeur</b> de la JVM. La valeur est le chemin du fichier [spring-agent.jar].
+      </li>
+    </ul>
+  </li>
+  <li>en [11] : on valide la configuration
+  </li>
+  <li>en [12] : la configuration est créée
+  </li>
+  <li>en [13] : on l&#x27;exécute
+  </li>
 </ul>
-</li>
-<li>en [11] : on valide la configuration</li>
-<li>en [12] : la configuration est créée</li>
-<li>en [13] : on l&#x27;exécute</li>
-</ul>
+
 <p>Ceci fait, [InitDB] s&#x27;exécute et donne les mêmes résultats qu&#x27;avec Hibernate. Pour [TestNG], il faut procéder de la même façon :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004230000010472DFD330.png" style="display:inline-block; margin:4px;width:14.011cm;height:3.44cm;" class="odt-zoomable" data-zoom-src="images/10000000000004230000010472DFD330.png" /></td></tr></table>
 
 <ul>
-<li>en [1], on crée une configuration d&#x27;exécution [Run/Run...]</li>
-<li>en [2], on  crée une configuration d&#x27;exécution <strong>TestNG</strong></li>
-<li>en [3], on choisit l&#x27;onglet [Test]</li>
-<li>en [4], on donne un nom à la configuration</li>
-<li>en [5], on nomme le projet Eclipse concerné par cette configuration (utiliser le bouton Browse)</li>
-<li>en [6], on nomme la classe des tests (utiliser le bouton Browse)</li>
+  <li>en [1], on crée une configuration d&#x27;exécution [Run/Run...]
+  </li>
+  <li>en [2], on  crée une configuration d&#x27;exécution <b>TestNG</b>
+  </li>
+  <li>en [3], on choisit l&#x27;onglet [Test]
+  </li>
+  <li>en [4], on donne un nom à la configuration
+  </li>
+  <li>en [5], on nomme le projet Eclipse concerné par cette configuration (utiliser le bouton Browse)
+  </li>
+  <li>en [6], on nomme la classe des tests (utiliser le bouton Browse)
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000003CF0000015DA3D55CA0.png" style="display:inline-block; margin:4px;width:12.899cm;height:4.618cm;" class="odt-zoomable" data-zoom-src="images/10000000000003CF0000015DA3D55CA0.png" /></td></tr></table>
 
 <ul>
-<li>en [7], on passe dans l&#x27;onglet [Arguments].</li>
-<li>en [8] : on fixe l&#x27;argument -<strong>javaagent</strong> de la JVM.</li>
-<li>en [9] : on valide la configuration</li>
-<li>en [10] : la configuration est créée</li>
-<li>en [11] : on l&#x27;exécute</li>
+  <li>en [7], on passe dans l&#x27;onglet [Arguments].
+  </li>
+  <li>en [8] : on fixe l&#x27;argument -<b>javaagent</b> de la JVM.
+  </li>
+  <li>en [9] : on valide la configuration
+  </li>
+  <li>en [10] : la configuration est créée
+  </li>
+  <li>en [11] : on l&#x27;exécute
+  </li>
 </ul>
+
 <p>Ceci fait, [TestNG] s&#x27;exécute et donne les mêmes résultats qu&#x27;avec Hibernate.</p>
 <p><a id="jbossejb3-personne"></a></p>
 <h2 id="32-exemple-2-jboss-ejb3-jpa-avec-entite-personne">3.2. Exemple 2 : JBoss EJB3 / JPA avec entité Personne</h2>
@@ -2191,17 +2382,26 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004D400000125A6A74B3C.png" style="display:inline-block; margin:4px;width:16.351cm;height:3.877cm;" class="odt-zoomable" data-zoom-src="images/10000000000004D400000125A6A74B3C.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le projet Eclipse. Il sera trouvé en [6] dans les exemples du tutoriel [5]. On l&#x27;importera.</li>
-<li>en [2] : les codes Java des couches présentés en paquetages :<ul>
-<li>[entites] : le paquetage des entités JPA</li>
-<li>[dao] : la couche d&#x27;accès aux données - s&#x27;appuie sur la couche JPA</li>
-<li>[service] : une couche de services plus que de métier. On y utilisera le service de transactions du conteneur Ejb3.</li>
-<li>[tests] : regroupe les programmes de tests.</li>
+  <li>en [1] : le projet Eclipse. Il sera trouvé en [6] dans les exemples du tutoriel [5]. On l&#x27;importera.
+  </li>
+  <li>en [2] : les codes Java des couches présentés en paquetages :
+    <ul>
+      <li>[entites] : le paquetage des entités JPA
+      </li>
+      <li>[dao] : la couche d&#x27;accès aux données - s&#x27;appuie sur la couche JPA
+      </li>
+      <li>[service] : une couche de services plus que de métier. On y utilisera le service de transactions du conteneur Ejb3.
+      </li>
+      <li>[tests] : regroupe les programmes de tests.
+      </li>
+    </ul>
+  </li>
+  <li>en [3] : la bibliothèque [jpa-jbossejb3] regroupe les jars nécessaires à Jboss Ejb3 (voir aussi [7] et [8]).
+  </li>
+  <li>en [4] : le dossier [conf] rassemble les fichiers de configuration pour chacun des SGBD utilisés dans ce tutoriel. Il y en a à chaque fois deux : [persistence.xml] qui configure la couche JPA et [jboss-config.xml] qui configure le conteneur Ejb3.
+  </li>
 </ul>
-</li>
-<li>en [3] : la bibliothèque [jpa-jbossejb3] regroupe les jars nécessaires à Jboss Ejb3 (voir aussi [7] et [8]).</li>
-<li>en [4] : le dossier [conf] rassemble les fichiers de configuration pour chacun des SGBD utilisés dans ce tutoriel. Il y en a à chaque fois deux : [persistence.xml] qui configure la couche JPA et [jboss-config.xml] qui configure le conteneur Ejb3.</li>
-</ul>
+
 <h3 id="322-les-entites-jpa">3.2.2. Les entités JPA</h3>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000501000000B18F583168.png" style="display:inline-block; margin:4px;width:16.947cm;height:2.342cm;" class="odt-zoomable" data-zoom-src="images/1000000000000501000000B18F583168.png" /></td></tr></table>
 
@@ -2267,19 +2467,30 @@
 </code></pre></div>
 
 <ul>
-<li>ce code est en tout point identique à celui qu&#x27;on avait avec Spring. Seules les annotations Java changent et c&#x27;est cela que nous commentons.</li>
-<li>ligne 4 : l&#x27;annotation <strong>@Stateless</strong> fait de la classe [Dao] un <strong>Ejb</strong> <strong>sans état</strong>. L&#x27;annotation @<strong>Stateful</strong> fait d&#x27;une classe un Ejb <strong>avec état</strong>. Un Ejb avec état a des champs privés dont il faut conserver la valeur au fil du temps. Un exemple classique est celui d&#x27;une classe qui contient des informations liées à l&#x27;utilisateur web d&#x27;une application. Une instance de cette classe est liée à un utilisateur précis et lorsque le thread d&#x27;exécution d&#x27;une requête de cet utilisateur est terminé, l&#x27;instance doit être conservée pour être disponible lors de la prochaine requête du même client. Un Ejb <strong>@Stateless</strong> n&#x27;a pas d&#x27;état. Si on reprend le même exemple, à la fin du  thread d&#x27;exécution d&#x27;une requête d&#x27;un utilisateur, l&#x27;Ejb <strong>@Stateless</strong> va rejoindre un pool d&#x27;Ejb <strong>@Stateless</strong> et devient disponible pour le thread d&#x27;exécution d&#x27;une requête d&#x27;un autre utilisateur.</li>
-<li>pour le développeur, la notion d&#x27;Ejb3 <strong>@Stateless</strong> est proche de celle du <strong>singleton</strong> de Spring. Il l&#x27;utilisera dans les mêmes cas.</li>
-<li>ligne 7 : l&#x27;annotation <strong>@PersistenceContext</strong> est la même que celle rencontrée dans la version Spring de la couche [dao]. Elle désigne le champ qui va recevoir l&#x27;EntityManager qui va permettre à la couche [dao] de manipuler le contexte de persistance.</li>
-<li>ligne 11 : l&#x27;annotation <strong>@TransactionAttribute</strong> appliquée à une méthode sert à configurer la transaction dans laquelle va s&#x27;exécuter la méthode. Voici quelques valeurs possibles de cette annotation :<ul>
-<li><strong>TransactionAttributeType.REQUIRED</strong> : la méthode doit s&#x27;exécuter dans une transaction. Si une transaction a déjà démarré, les opérations de persistance de la méthode prennent place dans celle-ci. Sinon, une transaction est créée et démarrée.</li>
-<li><strong>TransactionAttributeType.REQUIRES_NEW</strong> : la méthode doit s&#x27;exécuter dans une transaction neuve. Celle-ci est créée et démarrée.</li>
-<li><strong>TransactionAttributeType.MANDATORY</strong> : la méthode doit s&#x27;exécuter dans une transaction existante. Si celle-ci n&#x27;existe pas, une exception est lancée.</li>
-<li><strong>TransactionAttributeType.NEVER</strong> : la méthode ne s&#x27;exécute jamais dans une transaction.</li>
-<li>...</li>
+  <li>ce code est en tout point identique à celui qu&#x27;on avait avec Spring. Seules les annotations Java changent et c&#x27;est cela que nous commentons.
+  </li>
+  <li>ligne 4 : l&#x27;annotation <b>@Stateless</b> fait de la classe [Dao] un <b>Ejb</b> <b>sans état</b>. L&#x27;annotation @<b>Stateful</b> fait d&#x27;une classe un Ejb <b>avec état</b>. Un Ejb avec état a des champs privés dont il faut conserver la valeur au fil du temps. Un exemple classique est celui d&#x27;une classe qui contient des informations liées à l&#x27;utilisateur web d&#x27;une application. Une instance de cette classe est liée à un utilisateur précis et lorsque le thread d&#x27;exécution d&#x27;une requête de cet utilisateur est terminé, l&#x27;instance doit être conservée pour être disponible lors de la prochaine requête du même client. Un Ejb <b>@Stateless</b> n&#x27;a pas d&#x27;état. Si on reprend le même exemple, à la fin du  thread d&#x27;exécution d&#x27;une requête d&#x27;un utilisateur, l&#x27;Ejb <b>@Stateless</b> va rejoindre un pool d&#x27;Ejb <b>@Stateless</b> et devient disponible pour le thread d&#x27;exécution d&#x27;une requête d&#x27;un autre utilisateur.
+  </li>
+  <li>pour le développeur, la notion d&#x27;Ejb3 <b>@Stateless</b> est proche de celle du <b>singleton</b> de Spring. Il l&#x27;utilisera dans les mêmes cas.
+  </li>
+  <li>ligne 7 : l&#x27;annotation <b>@PersistenceContext</b> est la même que celle rencontrée dans la version Spring de la couche [dao]. Elle désigne le champ qui va recevoir l&#x27;EntityManager qui va permettre à la couche [dao] de manipuler le contexte de persistance.
+  </li>
+  <li>ligne 11 : l&#x27;annotation <b>@TransactionAttribute</b> appliquée à une méthode sert à configurer la transaction dans laquelle va s&#x27;exécuter la méthode. Voici quelques valeurs possibles de cette annotation :
+    <ul>
+      <li><b>TransactionAttributeType.REQUIRED</b> : la méthode doit s&#x27;exécuter dans une transaction. Si une transaction a déjà démarré, les opérations de persistance de la méthode prennent place dans celle-ci. Sinon, une transaction est créée et démarrée.
+      </li>
+      <li><b>TransactionAttributeType.REQUIRES_NEW</b> : la méthode doit s&#x27;exécuter dans une transaction neuve. Celle-ci est créée et démarrée.
+      </li>
+      <li><b>TransactionAttributeType.MANDATORY</b> : la méthode doit s&#x27;exécuter dans une transaction existante. Si celle-ci n&#x27;existe pas, une exception est lancée.
+      </li>
+      <li><b>TransactionAttributeType.NEVER</b> : la méthode ne s&#x27;exécute jamais dans une transaction.
+      </li>
+      <li>...
+      </li>
+    </ul>
+  </li>
 </ul>
-</li>
-</ul>
+
 <p>L&#x27;annotation aurait pu être placée sur la classe elle-même :</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-text">
 <span class="odt-code-line">@Stateless</span>
@@ -2313,18 +2524,25 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 2 : la classe [Service] est un Ejb sans état</li>
-<li>ligne 3 : toutes les méthodes de la classe [Service] doivent se dérouler dans une transaction</li>
-<li>lignes 7-8 : une référence sur l&#x27;Ejb de la couche [dao] sera injectée par le conteneur Ejb dans le champ [IDao dao] de la ligne 8. C&#x27;est l&#x27;annotation <strong>@EJB</strong> de la ligne 7 qui demande cette injection. L&#x27;objet injecté doit être un Ejb. C&#x27;est une différence importante avec Spring où tout type d&#x27;objet peut être injecté dans un autre objet.</li>
+  <li>ligne 2 : la classe [Service] est un Ejb sans état
+  </li>
+  <li>ligne 3 : toutes les méthodes de la classe [Service] doivent se dérouler dans une transaction
+  </li>
+  <li>lignes 7-8 : une référence sur l&#x27;Ejb de la couche [dao] sera injectée par le conteneur Ejb dans le champ [IDao dao] de la ligne 8. C&#x27;est l&#x27;annotation <b>@EJB</b> de la ligne 7 qui demande cette injection. L&#x27;objet injecté doit être un Ejb. C&#x27;est une différence importante avec Spring où tout type d&#x27;objet peut être injecté dans un autre objet.
+  </li>
 </ul>
+
 <h3 id="325-configuration-des-couches">3.2.5. Configuration des couches</h3>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000045900000155FFB39CEA.png" style="display:inline-block; margin:4px;width:14.725cm;height:4.512cm;" class="odt-zoomable" data-zoom-src="images/100000000000045900000155FFB39CEA.png" /></td></tr></table>
 
 <p>La configuration des couches [service], [dao] et [JPA] est assurée par les fichiers suivants : </p>
 <ul>
-<li>[META-INF/<strong>persistence.xml</strong>] configure la couche JPA</li>
-<li>[<strong>jboss-config.xml</strong>] configure le conteneur Ejb3. Il utilise lui-même les fichiers [default.persistence.properties, ejb3-interceptors-aop.xml, embedded-jboss-beans.xml, jndi.properties]. Ces derniers fichiers sont livrés avec Jboss Ejb3 et assure une configuration par défaut à laquelle on ne touche normalement pas. Le développeur ne s&#x27;intéresse qu&#x27;au fichier [jboss-config.xml]</li>
+  <li>[META-INF/<b>persistence.xml</b>] configure la couche JPA
+  </li>
+  <li>[<b>jboss-config.xml</b>] configure le conteneur Ejb3. Il utilise lui-même les fichiers [default.persistence.properties, ejb3-interceptors-aop.xml, embedded-jboss-beans.xml, jndi.properties]. Ces derniers fichiers sont livrés avec Jboss Ejb3 et assure une configuration par défaut à laquelle on ne touche normalement pas. Le développeur ne s&#x27;intéresse qu&#x27;au fichier [jboss-config.xml]
+  </li>
 </ul>
+
 <p>Examinons les deux fichiers de configuration :</p>
 <p><u><strong>persistence.xml</strong></u></p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
@@ -2364,8 +2582,10 @@
 
 <p>Ce fichier ressemble à ceux que nous avons déjà rencontrés dans l&#x27;étude des entités JPA. Il configure une couche JPA Hibernate. Les nouveautés sont les suivantes :</p>
 <ul>
-<li>ligne 5 : l&#x27;unité de persistance <em>jpa</em> n&#x27;a pas l&#x27;attribut <em>transaction-type</em> qu&#x27;on avait toujours jusqu&#x27;ici :</li>
+  <li>ligne 5 : l&#x27;unité de persistance <i>jpa</i> n&#x27;a pas l&#x27;attribut <i>transaction-type</i> qu&#x27;on avait toujours jusqu&#x27;ici :
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-text">
 <span class="odt-code-line"><span style="color:#008080">&lt;</span><span style="color:#3f7f7f">persistence-unit </span><span style="color:#7f007f">name</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;jpa&quot; </span><span style="color:#7f007f">transaction-type</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;RESOURCE_LOCAL&quot; </span><span style="color:#008080">/&gt;</span></span>
 </code></pre></div>
@@ -2373,8 +2593,10 @@
 <p>En l&#x27;absence de valeur, l&#x27;attribut <em>transaction-type</em> a la valeur par défaut &quot;JTA&quot; (pour Java Transaction Api) qui indique que le gestionnaire de transactions est fourni par un conteneur Ejb3. Un gestionnaire &quot;JTA&quot; peut faire davantage qu&#x27;un gestionaire &quot;RESOURCE_LOCAL&quot; : il peut gérer des transactions qui couvrent plusieurs connexions. Avec JTA, on peut ouvrir une transaction <em>t1</em> sur une connexion <em>c1</em> sur un SGBD 1, une transaction <em>t2</em> sur une connexion <em>c2</em> avec un SGBD 2 et être capable de considérer (t1,t2) comme une unique transaction dans laquelle soit toutes les opérations réussissent (commit) soit aucune (rollback).</p>
 <p>ici, nous fonctionnons avec le gestionnaire JTA du conteneur Jboss Ejb3.</p>
 <ul>
-<li>ligne 11 : déclare la source de données que doit utiliser le gestionnaire JTA. Celle-ci est donnée sous la forme d&#x27;un nom JNDI (Java Naming and Directory Interface). Cette source de données est définie dans [jboss-config.xml].</li>
+  <li>ligne 11 : déclare la source de données que doit utiliser le gestionnaire JTA. Celle-ci est donnée sous la forme d&#x27;un nom JNDI (Java Naming and Directory Interface). Cette source de données est définie dans [jboss-config.xml].
+  </li>
 </ul>
+
 <p><u><strong>jboss-config.xml</strong></u></p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
 <span class="odt-code-line"><span style="color:#008080">&lt;?</span><span style="color:#3f7f7f">xml </span><span style="color:#7f007f">version</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;1.0&quot; </span><span style="color:#7f007f">encoding</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;UTF-8&quot;</span><span style="color:#008080">?&gt;</span></span>
@@ -2424,16 +2646,26 @@
 </code></pre></div>
 
 <ul>
-<li>ligne 3 : la balise racine du fichier est &lt;<strong>deployment</strong>&gt;. Ce fichier de déploiement vise essentiellement à configurer la source de données <strong>java:/datasource</strong> qui a été déclarée dans <strong>persistence.xml</strong>.</li>
-<li>la source de données est définie par le bean &quot;<em>datasource</em>&quot; de la ligne 38. On voit que la source de données est obtenue (ligne 40) auprès d&#x27;une &quot;factory&quot; définie par le bean &quot;datasourceFactory&quot; de la ligne 7. Pour obtenir la source de données de l&#x27;application, le client devra appeler la méthode [getDatasource] de la <em>factory</em> (ligne 39).</li>
-<li>ligne 7 : la <em>factory</em> qui délivre la source de données est une classe Jboss.</li>
-<li>ligne 9 : le nom JNDI de la source de données. Ce doit être le même nom que celui déclaré dans la balise &lt;jta-data-source&gt; du fichier <strong>persistence.xml</strong>. En effet, la couche JPA va utiliser ce nom JNDI pour demander la source de données.</li>
-<li>lignes 12-15 : quelque chose de plus classique : les caractéristiques Jdbc de la connexion au SGBD</li>
-<li>lignes 18-21 : configuration du pool de connexions interne du conteneur Jboss Ejb3. </li>
-<li>lignes 24-26 : le gestionnaire JTA. La classe [TransactionManager] injectée ligne 25 est définie dans le fichier [embedded-jboss-beans.xml].</li>
-<li>lignes 28-30 : le cache Hibernate, une notion que nous n&#x27;avons pas abordée. La classe [CachedConnectionManager] injectée ligne 29 est définie dans le fichier [embedded-jboss-beans.xml]. On notera que la configuration est maintenant dépendante d&#x27;Hibernate, ce qui nous posera problème lorsqu&#x27;on voudra migrer vers Toplink.</li>
-<li>lignes 32-34 : configuration du service JNDI.</li>
+  <li>ligne 3 : la balise racine du fichier est &lt;<b>deployment</b>&gt;. Ce fichier de déploiement vise essentiellement à configurer la source de données <b>java:/datasource</b> qui a été déclarée dans <b>persistence.xml</b>.
+  </li>
+  <li>la source de données est définie par le bean &quot;<i>datasource</i>&quot; de la ligne 38. On voit que la source de données est obtenue (ligne 40) auprès d&#x27;une &quot;factory&quot; définie par le bean &quot;datasourceFactory&quot; de la ligne 7. Pour obtenir la source de données de l&#x27;application, le client devra appeler la méthode [getDatasource] de la <i>factory</i> (ligne 39).
+  </li>
+  <li>ligne 7 : la <i>factory</i> qui délivre la source de données est une classe Jboss.
+  </li>
+  <li>ligne 9 : le nom JNDI de la source de données. Ce doit être le même nom que celui déclaré dans la balise &lt;jta-data-source&gt; du fichier <b>persistence.xml</b>. En effet, la couche JPA va utiliser ce nom JNDI pour demander la source de données.
+  </li>
+  <li>lignes 12-15 : quelque chose de plus classique : les caractéristiques Jdbc de la connexion au SGBD
+  </li>
+  <li>lignes 18-21 : configuration du pool de connexions interne du conteneur Jboss Ejb3. 
+  </li>
+  <li>lignes 24-26 : le gestionnaire JTA. La classe [TransactionManager] injectée ligne 25 est définie dans le fichier [embedded-jboss-beans.xml].
+  </li>
+  <li>lignes 28-30 : le cache Hibernate, une notion que nous n&#x27;avons pas abordée. La classe [CachedConnectionManager] injectée ligne 29 est définie dans le fichier [embedded-jboss-beans.xml]. On notera que la configuration est maintenant dépendante d&#x27;Hibernate, ce qui nous posera problème lorsqu&#x27;on voudra migrer vers Toplink.
+  </li>
+  <li>lignes 32-34 : configuration du service JNDI.
+  </li>
 </ul>
+
 <p>Nous en avons fini avec le fichier de configuration de Jboss Ejb3. Il est complexe et bien des choses restent obscures. Il a été tiré de [<strong>ref1</strong>]. Nous serons cependant capables de l&#x27;adapter à un autre SGBD ( lignes 12-15 de <strong>jboss-config.xml</strong>, ligne 24 de <strong>persistence.xml</strong>). La migration vers Toplink n&#x27;a pas été possible faute d&#x27;exemples.</p>
 <h3 id="326-programme-client-initdb">3.2.6. Programme client [InitDB]</h3>
 <p>Nous abordons l&#x27;écriture d&#x27;un premier client de l&#x27;architecture décrite précédemment :</p>
@@ -2507,14 +2739,22 @@
 </code></pre></div>
 
 <ul>
-<li>la façon de lancer le conteneur Jboss Ejb3 a été trouvée dans [<strong>ref1</strong>].</li>
-<li>ligne 13 : le conteneur est lancé. [<span style="color: #000000">EJB3StandaloneBootstrap] est une classe du conteneur.</span></li>
-<li><span style="color: #000000">ligne 16 : l&#x27;unité de déploiement configurée par [jboss-config.xml] est déployée dans le conteneur : gestionnaire JTA, source de données, pool de connexions, cache Hibernate, service JNDI sont mis en place.</span></li>
-<li><span style="color: #000000">ligne 22 : on demande au conteneur de scanner le dossier </span><strong><span style="color: #000000">bin</span></strong><span style="color: #000000"> du projet Eclipse pour y trouver les Ejb. Les Ejb des couches [service] et [dao] vont être trouvées et gérées par le conteneur.</span></li>
-<li><span style="color: #000000">ligne 25 : un contexte JNDI est initialisé. Il va nous servir à localiser les Ejb.</span></li>
-<li><span style="color: #000000">ligne 28 : l&#x27;Ejb correspondant à la classe [Service] de la couche [service] est demandé au service JNDI. Un Ejb peut être accédé localement (local) ou via le réseau (remote). Ici le nom &quot;Service/local&quot; de l&#x27;Ejb cherché désigne la classe [Service] de la couche [service] pour un accès local.</span></li>
-<li><span style="color: #000000">maintenant, l&#x27;application est déployée et on détient une référence sur la couche [service]. On est dans la même situation qu&#x27;après la ligne 11 ci-dessous du code [InitDB] de la version Spring. On retrouve alors le même code dans les deux versions.</span></li>
+  <li>la façon de lancer le conteneur Jboss Ejb3 a été trouvée dans [<b>ref1</b>].
+  </li>
+  <li>ligne 13 : le conteneur est lancé. [<span style="color: #000000">EJB3StandaloneBootstrap] est une classe du conteneur.</span>
+  </li>
+  <li><span style="color: #000000">ligne 16 : l&#x27;unité de déploiement configurée par [jboss-config.xml] est déployée dans le conteneur : gestionnaire JTA, source de données, pool de connexions, cache Hibernate, service JNDI sont mis en place.</span>
+  </li>
+  <li><span style="color: #000000">ligne 22 : on demande au conteneur de scanner le dossier </span><b><span style="color: #000000">bin</span></b><span style="color: #000000"> du projet Eclipse pour y trouver les Ejb. Les Ejb des couches [service] et [dao] vont être trouvées et gérées par le conteneur.</span>
+  </li>
+  <li><span style="color: #000000">ligne 25 : un contexte JNDI est initialisé. Il va nous servir à localiser les Ejb.</span>
+  </li>
+  <li><span style="color: #000000">ligne 28 : l&#x27;Ejb correspondant à la classe [Service] de la couche [service] est demandé au service JNDI. Un Ejb peut être accédé localement (local) ou via le réseau (remote). Ici le nom &quot;Service/local&quot; de l&#x27;Ejb cherché désigne la classe [Service] de la couche [service] pour un accès local.</span>
+  </li>
+  <li><span style="color: #000000">maintenant, l&#x27;application est déployée et on détient une référence sur la couche [service]. On est dans la même situation qu&#x27;après la ligne 11 ci-dessous du code [InitDB] de la version Spring. On retrouve alors le même code dans les deux versions.</span>
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line"><span style="font-weight:bold;color:#7f0055">public</span><span style="color:#000000"> </span><span style="font-weight:bold;color:#7f0055">class</span><span style="color:#000000"> InitDB {</span></span>
 <span class="odt-code-line"></span>
@@ -2538,8 +2778,10 @@
 </code></pre></div>
 
 <ul>
-<li><span style="color: #000000">ligne 36 (Jboss Ejb3) : on arrête le conteneur Ejb3.</span></li>
+  <li><span style="color: #000000">ligne 36 (Jboss Ejb3) : on arrête le conteneur Ejb3.</span>
+  </li>
 </ul>
+
 <p><span style="color: #000000">L&#x27;exécution de [InitDB] donne les résultats suivants :</span></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
@@ -2661,10 +2903,14 @@
 </code></pre></div>
 
 <ul>
-<li>la méthode <strong>init</strong> (lignes 10-37) qui sert à mettre en place l&#x27;environnement nécessaire aux tests reprend le code expliqué précédemment dans [InitDB].</li>
-<li>la méthode <strong>terminate</strong> (lignes 40-45) qui est exécutée à la fin des tests (présence de l&#x27;annotation <strong>@AfterClass</strong>) arrête le conteneur Ejb3 (ligne 44).</li>
-<li>tout le reste est identique à ce qu&#x27;il était dans la version Spring.</li>
+  <li>la méthode <b>init</b> (lignes 10-37) qui sert à mettre en place l&#x27;environnement nécessaire aux tests reprend le code expliqué précédemment dans [InitDB].
+  </li>
+  <li>la méthode <b>terminate</b> (lignes 40-45) qui est exécutée à la fin des tests (présence de l&#x27;annotation <b>@AfterClass</b>) arrête le conteneur Ejb3 (ligne 44).
+  </li>
+  <li>tout le reste est identique à ce qu&#x27;il était dans la version Spring.
+  </li>
 </ul>
+
 <p>Les tests réussissent :</p>
 <p><img src="images/1000000000000138000000F0A70441E5.png" style="width:5.78cm;height:4.45cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/1000000000000138000000F0A70441E5.png" /></p>
 <h3 id="328-changer-de-sgbd">3.2.8. Changer de SGBD</h3>
@@ -2709,8 +2955,10 @@
 
 <p>Seule une ligne a changé :</p>
 <ul>
-<li>ligne 24 : le dialecte SQL qu&#x27;Hibernate doit utiliser</li>
+  <li>ligne 24 : le dialecte SQL qu&#x27;Hibernate doit utiliser
+  </li>
 </ul>
+
 <p>Le fichier [jboss-config.xml] de SQL Server est lui, le suivant :</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
 <span class="odt-code-line"><span style="color:#008080">&lt;?</span><span style="color:#3f7f7f">xml </span><span style="color:#7f007f">version</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;1.0&quot; </span><span style="color:#7f007f">encoding</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;UTF-8&quot;</span><span style="color:#008080">?&gt;</span></span>
@@ -2756,18 +3004,26 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000053D0000011AB518CA59.png" style="display:inline-block; margin:4px;width:17.741cm;height:3.731cm;" class="odt-zoomable" data-zoom-src="images/100000000000053D0000011AB518CA59.png" /></td></tr></table>
 
 <ul>
-<li><span style="color: #000000">en [1] : la version Spring / Hibernate</span></li>
-<li><span style="color: #000000">en [2] : la version Spring / Toplink</span></li>
-<li><span style="color: #000000">en [3] : la version Jboss Ejb3 / Hibernate</span></li>
+  <li><span style="color: #000000">en [1] : la version Spring / Hibernate</span>
+  </li>
+  <li><span style="color: #000000">en [2] : la version Spring / Toplink</span>
+  </li>
+  <li><span style="color: #000000">en [3] : la version Jboss Ejb3 / Hibernate</span>
+  </li>
 </ul>
+
 <p><u><strong><span style="color: #000000">Personne- Adresse - Activite</span></strong></u></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000054100000118F5C62377.png" style="display:inline-block; margin:4px;width:17.794cm;height:3.704cm;" class="odt-zoomable" data-zoom-src="images/100000000000054100000118F5C62377.png" /></td></tr></table>
 
 <ul>
-<li><span style="color: #000000">en [1] : la version Spring / Hibernate</span></li>
-<li><span style="color: #000000">en [2] : la version Spring / Toplink</span></li>
-<li><span style="color: #000000">en [3] : la version Jboss Ejb3 / Hibernate</span></li>
+  <li><span style="color: #000000">en [1] : la version Spring / Hibernate</span>
+  </li>
+  <li><span style="color: #000000">en [2] : la version Spring / Toplink</span>
+  </li>
+  <li><span style="color: #000000">en [3] : la version Jboss Ejb3 / Hibernate</span>
+  </li>
 </ul>
+
 <p><span style="color: #000000">Ces exemples n&#x27;amènent pas de nouveautés quant à l&#x27;architecture. Ils se placent simplement dans un contexte où il y a plusieurs entités à gérer avec des relations </span><strong><span style="color: #000000">un-à-plusieurs</span></strong><span style="color: #000000"> ou </span><strong><span style="color: #000000">plusieurs-à-plusieurs</span></strong><span style="color: #000000"> entre elles, ce que n&#x27;avaient pas les exemples avec l&#x27;entité </span><em><span style="color: #000000">Personne</span></em><span style="color: #000000">.</span></p>
 <h2 id="34-exemple-3-spring-jpa-dans-une-application-web">3.4. <span style="color: #000000">Exemple 3 : Spring / JPA dans une application web</span></h2>
 <h3 id="341-presentation">3.4.1. Présentation</h3>
@@ -2779,11 +3035,16 @@
 
 <p>L’application web que nous allons écrire va permettre de gérer un groupe de personnes avec quatre opérations :</p>
 <ul>
-<li>liste des personnes du groupe</li>
-<li>ajout d’une personne au groupe</li>
-<li>modification d’une personne du groupe</li>
-<li>suppression d’une personne du groupe</li>
+  <li>liste des personnes du groupe
+  </li>
+  <li>ajout d’une personne au groupe
+  </li>
+  <li>modification d’une personne du groupe
+  </li>
+  <li>suppression d’une personne du groupe
+  </li>
 </ul>
+
 <p>On reconnaîtra les quatre opérations de base sur une table de base de données. Les <a id="spring-mvc-37-ecrans"></a>copies d’écran qui suivent montrent les pages que l’application échange avec l’utilisateur.</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000054A0000021490EF2FA7.png" style="display:inline-block; margin:4px;width:17.912cm;height:7.038cm;" class="odt-zoomable" data-zoom-src="images/100000000000054A0000021490EF2FA7.png" /></td></tr></table>
 
@@ -2800,13 +3061,17 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004E60000018A83976579.png" style="display:inline-block; margin:4px;width:16.589cm;height:5.212cm;" class="odt-zoomable" data-zoom-src="images/10000000000004E60000018A83976579.png" /></td></tr></table>
 
 <ul>
-<li>en [1] : le projet web. C&#x27;est un projet Eclipse de type [Dynamic Web Project] [2]. On le trouvera en [4] dans le dossier [3] des exemples du tutoriel. On l&#x27;importera.</li>
+  <li>en [1] : le projet web. C&#x27;est un projet Eclipse de type [Dynamic Web Project] [2]. On le trouvera en [4] dans le dossier [3] des exemples du tutoriel. On l&#x27;importera.
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004EE00000298BAB6E8FC.png" style="display:inline-block; margin:4px;width:16.695cm;height:8.784cm;" class="odt-zoomable" data-zoom-src="images/10000000000004EE00000298BAB6E8FC.png" /></td></tr></table>
 
 <ul>
-<li>en [5] : les sources et la configuration des couches [service, dao, jpa]. Nous conservons l&#x27;acquis [dao, entites, service] du projet Eclipse [hibernate-spring-personnes-metier-dao] étudié au paragraphe <a href="#hibernate-spring-personnes-metier-dao">3.1.1</a>. Nous ne développons que la couche [web] représentée ici par le paquetage [web]. Par ailleurs nous conservons les fichiers de configuration [persistence.xml, spring-config.xml] de ce projet au détail près que nous allons utiliser le SGBD Postgres, ce qui se traduit par les modifications suivantes dans [spring-config.xml] :</li>
+  <li>en [5] : les sources et la configuration des couches [service, dao, jpa]. Nous conservons l&#x27;acquis [dao, entites, service] du projet Eclipse [hibernate-spring-personnes-metier-dao] étudié au paragraphe <a href="#hibernate-spring-personnes-metier-dao">3.1.1</a>. Nous ne développons que la couche [web] représentée ici par le paquetage [web]. Par ailleurs nous conservons les fichiers de configuration [persistence.xml, spring-config.xml] de ce projet au détail près que nous allons utiliser le SGBD Postgres, ce qui se traduit par les modifications suivantes dans [spring-config.xml] :
+  </li>
 </ul>
+
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
 <span class="odt-code-line"><span style="color:#008080">&lt;?</span><span style="color:#3f7f7f">xml </span><span style="color:#7f007f">version</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;1.0&quot; </span><span style="color:#7f007f">encoding</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;UTF-8&quot;</span><span style="color:#008080">?&gt;</span></span>
 <span class="odt-code-line"><span style="color:#008080">&lt;</span><span style="color:#3f7f7f">beans </span><span style="color:#7f007f">xmlns</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;http://www.springframework.org/schema/beans&quot; </span></span>
@@ -2834,36 +3099,53 @@
 
 <p>Les lignes 8 et 16-19 ont été adaptées à Postgres.</p>
 <ul>
-<li>en [6] : le dossier [WebContent] contient les pages JSP du projet ainsi que les bibliothèques nécessaires. Ces dernières sont présentées en [8]</li>
-<li>l&#x27;application est utilisable avec divers SGBD. Il suffit de changer le fichier [spring-config.xml]. Le dossier [conf] [7] contient le fichier [spring-config.xml] adapté à divers SGBD.</li>
+  <li>en [6] : le dossier [WebContent] contient les pages JSP du projet ainsi que les bibliothèques nécessaires. Ces dernières sont présentées en [8]
+  </li>
+  <li>l&#x27;application est utilisable avec divers SGBD. Il suffit de changer le fichier [spring-config.xml]. Le dossier [conf] [7] contient le fichier [spring-config.xml] adapté à divers SGBD.
+  </li>
 </ul>
+
 <h3 id="343-la-couche-web">3.4.3. La couche [web]</h3>
 <p>Notre application a l&#x27;architecture multi-couches suivante :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000045900000160CE209F53.png" style="display:inline-block; margin:4px;width:14.725cm;height:4.657cm;" class="odt-zoomable" data-zoom-src="images/100000000000045900000160CE209F53.png" /></td></tr></table>
 
 <p>La couche [web] va offrir des écrans à l’utilisateur pour lui permettre de gérer le groupe de personnes :</p>
 <ul>
-<li>liste des personnes du groupe</li>
-<li>ajout d’une personne au groupe</li>
-<li>modification d’une personne du groupe</li>
-<li>suppression d’une personne du groupe</li>
+  <li>liste des personnes du groupe
+  </li>
+  <li>ajout d’une personne au groupe
+  </li>
+  <li>modification d’une personne du groupe
+  </li>
+  <li>suppression d’une personne du groupe
+  </li>
 </ul>
+
 <p>Pour cela, elle va s’appuyer sur la couche [service] qui elle même fera appel à la couche [dao]. Nous avons déjà présenté les écrans gérés par la couche [web] (paragraphe <a href="#spring-mvc-37-ecrans">3.4.1</a>). Pour décrire la couche web, nous allons présenter successivement :</p>
 <ul>
-<li>sa configuration</li>
-<li>ses vues</li>
-<li>son contrôleur</li>
-<li>quelques tests</li>
+  <li>sa configuration
+  </li>
+  <li>ses vues
+  </li>
+  <li>son contrôleur
+  </li>
+  <li>quelques tests
+  </li>
 </ul>
+
 <h4 id="3431-configuration-de-lapplication-web">3.4.3.1. Configuration de l’application web</h4>
 <p>Revenons sur l&#x27;architecture du projet Eclipse :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000000B2000000AC029A8D4B.png" style="display:inline-block; margin:4px;width:3.11cm;height:3cm;" class="odt-zoomable" data-zoom-src="images/10000000000000B2000000AC029A8D4B.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000000B80000010040707ECF.png" style="display:inline-block; margin:4px;width:3.41cm;height:4.74cm;" class="odt-zoomable" data-zoom-src="images/10000000000000B80000010040707ECF.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">&nbsp;</td></tr></table>
 
 <ul>
-<li>dans le paquetage [web], on trouve le contrôleur de l&#x27;application web : la classe [Application].</li>
-<li>les pages JSP / JSTL de l&#x27;application sont dans [WEB-INF/vues].</li>
-<li>le dossier [WEB-INF/lib] contient les archives tierces nécessaires à l’application. Elles sont visibles dans le dossier [Web App Libraries].</li>
+  <li>dans le paquetage [web], on trouve le contrôleur de l&#x27;application web : la classe [Application].
+  </li>
+  <li>les pages JSP / JSTL de l&#x27;application sont dans [WEB-INF/vues].
+  </li>
+  <li>le dossier [WEB-INF/lib] contient les archives tierces nécessaires à l’application. Elles sont visibles dans le dossier [Web App Libraries].
+  </li>
 </ul>
+
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
 <p>[web.xml]</p>
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
@@ -2908,26 +3190,37 @@
 </code></pre></div>
 
 <ul>
-<li>lignes 23-26 : les url [/do/*] seront traitées par la servlet [personnes]</li>
-<li>lignes 7-8 : la servlet [personnes] est une instance de la classe [Application<span style="color: #000000">], une classe que nous allons construire.</span></li>
-<li><span style="color: #000000">lignes 9-20 : définissent trois paramètres [urlList, urlEdit, urlErreurs] identifiant les Url des pages JSP des vues [list, edit, erreurs].</span></li>
-<li><span style="color: #000000">lignes 28-30 : l’application a une page d’entrée par défaut [index.jsp] qui se trouve à la racine du dossier de l’application web.</span></li>
-<li><span style="color: #000000">lignes 32-35 :  l’application a une page d’erreurs par défaut qui est affichée lorsque le serveur web récupère une exception non gérée par l&#x27;application.</span><ul>
-<li><span style="color: #000000">ligne 37 : la balise &lt;exception-type&gt; indique le type d&#x27;exception gérée par la directive &lt;error-page&gt;, ici le type [java.lang.Exception] et dérivé, donc toutes les exceptions.</span></li>
-<li><span style="color: #000000">ligne 38 : la balise &lt;location&gt; indique la page JSP à afficher lorsqu&#x27;une exception du type défini par &lt;exception-type&gt; se produit. L&#x27;exception <strong>e</strong> survenue est disponible à cette page dans un objet nommé exception si la page a la directive :</span></li>
+  <li>lignes 23-26 : les url [/do/*] seront traitées par la servlet [personnes]
+  </li>
+  <li>lignes 7-8 : la servlet [personnes] est une instance de la classe [Application<span style="color: #000000">], une classe que nous allons construire.</span>
+  </li>
+  <li><span style="color: #000000">lignes 9-20 : définissent trois paramètres [urlList, urlEdit, urlErreurs] identifiant les Url des pages JSP des vues [list, edit, erreurs].</span>
+  </li>
+  <li><span style="color: #000000">lignes 28-30 : l’application a une page d’entrée par défaut [index.jsp] qui se trouve à la racine du dossier de l’application web.</span>
+  </li>
+  <li><span style="color: #000000">lignes 32-35 :  l’application a une page d’erreurs par défaut qui est affichée lorsque le serveur web récupère une exception non gérée par l&#x27;application.</span>
+    <ul>
+      <li><span style="color: #000000">ligne 37 : la balise &lt;exception-type&gt; indique le type d&#x27;exception gérée par la directive &lt;error-page&gt;, ici le type [java.lang.Exception] et dérivé, donc toutes les exceptions.</span>
+      </li>
+      <li><span style="color: #000000">ligne 38 : la balise &lt;location&gt; indique la page JSP à afficher lorsqu&#x27;une exception du type défini par &lt;exception-type&gt; se produit. L&#x27;exception <b>e</b> survenue est disponible à cette page dans un objet nommé exception si la page a la directive :</span>
+      </li>
+    </ul>
+  </li>
 </ul>
-</li>
-</ul>
+
 <div class="odt-code-rich" data-linenums="false" style="counter-reset: odtline 0;"><pre><code class="language-text">
 <span class="odt-code-line"><span style="color:#bf5f3f">&lt;%@ </span><span style="color:#3f7f7f">page </span><span style="color:#7f007f">isErrorPage</span>=<span style="color:#2a00ff">&quot;true&quot; </span><span style="color:#bf5f3f">%&gt;</span></span>
 </code></pre></div>
 
 <ul>
-<li><span style="color: #000000">(suite)</span><ul>
-<li><span style="color: #000000">si &lt;exception-type&gt; précise un type T1 et qu&#x27;une exception de type T2 non dérivé de T1 remonte jusqu&#x27;au serveur web, celui-ci envoie au client une page d&#x27;exception propriétaire généralement peu conviviale. D&#x27;où l&#x27;intérêt de la balise &lt;error-page&gt; dans le fichier [web.xml].</span></li>
+  <li><span style="color: #000000">(suite)</span>
+    <ul>
+      <li><span style="color: #000000">si &lt;exception-type&gt; précise un type T1 et qu&#x27;une exception de type T2 non dérivé de T1 remonte jusqu&#x27;au serveur web, celui-ci envoie au client une page d&#x27;exception propriétaire généralement peu conviviale. D&#x27;où l&#x27;intérêt de la balise &lt;error-page&gt; dans le fichier [web.xml].</span>
+      </li>
+    </ul>
+  </li>
 </ul>
-</li>
-</ul>
+
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
 <p>[index.jsp]</p>
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
@@ -2999,26 +3292,36 @@
 </code></pre></div>
 
 <ul>
-<li>
-<p>cette vue reçoit deux éléments dans son modèle :</p>
+  <li>cette vue reçoit deux éléments dans son modèle :
+    <ul>
+      <li>l&#x27;élément [<b>personnes]</b> associé à un objet de type [List] d’objets de type [Personne] : une liste de personnes.
+      </li>
+      <li>l&#x27;élément facultatif [<b>erreurs</b>] associé à un objet de type [List] d’objets de type [String] : une liste de messages d&#x27;erreur.
+      </li>
+    </ul>
+  </li>
+</ul>
+
 <ul>
-<li>l&#x27;élément [<strong>personnes]</strong> associé à un objet de type [List] d’objets de type [Personne] : une liste de personnes.</li>
-<li>l&#x27;élément facultatif [<strong>erreurs</strong>] associé à un objet de type [List] d’objets de type [String] : une liste de messages d&#x27;erreur.</li>
+  <li>lignes 31-43 : on parcourt la liste ${<b>personnes</b>} pour afficher un tableau HTML contenant les personnes du groupe.
+  </li>
+  <li>ligne 40 : l’url pointée par le lien [Modifier] est paramétrée par le champ [id] de la personne courante afin que le contrôleur associé à l’url [/do/edit] sache quelle est la personne à modifier.
+  </li>
+  <li>ligne 41 : il est fait de même pour le lien [Supprimer].
+  </li>
+  <li>ligne 37 : pour afficher la date de naissance de la personne sous la forme JJ/MM/AAAA, on utilise la balise &lt;dt&gt; de la bibliothèque de balise [DateTime] du projet Apache [Jakarta Taglibs] :
+  </li>
 </ul>
-</li>
-<li>
-<p>lignes 31-43 : on parcourt la liste ${<strong>personnes</strong>} pour afficher un tableau HTML contenant les personnes du groupe.</p>
-</li>
-<li>ligne 40 : l’url pointée par le lien [Modifier] est paramétrée par le champ [id] de la personne courante afin que le contrôleur associé à l’url [/do/edit] sache quelle est la personne à modifier.</li>
-<li>ligne 41 : il est fait de même pour le lien [Supprimer].</li>
-<li>ligne 37 : pour afficher la date de naissance de la personne sous la forme JJ/MM/AAAA, on utilise la balise &lt;dt&gt; de la bibliothèque de balise [DateTime] du projet Apache [Jakarta Taglibs] :</li>
-</ul>
+
 <p><img src="images/10000000000002610000018F782D6BE3.png" style="width:9.67cm;height:6.331cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002610000018F782D6BE3.png" /></p>
 <p>Le fichier de description de cette bibliothèque de balises est défini ligne 3.</p>
 <ul>
-<li>ligne 46 : le lien [Ajout] d&#x27;ajout d&#x27;une nouvelle personne a pour cible l&#x27;url [/do/edit] comme le lien [Modifier] de la ligne 40. C&#x27;est la valeur -1 du paramètre [id] qui indique qu&#x27;on a affaire à un ajout plutôt qu&#x27;une modification.</li>
-<li>lignes 10-18 : si l&#x27;élément ${<strong>erreurs</strong>} est dans le modèle, alors on affiche les messages d&#x27;erreurs qu&#x27;il contient.</li>
+  <li>ligne 46 : le lien [Ajout] d&#x27;ajout d&#x27;une nouvelle personne a pour cible l&#x27;url [/do/edit] comme le lien [Modifier] de la ligne 40. C&#x27;est la valeur -1 du paramètre [id] qui indique qu&#x27;on a affaire à un ajout plutôt qu&#x27;une modification.
+  </li>
+  <li>lignes 10-18 : si l&#x27;élément ${<b>erreurs</b>} est dans le modèle, alors on affiche les messages d&#x27;erreurs qu&#x27;il contient.
+  </li>
 </ul>
+
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
 <p>La vue [<a id="personnes-01-edit-jsp"></a><a id="spring-mvc-37-edit-jsp"></a>edit.jsp]</p>
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
@@ -3108,65 +3411,83 @@
 
 <p>Cette vue présente un formulaire d&#x27;ajout d&#x27;une nouvelle personne ou de mise à jour d&#x27;une personne existante. Par la suite et pour simplifier l&#x27;écriture, nous utiliserons l&#x27;unique terme de [mise à jour]. Le bouton [Valider] (ligne 73) provoque le POST du formulaire à l&#x27;url [/do/validate] (ligne 16). Si le POST échoue, la vue [edit.jsp] est réaffichée avec la ou les erreurs qui se sont produites, sinon la vue [list.jsp] est affichée.</p>
 <ul>
-<li>la vue [edit.jsp] affichée aussi bien sur un GET que sur un POST qui échoue, reçoit les éléments suivants dans son modèle :</li>
+  <li>la vue [edit.jsp] affichée aussi bien sur un GET que sur un POST qui échoue, reçoit les éléments suivants dans son modèle :
+  </li>
 </ul>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;"><b>attribut</b></p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;"><b>GET</b></p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;"><b>POST</b></p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0"><b>attribut</b></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0"><b>GET</b></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0"><b>POST</b></div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>id
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">identifiant de la personne mise</p><p style="margin:0;">à jour</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">idem</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">identifiant de la personne mise</div><div style="margin:0 0 0.5em 0">à jour</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">idem</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>version
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">sa version</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">idem</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">sa version</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">idem</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>prenom
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">son prénom</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">prénom saisi</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">son prénom</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">prénom saisi</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>nom
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">son nom</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">nom saisi</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">son nom</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">nom saisi</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>datenaissance
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">sa date de naissance</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">date de naissance saisie</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">sa date de naissance</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">date de naissance saisie</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>marie
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">son état marital</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">état marital saisi</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">son état marital</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">état marital saisi</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nbenfants
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">son nombre d&#x27;enfants</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">nombre d&#x27;enfants saisi</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">son nombre d&#x27;enfants</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">nombre d&#x27;enfants saisi</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>erreurEdit
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">vide</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">un message d&#x27;erreur signalant un échec de l&#x27;ajout</p><p style="margin:0;">ou de la modification au moment du POST provoqué</p><p style="margin:0;">par le bouton [Envoyer]. Vide si pas d&#x27;erreur.</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">vide</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">un message d&#x27;erreur signalant un échec de l&#x27;ajout</div><div style="margin:0 0 0.5em 0">ou de la modification au moment du POST provoqué</div><div style="margin:0 0 0.5em 0">par le bouton [Envoyer]. Vide si pas d&#x27;erreur.</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>erreurPrenom
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">vide</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">signale un prénom erroné – vide sinon</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">vide</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">signale un prénom erroné – vide sinon</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>erreurNom
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">vide</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">signale un nom erroné – vide sinon</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">vide</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">signale un nom erroné – vide sinon</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>erreurDateNaissance
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">vide</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">signale une date de naissance erronée – vide sinon</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">vide</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">signale une date de naissance erronée – vide sinon</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>erreurNbEnfants
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">vide</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">signale un nombre d&#x27;enfants erroné – vide sinon</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">vide</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">signale un nombre d&#x27;enfants erroné – vide sinon</div></td></tr></table>
 
 <ul>
-<li>lignes 11-15 : si le POST du formulaire se passe mal, on aura [erreurEdit!=&#x27;&#x27;] et un message d&#x27;erreur sera affiché.</li>
-<li>ligne 16 : le formulaire sera posté à l’url [/do/validate]</li>
-<li>ligne 20 : l&#x27;élément [id] du modèle est affiché</li>
-<li>ligne 24 : l&#x27;élément [version] du modèle est affiché</li>
-<li>lignes 26-32 : saisie du prénom de la personne :<ul>
-<li>lors de l’affichage initial du formulaire (GET), ${prenom} affiche la valeur actuelle du champ [prenom] de l’objet [Personne] mis à jour et ${erreurPrenom} est vide.</li>
-<li>en cas d’erreur après le POST, on réaffiche la valeur saisie ${prenom} ainsi que le message d’erreur éventuel ${erreurPrenom}</li>
+  <li>lignes 11-15 : si le POST du formulaire se passe mal, on aura [erreurEdit!=&#x27;&#x27;] et un message d&#x27;erreur sera affiché.
+  </li>
+  <li>ligne 16 : le formulaire sera posté à l’url [/do/validate]
+  </li>
+  <li>ligne 20 : l&#x27;élément [id] du modèle est affiché
+  </li>
+  <li>ligne 24 : l&#x27;élément [version] du modèle est affiché
+  </li>
+  <li>lignes 26-32 : saisie du prénom de la personne :
+    <ul>
+      <li>lors de l’affichage initial du formulaire (GET), ${prenom} affiche la valeur actuelle du champ [prenom] de l’objet [Personne] mis à jour et ${erreurPrenom} est vide.
+      </li>
+      <li>en cas d’erreur après le POST, on réaffiche la valeur saisie ${prenom} ainsi que le message d’erreur éventuel ${erreurPrenom}
+      </li>
+    </ul>
+  </li>
+  <li>lignes 33-39 : saisie du nom de la personne
+  </li>
+  <li>lignes 40-46 : saisie de la date de naissance de la personne
+  </li>
+  <li>lignes 47-61 : saisie de l’état marié ou non de la personne avec un bouton radio. On utilise la valeur du champ [marie] de l’objet [Personne] pour savoir lequel des deux boutons radio doit être coché.
+  </li>
+  <li>lignes 62-68 : saisie du nombre d’enfants de la personne
+  </li>
+  <li>ligne 71 : un champ HTML caché nommé [id] et ayant pour valeur le champ [id] de la personne en cours de mise à jour, -1 pour un ajout, autre chose pour une modification.
+  </li>
+  <li>ligne 72 :  un champ HTML caché nommé [version] et ayant pour valeur le champ [id] de la personne en cours de mise à jour.
+  </li>
+  <li>ligne 73 : le bouton [Valider] de type [Submit] du formulaire
+  </li>
+  <li>ligne 74 : un lien permettant de revenir à la liste des personnes. Il a été libellé [Annuler] parce qu’il permet de quitter le formulaire sans le valider.
+  </li>
 </ul>
-</li>
-<li>lignes 33-39 : saisie du nom de la personne</li>
-<li>lignes 40-46 : saisie de la date de naissance de la personne</li>
-<li>lignes 47-61 : saisie de l’état marié ou non de la personne avec un bouton radio. On utilise la valeur du champ [marie] de l’objet [Personne] pour savoir lequel des deux boutons radio doit être coché.</li>
-<li>lignes 62-68 : saisie du nombre d’enfants de la personne</li>
-<li>ligne 71 : un champ HTML caché nommé [id] et ayant pour valeur le champ [id] de la personne en cours de mise à jour, -1 pour un ajout, autre chose pour une modification.</li>
-<li>ligne 72 :  un champ HTML caché nommé [version] et ayant pour valeur le champ [id] de la personne en cours de mise à jour.</li>
-<li>ligne 73 : le bouton [Valider] de type [Submit] du formulaire</li>
-<li>ligne 74 : un lien permettant de revenir à la liste des personnes. Il a été libellé [Annuler] parce qu’il permet de quitter le formulaire sans le valider.</li>
-</ul>
+
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
 <p>La vue [<a id="spring-mvc-37-exception-jsp"></a>exception.jsp]</p>
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
@@ -3199,15 +3520,19 @@
 </code></pre></div>
 
 <ul>
-<li>
-<p>cette vue reçoit une clé dans son modèle l&#x27;élément [<strong>exception]</strong> qui est l’exception qui a été interceptée par le serveur web. Pour que cet élément soit inclus dans le modèle de la page JSP par le serveur web, il faut que la page ait défini la balise de la ligne 3.</p>
-</li>
-<li>
-<p>ligne 6 : on fixe à 200 le code d&#x27;état HTTP de la réponse. C&#x27;est le premier entête HTTP de la réponse. Le code 200 signifie au client que sa demande a été honorée. Généralement un document HTML a été intégré dans la réponse du serveur. C&#x27;est le cas ici. Si on ne fixe pas à 200  le code d&#x27;état HTTP de la réponse, il aura ici la valeur 500 qui signifie qu&#x27;il s&#x27;est produit une erreur. En effet, le serveur web ayant intercepté une exception non gérée trouve cette situation anormale et le signale par le code 500. La réaction au code HTTP 500 diffère selon les navigateurs : Firefox affiche le document HTML qui peut accompagner cette réponse alors qu&#x27;IE ignore ce document et affiche sa propre page. C&#x27;est pour cette raison que nous avons remplacé le code 500 par le code 200.</p>
-</li>
-<li>ligne 16 : le texte de l’exception est affiché</li>
-<li>ligne 18 : on propose à l’utilisateur un lien pour revenir à la liste des personnes</li>
+  <li>cette vue reçoit une clé dans son modèle l&#x27;élément [<b>exception]</b> qui est l’exception qui a été interceptée par le serveur web. Pour que cet élément soit inclus dans le modèle de la page JSP par le serveur web, il faut que la page ait défini la balise de la ligne 3.
+  </li>
 </ul>
+
+<ul>
+  <li>ligne 6 : on fixe à 200 le code d&#x27;état HTTP de la réponse. C&#x27;est le premier entête HTTP de la réponse. Le code 200 signifie au client que sa demande a été honorée. Généralement un document HTML a été intégré dans la réponse du serveur. C&#x27;est le cas ici. Si on ne fixe pas à 200  le code d&#x27;état HTTP de la réponse, il aura ici la valeur 500 qui signifie qu&#x27;il s&#x27;est produit une erreur. En effet, le serveur web ayant intercepté une exception non gérée trouve cette situation anormale et le signale par le code 500. La réaction au code HTTP 500 diffère selon les navigateurs : Firefox affiche le document HTML qui peut accompagner cette réponse alors qu&#x27;IE ignore ce document et affiche sa propre page. C&#x27;est pour cette raison que nous avons remplacé le code 500 par le code 200.
+  </li>
+  <li>ligne 16 : le texte de l’exception est affiché
+  </li>
+  <li>ligne 18 : on propose à l’utilisateur un lien pour revenir à la liste des personnes
+  </li>
+</ul>
+
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
 <p>La vue [<a id="personnes-01-erreurs-jsp"></a>erreurs<a id="spring-mvc-37-exception-jsp1"></a>.jsp]</p>
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
@@ -3354,27 +3679,32 @@
 </code></pre></div>
 
 <ul>
-<li>lignes 21-34 : on récupère les paramètres attendus dans le fichier [web.xml].</li>
-<li>lignes 37-39 :  le paramètre [urlErreurs] doit être obligatoirement présent car il désigne l&#x27;url de la vue [erreurs] capable d&#x27;afficher les éventuelles erreurs d&#x27;initialisation. S&#x27;il n&#x27;existe pas, on interrompt l&#x27;application en lançant une [ServletException] (ligne 39). Cette exception va remonter au serveur web et être gérée par la balise &lt;error-page&gt; du fichier [web.xml]. La vue [exception.jsp] est donc affichée :</li>
+  <li>lignes 21-34 : on récupère les paramètres attendus dans le fichier [web.xml].
+  </li>
+  <li>lignes 37-39 :  le paramètre [urlErreurs] doit être obligatoirement présent car il désigne l&#x27;url de la vue [erreurs] capable d&#x27;afficher les éventuelles erreurs d&#x27;initialisation. S&#x27;il n&#x27;existe pas, on interrompt l&#x27;application en lançant une [ServletException] (ligne 39). Cette exception va remonter au serveur web et être gérée par la balise &lt;error-page&gt; du fichier [web.xml]. La vue [exception.jsp] est donc affichée :
+  </li>
 </ul>
+
 <p><img src="images/10000000000001FF000000B3B85301EA.png" style="width:9.5cm;height:3.311cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000001FF000000B3B85301EA.png" /></p>
 <p>Le lien [Retour à la liste] ci-dessus est inopérant. L&#x27;utiliser redonne la même réponse tant que l&#x27;application n&#x27;a pas été modifiée et rechargée. Il est utile pour d&#x27;autres types d&#x27;exceptions comme nous l&#x27;avons déjà vu.</p>
 <ul>
-<li>lignes 40-43 : exploitent le fichier de configuration Spring pour récupérer une référence sur la couche [service]. Après l&#x27;initialisation du contrôleur, les méthodes de celui-ci disposent d&#x27;une référence [service] sur la couche [service] (ligne 15) qu&#x27;elles vont utiliser pour exécuter les actions demandées par l&#x27;utilisateur. Celles-ci vont être interceptées par la méthode [doGet] qui va les faire traiter par une méthode particulière du contrôleur :</li>
+  <li>lignes 40-43 : exploitent le fichier de configuration Spring pour récupérer une référence sur la couche [service]. Après l&#x27;initialisation du contrôleur, les méthodes de celui-ci disposent d&#x27;une référence [service] sur la couche [service] (ligne 15) qu&#x27;elles vont utiliser pour exécuter les actions demandées par l&#x27;utilisateur. Celles-ci vont être interceptées par la méthode [doGet] qui va les faire traiter par une méthode particulière du contrôleur :
+  </li>
 </ul>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;"><b>Url</b></p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;"><b>Méthode HTTP</b></p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;"><b>méthode contrôleur</b></p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0"><b>Url</b></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0"><b>Méthode HTTP</b></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0"><b>méthode contrôleur</b></div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>/do/list
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">GET</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">doListPersonnes</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">GET</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">doListPersonnes</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>/do/edit
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">GET</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">doEditPersonne</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">GET</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">doEditPersonne</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>/do/validate
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">POST</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">doValidatePersonne</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">POST</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">doValidatePersonne</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="err">/do/delete</span>
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">GET</p></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">doDeletePersonne</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">GET</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">doDeletePersonne</div></td></tr></table>
 
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
 <p>La méthode [doGet<span style="color: #000000">]</span></p>
@@ -3429,15 +3759,24 @@
 </code></pre></div>
 
 <ul>
-<li>lignes 7-13 : on vérifie que la liste des erreurs d&#x27;initialisation est vide. Si ce n&#x27;est pas le cas, on fait afficher la vue [erreurs(erreurs)] qui va signaler la ou les erreurs.</li>
-<li>ligne 15 : on récupère la méthode [get] ou [post] que le client a utilisée pour faire sa requête.</li>
-<li>ligne 17 : on récupère la valeur du paramètre [action] de la requête.</li>
-<li>lignes 23-27 : traitement de la requête [GET /do/list] qui demande la liste des personnes.</li>
-<li>lignes 28-32 : traitement de la requête [GET /do/delete] qui demande la suppression d&#x27;une personne.</li>
-<li>lignes 33-37 : traitement de la requête [GET /do/edit] qui demande le formulaire de mise à jour d&#x27;une personne.</li>
-<li>lignes 38-42 : traitement de la requête [POST /do/validate] qui demande la validation de la personne mise à jour.</li>
-<li>ligne 44 : si l&#x27;action demandée n&#x27;est pas l&#x27;une des cinq précédentes, alors on fait comme si c&#x27;était [GET /do/list].</li>
+  <li>lignes 7-13 : on vérifie que la liste des erreurs d&#x27;initialisation est vide. Si ce n&#x27;est pas le cas, on fait afficher la vue [erreurs(erreurs)] qui va signaler la ou les erreurs.
+  </li>
+  <li>ligne 15 : on récupère la méthode [get] ou [post] que le client a utilisée pour faire sa requête.
+  </li>
+  <li>ligne 17 : on récupère la valeur du paramètre [action] de la requête.
+  </li>
+  <li>lignes 23-27 : traitement de la requête [GET /do/list] qui demande la liste des personnes.
+  </li>
+  <li>lignes 28-32 : traitement de la requête [GET /do/delete] qui demande la suppression d&#x27;une personne.
+  </li>
+  <li>lignes 33-37 : traitement de la requête [GET /do/edit] qui demande le formulaire de mise à jour d&#x27;une personne.
+  </li>
+  <li>lignes 38-42 : traitement de la requête [POST /do/validate] qui demande la validation de la personne mise à jour.
+  </li>
+  <li>ligne 44 : si l&#x27;action demandée n&#x27;est pas l&#x27;une des cinq précédentes, alors on fait comme si c&#x27;était [GET /do/list].
+  </li>
 </ul>
+
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
 <p>La méthode [doListPersonnes<span style="color: #000000">]</span></p>
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
@@ -3455,9 +3794,12 @@
 </code></pre></div>
 
 <ul>
-<li><span style="color: #000000">ligne 4 : on demande à la couche [service] la liste des personnes du groupe et on met celle-ci dans le modèle sous la clé &quot; personnes &quot;.</span></li>
-<li><span style="color: #000000">ligne 6 : on fait afficher la vue [list.jsp] décrite paragraphe <a href="#spring-mvc-37-list-jsp">3.4.3.2</a>.</span></li>
+  <li><span style="color: #000000">ligne 4 : on demande à la couche [service] la liste des personnes du groupe et on met celle-ci dans le modèle sous la clé &quot; personnes &quot;.</span>
+  </li>
+  <li><span style="color: #000000">ligne 6 : on fait afficher la vue [list.jsp] décrite paragraphe <a href="#spring-mvc-37-list-jsp">3.4.3.2</a>.</span>
+  </li>
 </ul>
+
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
 <p>La méthode [doDeletePersonne<span style="color: #000000">]</span></p>
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
@@ -3500,13 +3842,18 @@
 </code></pre></div>
 
 <ul>
-<li><span style="color: #000000">ligne 4 : l’url traitée est de la forme [/do/delete?id=XX]. On récupère la valeur [XX] du paramètre [id].</span></li>
-<li><span style="color: #000000">ligne 6 : on demande à la couche [service] la suppression de la personne ayant l’id obtenu. Nous ne faisons aucune vérification. Si la personne qu’on cherche à supprimer n’existe pas, la couche [dao] lance une exception que laisse remonter la couche [service]. Nous ne la gérons pas non plus ici, dans le contrôleur. Elle remontera donc jusqu’au serveur web qui par configuration fera afficher la page [exception.jsp], décrite paragraphe <a href="#spring-mvc-37-exception-jsp">3.4.3.2</a> :</span></li>
+  <li><span style="color: #000000">ligne 4 : l’url traitée est de la forme [/do/delete?id=XX]. On récupère la valeur [XX] du paramètre [id].</span>
+  </li>
+  <li><span style="color: #000000">ligne 6 : on demande à la couche [service] la suppression de la personne ayant l’id obtenu. Nous ne faisons aucune vérification. Si la personne qu’on cherche à supprimer n’existe pas, la couche [dao] lance une exception que laisse remonter la couche [service]. Nous ne la gérons pas non plus ici, dans le contrôleur. Elle remontera donc jusqu’au serveur web qui par configuration fera afficher la page [exception.jsp], décrite paragraphe <a href="#spring-mvc-37-exception-jsp">3.4.3.2</a> :</span>
+  </li>
 </ul>
+
 <p><img src="images/10000000000001DB000000B57C26FF30.png" style="width:8.8cm;height:3.35cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000001DB000000B57C26FF30.png" /></p>
 <ul>
-<li><span style="color: #000000">ligne 9 : si la suppression a eu lieu (pas d’exception), on demande au client de se rediriger vers l&#x27;Url relative [list]. Comme celle qui vient d&#x27;être traitée est [/do/delete], l&#x27;Url de redirection sera [/do/list]. Le navigateur sera donc amené à faire un [GET /do/list] qui provoquera l&#x27;affichage de la liste des personnes.</span></li>
+  <li><span style="color: #000000">ligne 9 : si la suppression a eu lieu (pas d’exception), on demande au client de se rediriger vers l&#x27;Url relative [list]. Comme celle qui vient d&#x27;être traitée est [/do/delete], l&#x27;Url de redirection sera [/do/list]. Le navigateur sera donc amené à faire un [GET /do/list] qui provoquera l&#x27;affichage de la liste des personnes.</span>
+  </li>
 </ul>
+
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
 <p>La méthode [doEditPersonne<span style="color: #000000">]</span></p>
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
@@ -3539,8 +3886,10 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004F1000001DDAC30A2B2.png" style="display:inline-block; margin:4px;width:16.736cm;height:6.311cm;" class="odt-zoomable" data-zoom-src="images/10000000000004F1000001DDAC30A2B2.png" /></td></tr></table>
 
 <ul>
-<li>en [1] ci-dessus, le formulaire d&#x27;ajout et en [2] le formulaire de modification.</li>
+  <li>en [1] ci-dessus, le formulaire d&#x27;ajout et en [2] le formulaire de modification.
+  </li>
 </ul>
+
 <p>Le code de la méthode [doEditPersonne] est le suivant :</p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
 <span class="odt-code-line">// modification / ajout d&#x27;une personne</span>
@@ -3580,21 +3929,28 @@
 </code></pre></div>
 
 <ul>
-<li>
-<p><span style="color: #000000">le GET a pour cible une url du type [/do/edit?id=XX]. Ligne 4, nous récupérons la valeur de [id]. Ensuite il y a deux cas :</span></p>
-<ol>
-<li><span style="color: #000000">id est différent de -1. Alors il s’agit d’une modification et il faut afficher un formulaire pré-rempli avec les informations de la personne à modifier. Ligne 9, cette personne est demandée à la couche [service].</span></li>
-<li><span style="color: #000000">id est égal à -1. Alors il s’agit d’un ajout et il faut afficher un formulaire vide. Pour cela, une personne vide est créée ligne 14.</span></li>
-<li><span style="color: #000000">dans les deux cas, les éléments [id, version] du modèle de la page [edit.jsp] décrite paragraphe <a href="#personnes-01-edit-jsp">3.4.3.2</a> sont initialisés.</span></li>
-</ol>
-</li>
-<li>
-<p><span style="color: #000000">l&#x27;objet [Personne] obtenu est placé dans le modèle de la page [edit.jsp]. Ce modèle comprend les éléments suivants [erreurEdit, id, version, prenom, erreurPrenom, nom, erreurNom, datenaissance, erreurDateNaissance, marie, nbenfants, erreurNbEnfants]. Ces éléments sont initialisés lignes 19-31 à l&#x27;exception de ceux dont la valeur est la chaîne vide [erreurPrenom, erreurNom, erreurDateNaissance,  erreurNbEnfants]. On sait qu&#x27;en leur absence dans le modèle, la bibliothèque JSTL affichera une chaîne vide pour leur valeur. Bien que l&#x27;élément [erreurEdit] ait également pour valeur une chaîne vide, il est néanmoins initialisé car un test est fait sur sa valeur dans la page [edit.jsp].</span></p>
-</li>
-<li>
-<p><span style="color: #000000">une fois le modèle prêt, le contrôle est passé à la page [edit.jsp], ligne 33, qui va générer la vue [edit].</span></p>
-</li>
+  <li><span style="color: #000000">le GET a pour cible une url du type [/do/edit?id=XX]. Ligne 4, nous récupérons la valeur de [id]. Ensuite il y a deux cas :</span>
+    <ol>
+      <li><span style="color: #000000">id est différent de -1. Alors il s’agit d’une modification et il faut afficher un formulaire pré-rempli avec les informations de la personne à modifier. Ligne 9, cette personne est demandée à la couche [service].</span>
+      </li>
+      <li><span style="color: #000000">id est égal à -1. Alors il s’agit d’un ajout et il faut afficher un formulaire vide. Pour cela, une personne vide est créée ligne 14.</span>
+      </li>
+      <li><span style="color: #000000">dans les deux cas, les éléments [id, version] du modèle de la page [edit.jsp] décrite paragraphe <a href="#personnes-01-edit-jsp">3.4.3.2</a> sont initialisés.</span>
+      </li>
+    </ol>
+  </li>
 </ul>
+
+<ul>
+  <li><span style="color: #000000">l&#x27;objet [Personne] obtenu est placé dans le modèle de la page [edit.jsp]. Ce modèle comprend les éléments suivants [erreurEdit, id, version, prenom, erreurPrenom, nom, erreurNom, datenaissance, erreurDateNaissance, marie, nbenfants, erreurNbEnfants]. Ces éléments sont initialisés lignes 19-31 à l&#x27;exception de ceux dont la valeur est la chaîne vide [erreurPrenom, erreurNom, erreurDateNaissance,  erreurNbEnfants]. On sait qu&#x27;en leur absence dans le modèle, la bibliothèque JSTL affichera une chaîne vide pour leur valeur. Bien que l&#x27;élément [erreurEdit] ait également pour valeur une chaîne vide, il est néanmoins initialisé car un test est fait sur sa valeur dans la page [edit.jsp].</span>
+  </li>
+</ul>
+
+<ul>
+  <li><span style="color: #000000">une fois le modèle prêt, le contrôle est passé à la page [edit.jsp], ligne 33, qui va générer la vue [edit].</span>
+  </li>
+</ul>
+
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
 <p>La méthode [doValidatePersonne<span style="color: #000000">]</span></p>
 <hr style="border:0; border-top:0.06pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
@@ -3733,18 +4089,30 @@
 </code></pre></div>
 
 <ul>
-<li><span style="color: #000000">lignes 7-13 : le paramètre [prenom] de la requête POST est récupéré et sa validité vérifiée. S&#x27;il s&#x27;avère incorrect, l&#x27;élément [erreurPrenom] est initialisé avec un message d&#x27;erreur et placé dans les attributs de la requête.</span></li>
-<li><span style="color: #000000">lignes 15-21 : on opère de façon similaire pour le paramètre [nom]</span></li>
-<li><span style="color: #000000">lignes 23-30 : on opère de façon similaire pour le paramètre [datenaissance]</span></li>
-<li><span style="color: #000000">ligne 32 : on récupère le paramètre [marie]. On ne fait pas de vérification sur sa validité parce qu&#x27;à priori il provient de la valeur d&#x27;un bouton radio. Ceci dit, rien n&#x27;empêche un programme de faire un [POST /.../do/validate] accompagné d&#x27;un paramètre [marie] fantaisiste. Nous devrions donc tester la validité de ce paramètre. Ici, on se repose sur notre gestion des exceptions qui provoquent l&#x27;affichage de la page [exception.jsp] si le contrôleur ne les gère pas lui-même. Si donc, la conversion du paramètre [marie] en booléen échoue ligne 32, une exception en sortira qui aboutira à l&#x27;envoi de la page [exception.jsp] au client. Ce fonctionnement nous convient.</span></li>
-<li><span style="color: #000000">lignes 34-50 : on récupère le paramètre [nbenfants] et on vérifie sa valeur.</span></li>
-<li><span style="color: #000000">ligne 52 : on récupère le paramètre [id] sans vérifier sa valeur</span></li>
-<li><span style="color: #000000">lignes 54-59 : si le formulaire est erroné, il est réaffiché avec les messages d&#x27;erreurs construits précédemment</span></li>
-<li><span style="color: #000000">lignes 62-67 : s&#x27;il est valide, on construit un nouvel objet [Personne] avec les éléments du formulaire</span></li>
-<li><span style="color: #000000">lignes 69-82 : la personne est sauvegardée. La sauvegarde peut échouer. Dans un cadre multi-utilisateurs, la personne à modifier a pu être supprimée ou bien déjà modifiée par quelqu’un d’autre. Dans ce cas, la couche [dao] va lancer une exception qu’on gère ici.</span></li>
-<li><span style="color: #000000">ligne 84 : s’il n’y a pas eu d’exception, on redirige le client vers l’url [/do/list] pour lui présenter le nouvel état du groupe.</span></li>
-<li><span style="color: #000000">ligne 79 : s’il y a eu exception lors de la sauvegarde, on redemande le réaffichage du formulaire initial en lui passant le message d&#x27;erreur de l&#x27;exception (3ième paramètre).</span></li>
+  <li><span style="color: #000000">lignes 7-13 : le paramètre [prenom] de la requête POST est récupéré et sa validité vérifiée. S&#x27;il s&#x27;avère incorrect, l&#x27;élément [erreurPrenom] est initialisé avec un message d&#x27;erreur et placé dans les attributs de la requête.</span>
+  </li>
+  <li><span style="color: #000000">lignes 15-21 : on opère de façon similaire pour le paramètre [nom]</span>
+  </li>
+  <li><span style="color: #000000">lignes 23-30 : on opère de façon similaire pour le paramètre [datenaissance]</span>
+  </li>
+  <li><span style="color: #000000">ligne 32 : on récupère le paramètre [marie]. On ne fait pas de vérification sur sa validité parce qu&#x27;à priori il provient de la valeur d&#x27;un bouton radio. Ceci dit, rien n&#x27;empêche un programme de faire un [POST /.../do/validate] accompagné d&#x27;un paramètre [marie] fantaisiste. Nous devrions donc tester la validité de ce paramètre. Ici, on se repose sur notre gestion des exceptions qui provoquent l&#x27;affichage de la page [exception.jsp] si le contrôleur ne les gère pas lui-même. Si donc, la conversion du paramètre [marie] en booléen échoue ligne 32, une exception en sortira qui aboutira à l&#x27;envoi de la page [exception.jsp] au client. Ce fonctionnement nous convient.</span>
+  </li>
+  <li><span style="color: #000000">lignes 34-50 : on récupère le paramètre [nbenfants] et on vérifie sa valeur.</span>
+  </li>
+  <li><span style="color: #000000">ligne 52 : on récupère le paramètre [id] sans vérifier sa valeur</span>
+  </li>
+  <li><span style="color: #000000">lignes 54-59 : si le formulaire est erroné, il est réaffiché avec les messages d&#x27;erreurs construits précédemment</span>
+  </li>
+  <li><span style="color: #000000">lignes 62-67 : s&#x27;il est valide, on construit un nouvel objet [Personne] avec les éléments du formulaire</span>
+  </li>
+  <li><span style="color: #000000">lignes 69-82 : la personne est sauvegardée. La sauvegarde peut échouer. Dans un cadre multi-utilisateurs, la personne à modifier a pu être supprimée ou bien déjà modifiée par quelqu’un d’autre. Dans ce cas, la couche [dao] va lancer une exception qu’on gère ici.</span>
+  </li>
+  <li><span style="color: #000000">ligne 84 : s’il n’y a pas eu d’exception, on redirige le client vers l’url [/do/list] pour lui présenter le nouvel état du groupe.</span>
+  </li>
+  <li><span style="color: #000000">ligne 79 : s’il y a eu exception lors de la sauvegarde, on redemande le réaffichage du formulaire initial en lui passant le message d&#x27;erreur de l&#x27;exception (3ième paramètre).</span>
+  </li>
 </ul>
+
 <p>La méthode [showFormulaire] (lignes 88-97) construit le modèle nécessaire à la page [edit.jsp] avec les valeurs saisies (<em>request.getParameter(&quot; ... &quot;))</em>. On se rappelle que les messages d&#x27;erreurs ont déjà été placés dans le modèle par la méthode [doValidatePersonne]. La page [edit.jsp] est affichée ligne 99.</p>
 <h3 id="344-les-tests-de-lapplication-web">3.4.4. Les tests de l’application web</h3>
 <p>Un certain nombre de tests ont été présentés au paragraphe <a href="#spring-mvc-37-ecrans">3.4.1</a>. Nous invitons le lecteur à les rejouer. Nous montrons ici d’autres copies d’écran qui illustrent les cas de conflits d’accès aux données dans un cadre multi-utilisateurs :</p>
@@ -3778,9 +4146,12 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004ED00000143D2E7D971.png" style="display:inline-block; margin:4px;width:16.683cm;height:4.274cm;" class="odt-zoomable" data-zoom-src="images/10000000000004ED00000143D2E7D971.png" /></td></tr></table>
 
 <ul>
-<li><span style="color: #000000">en [1] : le nouveau projet Eclipse. On notera la disparition des paquetages [service, dao, entites]. Ceux-ci ont été encapsulés dans l&#x27;archive [service-dao-jpa-personne.jar] [2] placée dans [WEB-INF/lib].</span></li>
-<li><span style="color: #000000">le dossier du projet est en [4]. On l&#x27;importera.</span></li>
+  <li><span style="color: #000000">en [1] : le nouveau projet Eclipse. On notera la disparition des paquetages [service, dao, entites]. Ceux-ci ont été encapsulés dans l&#x27;archive [service-dao-jpa-personne.jar] [2] placée dans [WEB-INF/lib].</span>
+  </li>
+  <li><span style="color: #000000">le dossier du projet est en [4]. On l&#x27;importera.</span>
+  </li>
 </ul>
+
 <p><span style="color: #000000">Il n&#x27;y a rien de plus à faire. Lorsque la nouvelle application web est lancée et qu&#x27;on demande la liste des personnes, on reçoit la réponse suivante :</span></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000028B000000CBC1E2BE00.png" style="display:inline-block; margin:4px;width:11.857cm;height:3.697cm;" class="odt-zoomable" data-zoom-src="images/100000000000028B000000CBC1E2BE00.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">&nbsp;</td></tr></table>
 
@@ -3798,8 +4169,10 @@
 </code></pre></div>
 
 <ul>
-<li><span style="color: #000000">ligne 7 : l&#x27;entité <em>Personne</em> est déclarée.</span></li>
+  <li><span style="color: #000000">ligne 7 : l&#x27;entité <i>Personne</i> est déclarée.</span>
+  </li>
 </ul>
+
 <p><span style="color: #000000">Ceci fait, l&#x27;exception disparaît :</span></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000026F000000EF07E60F33.png" style="display:inline-block; margin:4px;width:11.539cm;height:4.431cm;" class="odt-zoomable" data-zoom-src="images/100000000000026F000000EF07E60F33.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">&nbsp;</td></tr></table>
 
@@ -3807,10 +4180,14 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004E3000001761CEC0C4A.png" style="display:inline-block; margin:4px;width:16.551cm;height:4.948cm;" class="odt-zoomable" data-zoom-src="images/10000000000004E3000001761CEC0C4A.png" /></td></tr></table>
 
 <ul>
-<li><span style="color: #000000">en [1] : le nouveau projet Eclipse</span></li>
-<li><span style="color: #000000">en [2] : les bibliothèques Toplink ont remplacé les bibliothèques Hibernate</span></li>
-<li><span style="color: #000000">le dossier du projet est en [4]. On l&#x27;importera.</span></li>
+  <li><span style="color: #000000">en [1] : le nouveau projet Eclipse</span>
+  </li>
+  <li><span style="color: #000000">en [2] : les bibliothèques Toplink ont remplacé les bibliothèques Hibernate</span>
+  </li>
+  <li><span style="color: #000000">le dossier du projet est en [4]. On l&#x27;importera.</span>
+  </li>
 </ul>
+
 <p><span style="color: #000000">Changer d&#x27;implémentation JPA n&#x27;implique que quelques changements dans le fichier [spring-config.xml]. Rien d&#x27;autre ne change. Les changements amenés dans le fichier [spring-config.xml] ont été expliqués au paragraphe <a href="#spring-agent-toplink">3.1.9</a> :</span></p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-xml">
 <span class="odt-code-line"><span style="color:#008080">&lt;?</span><span style="color:#3f7f7f">xml </span><span style="color:#7f007f">version</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;1.0&quot; </span><span style="color:#7f007f">encoding</span><span style="color:#000000">=</span><span style="color:#2a00ff">&quot;UTF-8&quot;</span><span style="color:#008080">?&gt;</span></span>
@@ -3834,9 +4211,12 @@
 
 <p>Peu de lignes doivent être changées pour passer d&#x27;Hibernate à Toplink :</p>
 <ul>
-<li>ligne 11 : l&#x27;implémentation JPA est désormais faite par Toplink</li>
-<li>ligne 13 : la propriété [databasePlatform] a une autre valeur qu&#x27;avec Hibernate : le nom d&#x27;une classe propre à Toplink. Où trouver ce nom a été expliqué au paragraphe <a href="les-entites-jpa.html#conf-jpa-toplink">2.1.15.2</a>.</li>
+  <li>ligne 11 : l&#x27;implémentation JPA est désormais faite par Toplink
+  </li>
+  <li>ligne 13 : la propriété [databasePlatform] a une autre valeur qu&#x27;avec Hibernate : le nom d&#x27;une classe propre à Toplink. Où trouver ce nom a été expliqué au paragraphe <a href="les-entites-jpa.html#conf-jpa-toplink">2.1.15.2</a>.
+  </li>
 </ul>
+
 <p>C&#x27;est tout. On notera la facilité avec laquelle on peut changer de SGBD ou d&#x27;implémentation JPA avec Spring. On n&#x27;a quand même pas tout a fait fini. Lorsqu&#x27;on exécute l&#x27;application, on a une exception :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000028B000000D2F3721337.png" style="display:inline-block; margin:4px;width:12.06cm;height:3.889cm;" class="odt-zoomable" data-zoom-src="images/100000000000028B000000D2F3721337.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">&nbsp;</td></tr></table>
 
@@ -3844,10 +4224,14 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000048C000001DE60C4A03E.png" style="display:inline-block; margin:4px;width:15.399cm;height:6.324cm;" class="odt-zoomable" data-zoom-src="images/100000000000048C000001DE60C4A03E.png" /></td></tr></table>
 
 <ul>
-<li><span style="color: #000000">en [1] : on a pris l&#x27;option [Run / Run...] pour modifier la configuration de Tomcat</span></li>
-<li><span style="color: #000000">en [2] : on a sélectionné l&#x27;onglet [Arguments]</span></li>
-<li><span style="color: #000000">en [3] : on a rajouté le paramètre -</span><strong><span style="color: #000000">javaagent</span></strong><span style="color: #000000"> tel qu&#x27;il a été décrit au paragraphe </span><span style="color: #000000"><a href="#spring-agent-toplink">3.1.9</a></span><span style="color: #000000">.</span></li>
+  <li><span style="color: #000000">en [1] : on a pris l&#x27;option [Run / Run...] pour modifier la configuration de Tomcat</span>
+  </li>
+  <li><span style="color: #000000">en [2] : on a sélectionné l&#x27;onglet [Arguments]</span>
+  </li>
+  <li><span style="color: #000000">en [3] : on a rajouté le paramètre -</span><b><span style="color: #000000">javaagent</span></b><span style="color: #000000"> tel qu&#x27;il a été décrit au paragraphe </span><span style="color: #000000"><a href="#spring-agent-toplink">3.1.9</a></span><span style="color: #000000">.</span>
+  </li>
 </ul>
+
 <p><span style="color: #000000">Ceci fait, on peut demander la liste des personnes :</span></p>
 <p><img src="images/1000000000000275000000F5A59D552D.png" style="width:11.65cm;height:4.54cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/1000000000000275000000F5A59D552D.png" /></p>
 <h2 id="35-autres-exemples">3.5. Autres exemples</h2>
@@ -3855,9 +4239,12 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000034700000205761570EF.png" style="display:inline-block; margin:4px;width:11.1cm;height:6.84cm;" class="odt-zoomable" data-zoom-src="images/100000000000034700000205761570EF.png" /></td></tr></table>
 
 <ul>
-<li><span style="color: #000000">en [1] : le projet Eclipse</span></li>
-<li><span style="color: #000000">en [3] : son emplacement dans le dossier des exemples. On l&#x27;importera.</span></li>
+  <li><span style="color: #000000">en [1] : le projet Eclipse</span>
+  </li>
+  <li><span style="color: #000000">en [3] : son emplacement dans le dossier des exemples. On l&#x27;importera.</span>
+  </li>
 </ul>
+
 <p><span style="color: #000000">Nous avons repris la configuration [jboss-config.xml, persistence.xml] décrite au paragraphe <a href="#jbossejb3-personne">3.2</a>, puis avons modifié la méthode [init] du contrôleur [Application.java] de la façon suivante :</span></p>
 <div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-javascript">
 <span class="odt-code-line">// init</span>
@@ -3912,9 +4299,12 @@
 </code></pre></div>
 
 <ul>
-<li><span style="color: #000000">lignes 28-38 : on démarre le conteneur Ejb3. Celui-ci remplace le conteneur Spring.</span></li>
-<li><span style="color: #000000">ligne 41 : on demande une référence sur la couche [service] de l&#x27;application.</span></li>
+  <li><span style="color: #000000">lignes 28-38 : on démarre le conteneur Ejb3. Celui-ci remplace le conteneur Spring.</span>
+  </li>
+  <li><span style="color: #000000">ligne 41 : on demande une référence sur la couche [service] de l&#x27;application.</span>
+  </li>
 </ul>
+
 <p><span style="color: #000000">A priori, ce sont les seules modifications à apporter. A l&#x27;exécution, on a l&#x27;erreur suivante :</span></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000288000001024C9BB7B9.png" style="display:inline-block; margin:4px;width:11.841cm;height:4.713cm;" class="odt-zoomable" data-zoom-src="images/1000000000000288000001024C9BB7B9.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">&nbsp;</td></tr></table>
 
