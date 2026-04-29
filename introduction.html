@@ -141,9 +141,9 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_0">
     
-      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_1" hidden>
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
       </label>
     
@@ -151,9 +151,9 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_1">
     
-      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_0" hidden>
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
       </label>
     
@@ -556,7 +556,7 @@
 <p>Les exemples du document sont disponibles |<a href="https://1drv.ms/u/c/f53a919f43d27eb5/IQBzEAmMYmfsS6hfv1vS5xTyAZXbc04wXWuR9E9VBNnyLaA?e=1lE8zo">ICI</a>|.</p>
 <p>On se propose ici de découvrir les concepts principaux de la persistance de données avec l&#x27;API JPA (Java Persistence Api). Après avoir lu ce document et en avoir testé les exemples, le lecteur devrait avoir acquis les bases nécessaires pour voler ensuite de ses propres ailes.</p>
 <p>L&#x27;API JPA est récente. Elle n&#x27;a été disponible qu&#x27;à partir du JDK 1.5. La couche JPA a sa place dans une architecture multi-couches. Considérons une telle architecture assez répandue, celle à trois couches :</p>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006870000011D90417578.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.069cm;" class="odt-zoomable" data-zoom-src="images/10000000000006870000011D90417578.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006870000011D90417578.png" width="680" height="116" style="display:inline-block; margin:4px;width:17.997cm;height:3.069cm;" class="odt-zoomable" data-zoom-src="images/10000000000006870000011D90417578.png" /></td></tr></table>
 
 <ul>
 <li>la couche [1], appelée ici [ui] (User Interface) est la couche qui dialogue avec l&#x27;utilisateur, via une interface graphique Swing, une interface console ou une interface web. Elle a pour rôle de fournir des données provenant de l&#x27;utilisateur à la couche [2] ou bien de présenter à l&#x27;utilisateur des données fournies par la couche [2].</li>
@@ -565,7 +565,7 @@
 <li>la couche [JDBC] est la couche standard utilisée en Java pour accéder à des bases de données. C&#x27;est ce qu&#x27;on appelle habituellement le pilote Jdbc du SGBD.</li>
 </ul>
 <p>De multiples efforts ont été faits pour faciliter l&#x27;écriture des ces différentes couches par les développeurs. Parmi ceux-ci, JPA vise à faciliter l&#x27;écriture de la couche [dao], celle qui gère les données dites persistantes, d&#x27;où le nom de l&#x27;API (Java Persistence Api). Une solution qui a percé ces dernières années dans ce domaine, est celle d&#x27;<strong>Hibernate</strong> :</p>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006950000011E3D831AFC.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.053cm;" class="odt-zoomable" data-zoom-src="images/10000000000006950000011E3D831AFC.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006950000011E3D831AFC.png" width="680" height="115" style="display:inline-block; margin:4px;width:17.997cm;height:3.053cm;" class="odt-zoomable" data-zoom-src="images/10000000000006950000011E3D831AFC.png" /></td></tr></table>
 
 <p>La couche [Hibernate] vient se placer entre la couche [dao] écrite par le développeur et la couche [Jdbc]. Hibernate est un ORM (Object Relational Mapping), un outil qui fait le pont entre le monde relationnel des bases de données et celui des objets manipulés par Java. Le développeur de la couche [dao] ne voit plus la couche [Jdbc] ni les tables de la base de données dont il veut exploiter le contenu. Il ne voit que l&#x27;image objet de la base de données, image objet fournie par la couche [Hibernate]. Le pont entre les tables de la base de données et les objets manipulés par la couche [dao] est faite principalement de deux façons :</p>
 <ul>
@@ -576,10 +576,10 @@
 <p>La couche [4] des objets, image de la BD est appelée &quot;contexte de persistance&quot;. Une couche [dao] s&#x27;appuyant sur Hibernate fait des actions de persistance (CRUD, create - read - update - delete) sur les objets du contexte de persistance, actions traduites par Hibernate en ordres SQL. Pour les actions d&#x27;interrogation de la base (le SQL Select), Hibernate fournit au développeur, un langage HQL (Hibernate Query Language) pour interroger le contexte de persistance [4] et non la BD elle-même.</p>
 <p>Hibernate est populaire mais complexe à maîtriser. La courbe d&#x27;apprentissage souvent présentée comme facile est en fait assez raide. Dès qu&#x27;on a une base de données avec des tables ayant des relations un-à-plusieurs ou plusieurs-à-plusieurs, la configuration du pont relationnel / objets n&#x27;est pas à la portée du premier débutant venu. Des erreurs de configuration peuvent alors conduire à des applications peu performantes.</p>
 <p>Dans le monde commercial, il existait un produit équivalent à Hibernate appelé Toplink :</p>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006C20000012271EFE4FA.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.016cm;" class="odt-zoomable" data-zoom-src="images/10000000000006C20000012271EFE4FA.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006C20000012271EFE4FA.png" width="680" height="114" style="display:inline-block; margin:4px;width:17.997cm;height:3.016cm;" class="odt-zoomable" data-zoom-src="images/10000000000006C20000012271EFE4FA.png" /></td></tr></table>
 
 <p>Devant le succès des produits ORM, Sun le créateur de Java, a décidé de standardiser une couche ORM via une spécification appelée JPA apparue en même temps que Java 5. La spécification JPA a été implémentée par les deux produits <strong>Toplink</strong> et <strong>Hibernate</strong>. Toplink qui était un produit commercial est devenu depuis un produit libre. Avec JPA, l&#x27;architecture précédente devient la suivante :</p>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006BD00000122CB1D6B40.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.025cm;" class="odt-zoomable" data-zoom-src="images/10000000000006BD00000122CB1D6B40.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006BD00000122CB1D6B40.png" width="680" height="114" style="display:inline-block; margin:4px;width:17.997cm;height:3.025cm;" class="odt-zoomable" data-zoom-src="images/10000000000006BD00000122CB1D6B40.png" /></td></tr></table>
 
 <p>La couche [dao] dialogue maintenant avec la spécification JPA, un ensemble d&#x27;interfaces. Le développeur y a gagné en standardisation. Avant, s&#x27;il changeait sa couche ORM, il devait également changer sa couche [dao] qui avait été écrite pour dialoguer avec un ORM spécifique. Maintenant, il va écrire une couche [dao] qui va dialoguer avec une couche JPA. Quelque soit le produit qui implémente celle-ci, l&#x27;interface de la couche JPA présentée à la couche [dao] reste la même.</p>
 <p>Ce document va présenter des exemples JPA dans divers domaines :</p>
@@ -592,13 +592,13 @@
 </li>
 </ul>
 <p>Pour illustrer ce domaine, nous créerons des architectures de test suivantes :</p>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006BF000001181CBAA76F.png" style="display:inline-block; margin:4px;width:17.997cm;height:2.917cm;" class="odt-zoomable" data-zoom-src="images/10000000000006BF000001181CBAA76F.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006BF000001181CBAA76F.png" width="680" height="110" style="display:inline-block; margin:4px;width:17.997cm;height:2.917cm;" class="odt-zoomable" data-zoom-src="images/10000000000006BF000001181CBAA76F.png" /></td></tr></table>
 
 <p>Nos programmes de tests seront des applications console qui interrogeront directement la couche JPA. Nous découvrirons à cette occasion les principales méthodes de la couche JPA. Nous serons dans un environnement dit &quot;Java SE&quot; (Standard Edition). JPA fonctionne à la fois dans un environnement Java SE et Java EE5 (Edition Entreprise).</p>
 <ul>
 <li>lorsque nous maîtriserons à la fois la configuration du pont relationnel / objet et l&#x27;utilisation des méthodes de la couche JPA, nous reviendrons à une architecture multi-couches plus classique :</li>
 </ul>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006F6000001712DB9AB08.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.727cm;" class="odt-zoomable" data-zoom-src="images/10000000000006F6000001712DB9AB08.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006F6000001712DB9AB08.png" width="680" height="141" style="display:inline-block; margin:4px;width:17.997cm;height:3.727cm;" class="odt-zoomable" data-zoom-src="images/10000000000006F6000001712DB9AB08.png" /></td></tr></table>
 
 <p>La couche [JPA] sera accédée via une architecture à 2 couches [metier] et [dao]. Le framework Spring [7], puis le conteneur EJB3 de JBoss seront utilisés pour lier ces couches entre-elles.</p>
 <p>Nous avons dit plus haut que JPA était disponible dans les environnements SE et EE5. L&#x27;environnement Java EE5 délivre de nombreux services dans le domaine de l&#x27;accès aux données persistantes notamment les pools de connexion, les gestionnaire de transactions, ... Il peut être intéressant pour un développeur de profiter de ces services. L&#x27;environnement Java EE5 n&#x27;est pas encore très répandu (mai 2007). On le trouve actuellement sur le serveurs d&#x27;application <em>Sun Application Server 9.x (Glassfish)</em>. Un serveur d&#x27;application est essentiellement un serveur d&#x27;applications web. Si on construit une application graphique autonome de type Swing, on ne peut disposer de l&#x27;environnement EE et des services qu&#x27;il apporte. C&#x27;est un problème. On commence à voir des environnements EE &quot;stand-alone&quot;, c.a.d. pouvant être utilisés en-dehors d&#x27;un serveur d&#x27;applications. C&#x27;est le cas de JBos EJB3 que nous allons utiliser dans ce document.</p>
@@ -615,7 +615,7 @@
 <p>nous terminerons le document avec un exemple d&#x27;application web à trois couches, basique mais néanmoins représentative :</p>
 </li>
 </ul>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000071C0000016E67BAC4C9.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.618cm;" class="odt-zoomable" data-zoom-src="images/100000000000071C0000016E67BAC4C9.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000071C0000016E67BAC4C9.png" width="680" height="137" style="display:inline-block; margin:4px;width:17.997cm;height:3.618cm;" class="odt-zoomable" data-zoom-src="images/100000000000071C0000016E67BAC4C9.png" /></td></tr></table>
 
 <h2 id="12-references">1.2. Références</h2>
 <p>[<strong>ref1</strong>] :  <strong>Java Persistence with Hibernate,  de Christian Bauer et Gavin King, chez Manning</strong>.</p>
@@ -654,7 +654,7 @@
 <p><a id="dvp-jpa-exemples"></a></p>
 <h2 id="14-telechargement-des-exemples">1.4. Téléchargement des exemples</h2>
 <p>Sur le site de ce document, les exemples étudiés sont <a href="https://stahe.github.io/jpa-juin-2007/jpa-juin-2007.zip">téléchargeables</a> sous la forme d&#x27;un fichier zip, qui une fois décompressé, donne naissance au dossier suivant :</p>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006A2000001C4C509CA4E.png" style="display:inline-block; margin:4px;width:17.997cm;height:4.789cm;" class="odt-zoomable" data-zoom-src="images/10000000000006A2000001C4C509CA4E.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006A2000001C4C509CA4E.png" width="680" height="181" style="display:inline-block; margin:4px;width:17.997cm;height:4.789cm;" class="odt-zoomable" data-zoom-src="images/10000000000006A2000001C4C509CA4E.png" /></td></tr></table>
 
 <ul>
 <li>en [1] : l&#x27;arborescence des exemples</li>
@@ -665,7 +665,7 @@
         - de l&#x27;outil de test unitaire [testNG]
         - de l&#x27;outil de logs [log4j]</li>
 </ul>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006AB000002A2606FA89D.png" style="display:inline-block; margin:4px;width:17.997cm;height:7.105cm;" class="odt-zoomable" data-zoom-src="images/10000000000006AB000002A2606FA89D.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006AB000002A2606FA89D.png" width="680" height="269" style="display:inline-block; margin:4px;width:17.997cm;height:7.105cm;" class="odt-zoomable" data-zoom-src="images/10000000000006AB000002A2606FA89D.png" /></td></tr></table>
 
 <ul>
 <li>en [5] : les archives de l&#x27;implémentation JPA/Hibernate et d&#x27;outils tierces nécessairesà Hibernate</li>
@@ -673,14 +673,14 @@
 <li>en [7] : les archives de Spring 2.x et d&#x27;outils tierces nécessaires à Spring</li>
 <li>en [8] : les archives du conteneur EJB3 de JBoss</li>
 </ul>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000064A000001D485AAE99C.png" style="display:inline-block; margin:4px;width:17.997cm;height:5.23cm;" class="odt-zoomable" data-zoom-src="images/100000000000064A000001D485AAE99C.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000064A000001D485AAE99C.png" width="680" height="198" style="display:inline-block; margin:4px;width:17.997cm;height:5.23cm;" class="odt-zoomable" data-zoom-src="images/100000000000064A000001D485AAE99C.png" /></td></tr></table>
 
 <ul>
 <li>en [9] : le dossier &lt;hibernate&gt; regroupe les exemples traités avec la couche de persistance JPA/Hibernate</li>
 <li>en [10] : le dossier &lt;hibernate/direct&gt; regroupe les exemples où la couche JPA est exploitée directement avec un programme de type [Main].</li>
 <li>en [11] et [12] : des exemples où la couche JPA est exploitée via des couches [metier] et [dao] dans une architecture multi-couches, ce qui est le cas normal d&#x27;exploitation. Les services (pool de connexions, gestionnaire de transactions) utilisés par les couches [metier] et [dao] sont fournis soit par Spring [11] soit par JBoss EJB3 [12].</li>
 </ul>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006370000012F4402DCE1.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.427cm;" class="odt-zoomable" data-zoom-src="images/10000000000006370000012F4402DCE1.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006370000012F4402DCE1.png" width="680" height="130" style="display:inline-block; margin:4px;width:17.997cm;height:3.427cm;" class="odt-zoomable" data-zoom-src="images/10000000000006370000012F4402DCE1.png" /></td></tr></table>
 
 <ul>
 <li>en [13] : le dossier &lt;toplink&gt; reprend les exemples du dossier &lt;hibernate&gt; [9] mais avec cette fois une couche de persistance JPA/Toplink au lieu de JPA/Hibernate. Il n&#x27;y a pas dans [13] de dossier &lt;jbossejb3&gt; car il n&#x27;a pas été possible de faire fonctionner un exemple où la couche de persistance est assurée par Toplink et les services assurés par le conteneur EJB3 de JBoss.</li>
@@ -693,20 +693,20 @@
 <p><a id="eclipse-libraries"></a></p>
 <h2 id="15-configuration-des-projets-eclipse-des-exemples">1.5. Configuration des projets Eclipse des exemples</h2>
 <p>Les exemples utilisent des bibliothèques &quot;utilisateur&quot;. Ce sont des archives .jar réunies sous un même nom. Lorsqu&#x27;on inclut une telle bibliothèque dans le <em>classpath</em> d&#x27;un projet Java, toutes les archives qu&#x27;elle contient sont alors incluses dans ce classpath. Voyons comment procéder sous Eclipse :</p>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007340000019CF066E0F9.png" style="display:inline-block; margin:4px;width:17.997cm;height:4.02cm;" class="odt-zoomable" data-zoom-src="images/10000000000007340000019CF066E0F9.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000007340000019CF066E0F9.png" width="680" height="152" style="display:inline-block; margin:4px;width:17.997cm;height:4.02cm;" class="odt-zoomable" data-zoom-src="images/10000000000007340000019CF066E0F9.png" /></td></tr></table>
 
 <ul>
 <li>en [1] : [Window / Preferences / Java / Buld Path / User Libraries]</li>
 <li>en [2] : on crée une nouvelle bibliothèque</li>
 <li>en [3] : on lui donne un nom et on valide</li>
 </ul>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004CB000001A00A6A37FB.png" style="display:inline-block; margin:4px;width:16.233cm;height:5.503cm;" class="odt-zoomable" data-zoom-src="images/10000000000004CB000001A00A6A37FB.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004CB000001A00A6A37FB.png" width="614" height="208" style="display:inline-block; margin:4px;width:16.233cm;height:5.503cm;" class="odt-zoomable" data-zoom-src="images/10000000000004CB000001A00A6A37FB.png" /></td></tr></table>
 
 <ul>
 <li>en [4] : on va sélectionner les jars qui feront partie de la bibliothèque [jpa-divers]</li>
 <li>en [5] : on sélectionne tous les jars du dossier &lt;exemples&gt;/lib/divers</li>
 </ul>
-<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000654000001910A67AD0A.png" style="display:inline-block; margin:4px;width:17.997cm;height:4.454cm;" class="odt-zoomable" data-zoom-src="images/1000000000000654000001910A67AD0A.png" /></td></tr></table>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000654000001910A67AD0A.png" width="680" height="168" style="display:inline-block; margin:4px;width:17.997cm;height:4.454cm;" class="odt-zoomable" data-zoom-src="images/1000000000000654000001910A67AD0A.png" /></td></tr></table>
 
 <ul>
 <li>en [6] : la bibliothèque utilisateur [jpa-divers] a été définie</li>
@@ -760,13 +760,14 @@
     <div class="md-footer-meta__inner">
 
       <div>
-        <a href="https://tahe.developpez.com" target="_blank">
-          https://tahe.developpez.com
+        <a href="https://stahe.github.io" target="_blank">
+          https://stahe.github.io
         </a>
         <br>
-        Ce cours-tutoriel écrit par <strong>Serge Tahé</strong> est mis à disposition du public selon les termes de la
-        <em>Licence Creative Commons Attribution – Pas d’Utilisation Commerciale –
-        Partage dans les Mêmes Conditions 3.0 non transposé</em>.
+        Ce cours-tutoriel rédigé par <strong>Serge Tahé</strong> est mis à la disposition du public selon les termes de la
+        <em>Licence Creative Commons Attribution – Pas d'utilisation commerciale –
+        Partage dans les mêmes conditions 3.0 non modifiée</em>.
+
       </div>
 
     </div>
